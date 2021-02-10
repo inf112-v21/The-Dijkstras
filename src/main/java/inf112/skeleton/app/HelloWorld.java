@@ -25,16 +25,15 @@ public class HelloWorld extends InputAdapter implements ApplicationListener  {
 
     private TiledMap map;
     private TiledMapTileLayer boardLayer, playerLayer, holeLayer, flagLayer;
-
     private OrthogonalTiledMapRenderer myRenderer;
     private OrthographicCamera myCam;
+
 
     private TiledMapTileLayer.Cell playerCell;
     private TiledMapTileLayer.Cell playerWonCell;
     private TiledMapTileLayer.Cell playerDiedCell;
     private Vector2 playerPos;
     private int xPos=0, yPos=0;
-
     @Override
     public void create() {
         batch = new SpriteBatch();
