@@ -19,7 +19,9 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 
+
 public class HelloWorld extends InputAdapter implements ApplicationListener  {
+
     private SpriteBatch batch;
     private BitmapFont font;
 
@@ -35,6 +37,16 @@ public class HelloWorld extends InputAdapter implements ApplicationListener  {
     private Vector2 playerPos;
     private int xPos=0, yPos=0;
 
+    public TiledMap map;
+    private TiledMapTileLayer Board;
+    private TiledMapTileLayer Player;
+    private TiledMapTileLayer Hole;
+    private TiledMapTileLayer Flag;
+
+    public OrthoCachedTiledMapRenderer orthoRenderer;
+    public OrthographicCamera camera;
+
+
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -48,7 +60,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener  {
         holeLayer= (TiledMapTileLayer) map.getLayers().get("Hole");
         flagLayer= (TiledMapTileLayer) map.getLayers().get("Flag");
 
-
+      
         myCam = new OrthographicCamera();
         myCam.setToOrtho(false,5,5);
         myCam.position.set(2.5F, 2.5F, 0.0F);
@@ -56,6 +68,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener  {
 
         myRenderer= new OrthogonalTiledMapRenderer(map,1F/300F);
         myRenderer.setView(myCam);
+
 
 
         TextureRegion[][] playerTextures = TextureRegion.split( new Texture("assets/player.png"),300,300);
@@ -85,7 +98,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener  {
             yPos +=1;
         }
         return false;
-    }
+
 
     @Override
     public void dispose() {
@@ -98,7 +111,9 @@ public class HelloWorld extends InputAdapter implements ApplicationListener  {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
+
         myRenderer.render();
+
 
         if (holeLayer.getCell(xPos,yPos)!= null){
             playerLayer.setCell(xPos,yPos,playerDiedCell);
@@ -108,7 +123,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener  {
         }else
 
         playerLayer.setCell(xPos,yPos,playerCell);
-    }
+
 
     @Override
     public void resize(int width, int height) {
