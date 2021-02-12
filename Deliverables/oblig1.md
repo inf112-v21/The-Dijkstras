@@ -74,19 +74,10 @@ Vi ønsker å bruke Github til lagring av prosjektet, og ønsker å få endring 
 
 ##OPPGAVE 3
 
-En kort beskrivelse av det overordnede målet for applikasjonen
-
-En liste over brukerhistorier til systemet basert på MVP-kravene.
-
-For hver brukerhistorie, skal dere ha akseptansekriterier og arbeidsoppgaver, samt beskrivelse av hvilke krav brukerhistorien oppfyller (dette lager dere kun for historier dere er ferdige med, holder på med, eller skal til å begynne med)
-
-En prioritert liste over hvilke brukerhistorier dere vil ha med i første iterasjon (altså frem til levering av denne oppgaven, se deloppgave 4 for forslag).
-
-
 ###Spesifikasjon:  
-Gjøre et brettspill om til dataspill som skal kunne være multiplayer.
+Vi ønsker å gjøre brettspillet RobotRally om til et digitalt multiplayerspill, som andre spillere synes er moro å spille.
 
----
+
 ##MVP-krav og brukerhistorier:
 
 ###Vise et spillebrett
@@ -180,14 +171,33 @@ Flagg i stigende rekkefølge ved spillstart.
 ---
 
 
-##OPPGAVE 4
-Oppsummering // TODO
+##Kode
+Vi har gjort ferdig LIBGTDX turtorial. Samt har vi lagt noen logiske klasser med tester. Grid-packen i prosjektet 
+vårt er hentet ut fra INF101-kodebase fra i fjor, men vi har refaktorert og endret den etter behov.
 
-Utfør et kort prosjekt-retrospektiv og diskuter hva som gikk bra, hva som ikke fungerte helt som forventet, 
-hva (om noe) som ikke virket i det hele tatt, og eventuelle nye aktiviteter eller verktøy som teamet vil prøve ut i løpet av neste
-obligatoriske oppgave. Diskuter hvorfor ting fungerte eller ikke fungerte. Skriv opp en kort oppsummering 
-av diskusjonen, og last opp til team repo-et.
-På slutten av denne oppgaven kan dere gjøre en liten vurdering av hvor bra dere traff på oppgaven. Dette kan dere bruke til å justere hvor mange oppgaver dere tenker å få inn i neste iterasjon, som da leveres med obligatorisk oppgave 2.
+##Retrospektiv
+
+Vi har opplevd at det er utfordrende og jobbe sammen om et prosjekt. Med en gang vi er flere involvert blir det mindre
+fleksibilitet og det blir vanskelig å få oversikt. Det som kanskje har spist mest tid, er tekniske problemer med 
+IntelliJ og Maven. 
+
+En av utfordringene vi har hatt er git branching, og gode rutiner for arbeid mot master-branchen. Når vi er flere om et 
+prosjekt er det viktig at vi blir samkjørte om hvordan vi bruke git. Da vi ikke satte faste krav og regler om hvordan 
+vi håndtere arbeid mot masterbranching har vi fått lære hva som kan gå galt.
+
+Vi har hatt en positiv opplevelse med parprogrammering. Det går ikke alltid like strukturert for seg, men er lettere å
+være to om avgjørelser. I tillegg hjelper det når det er god kommunikasjonsflyt. En ting vi savnet var en bedre struktur 
+for hva vi skulle jobbe med. Tenker å flinkere å sette mål for hver ParProgrammering.
+
+Git-Krakken har blitt brukt av et fåtall av gruppen, men vi tenker å innføre dette verktøyet i teamet og bruke tid for
+lære det sammen.
+
+Etterhvert ønsker vi å jobbe tettere opp mot en prosjektmodell som Kanban. Dette vil vi gjøre for å gjøre det lettere å
+gjøre individuelt arbeid opp mot prosjektet. I tilegg gir det en mer strukturert måte å arbeide med git.
+
+
+###Arbeid mot Oblig1
+Vi har fått gjort oss erfaringer som gruppe, men vi ble ikke helt ferdig med alt vi tenkte å få gjort. 
 
 
 
