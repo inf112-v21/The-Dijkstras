@@ -11,20 +11,21 @@ Agenda:
 
 Innsjekk
 
-Aleksandern
->Har gått gjennom tutorial for TileLayer og sett på Oppsett for LibGDX. Han sjekke inn.
+Aleksander  
+Har gått gjennom tutorial for TileLayer og sett på Oppsett for LibGDX. Han sjekke inn.
+ 
 
-Trym
->Kommer rett ut av dusjen. Lest på regelboken Roborally. Jobbet med å få overblikk. Han sjekke inn
+Trym  
+Kommer rett ut av dusjen. Lest på regelboken Roborally. Jobbet med å få overblikk. Han sjekke inn
 
-Erlend
->Sett turtorials for RoboRally og LibGDX. Fixet referatdolk i prosjektet.S Sjekke inn
+Erlend  
+Sett turtorials for RoboRally og LibGDX. Fixet referatdolk i prosjektet.S Sjekke inn
 
-Morten
->Sett youtube videor av folk spill Robo rally. Sett på regelboken. Sjekker inn.
+Morten  
+Sett youtube videor av folk spill Robo rally. Sett på regelboken. Sjekker inn.
 
-Anas
->Syk, men følger med! Sjekker inn
+Anas  
+Syk, men følger med! Sjekker inn
 
 
 
@@ -77,7 +78,6 @@ Brikken må kunne bevege seg, og vises på skjerm for spillerne
 Gitt at brikken kan bevege seg så må:
 Brikken ta imot kommando slik at den beveger seg.
 Brikken bevege seg på skjermen slik at spillerne kan se at den beveger seg.
-
 
 ###Robot besøker flagg
 ####Brukerhistorie

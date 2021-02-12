@@ -1,7 +1,7 @@
-ParProgrammering 11.2.2021
+### ParProgrammering 11.2.2021
 
-Erlend - Feil fot  
-Aleksander - Klar for 6 timer med feilsøking
+Erlend - Feil fot, kjøpte snop  
+Aleksander - Klar for 6 timer med feilsøking!
 
 
 Aleksander sin IntelliJ bestemte seg for å streike.  
