@@ -28,5 +28,6 @@ Deliverables contains documents:
 **Fix for IntelliJ:**  
 run > edit configurations > modify options > add VM options    
 then add line: "-XstartOnFirstThread"
+
 ---
 
