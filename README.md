@@ -1,7 +1,7 @@
 # INF112 Robot Rally
 An unfinished MVP implementation of Robot Rally. 
 
-##Status
+## Status
 When you run main:
 - open a window, and move the player around the map
 
@@ -10,7 +10,7 @@ When you run main:
 *To run:*  
 You simply need to run the main class.
 
-##Deliverables
+## Deliverables
 
 Deliverables contains documents:
 - Meeting minutes

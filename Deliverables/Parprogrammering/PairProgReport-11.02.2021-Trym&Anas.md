@@ -1,4 +1,4 @@
-###Trym og Anas sjekker inn
+### Trym og Anas sjekker inn
 
 I dag har vi jobbet sammen med å implementere en package grid med diverse grid relaterte klasser
 
