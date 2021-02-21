@@ -1,4 +1,4 @@
-#The Dijkstras ObligDoc 1
+# The Dijkstras ObligDoc 1
 
 ---
 ## OPPGAVE 1
