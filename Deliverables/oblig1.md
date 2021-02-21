@@ -16,7 +16,7 @@ Cmd, gitbash
 Ikke særlig flink med gui, men kan lære :)  
 Masse matte som sikkert er ubrukelig i dette emnet  
 
-[Morten]()  
+[Morten](https://github.com/Mortenhavs)  
 Programmeringspråk: Java, python helt ok  
 Basics i cmd/Linux  
 
