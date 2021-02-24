@@ -1,4 +1,5 @@
-package inf112.skeleton.app;
+
+package inf112.skeleton.game;
 import inf112.skeleton.Game.Robot;
 import inf112.skeleton.grid.Location;
 import org.junit.*;
