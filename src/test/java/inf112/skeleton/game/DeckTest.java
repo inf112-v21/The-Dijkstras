@@ -4,10 +4,9 @@ import inf112.skeleton.Game.CardType;
 import inf112.skeleton.Game.Deck;
 import org.junit.Test;
 import org.junit.*;
-import org.junit.jupiter.api.BeforeEach;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.Matcher.*;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
