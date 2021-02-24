@@ -25,7 +25,7 @@ public class Deck {
         makeGenericCard(CardType.BACKUP, 430, 480, 10);
         makeGenericCard(CardType.UTURN, 10, 60, 10);
 
-        makeGenericCard(CardType.ROTLEFT, 80, 420, 20);
+        makeGenericCard(CardType.ROTRIGHT, 80, 420, 20);
         makeGenericCard(CardType.ROTLEFT, 70, 410, 20);
 
         makeGenericCard(CardType.MOVE1, 490, 660, 10);
