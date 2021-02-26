@@ -7,9 +7,9 @@ public class Flag {
     private final Location location;
     private int flagIndex;
 
-    public Flag(Location location) {
+    public Flag(Location location, int flagindex) {
         this.location = location;
-        this.flagIndex = 1; // TODO Different flagindexes in constructor?
+        this.flagIndex = flagindex; // TODO Different flagindexes in constructor?
     }
 
     public Object getIndex() {

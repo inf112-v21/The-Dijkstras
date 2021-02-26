@@ -11,7 +11,7 @@ public class FlagTest {
 
     @Before
     public void makeFlag(){
-        myFlag = new Flag(new Location(1,1));
+        myFlag = new Flag(new Location(1,1), 1);
     }
 
     @Test

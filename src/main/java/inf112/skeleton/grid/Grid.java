@@ -13,17 +13,22 @@ public class Grid<T> implements IGrid<T> {
     private List<T> cells;
     private int rows;
     private int cols;
+    private int layer;
 
-    public Grid(int rows, int cols, T initElement) {
+    public Grid(int rows, int cols, T initElement, int layer) {
         if(cols <= 0 || rows <= 0)
             throw new IllegalArgumentException("number of rows and columns must be positive");
 
         this.rows = rows;
         this.cols = cols;
+        this.layer = layer;
         cells = new ArrayList<>(rows * cols);
         for(int i = 0; i<rows*cols; i++) {
             cells.add(initElement);
         }
+    }
+
+    public Grid() {
     }
 
     @Override
@@ -37,6 +42,8 @@ public class Grid<T> implements IGrid<T> {
         return cols;
     }
 
+    @Override
+    public int getLayer() { return layer; }
 
     @Override
     public void set(Location loc, T elem) {
@@ -74,7 +81,7 @@ public class Grid<T> implements IGrid<T> {
 
     @Override
     public IGrid<T> copy() {
-        Grid<T> newGrid = new Grid<>(numRows(), numCols(), null);
+        Grid<T> newGrid = new Grid<>(numRows(), numCols(), null, getLayer());
         copy(newGrid);
         return newGrid;
 

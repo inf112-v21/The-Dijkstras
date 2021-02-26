@@ -17,6 +17,8 @@ public interface IGrid<T> extends Iterable<T> {
      */
     int numCols();
 
+    int getLayer();
+
     /**
      *
      * Set the contents of the cell in the given Location.
