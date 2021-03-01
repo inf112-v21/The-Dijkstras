@@ -8,8 +8,8 @@ import inf112.skeleton.grid.Location;
      * - StartPosition = (0,0)
      */
     public class Robot {
-        private float life;
-        private float health;
+        private int life;
+        private int health;
         private Location position;
         // TODO Implement Direction
 
@@ -21,15 +21,19 @@ import inf112.skeleton.grid.Location;
 
         }
 
-        public float getLife() {
+        public int getLife() {
             return this.life;
         }
 
-        public float getHealth() {
+        public int getHealth() {
             return health;
         }
 
         public Location getPosition() {
             return this.position;
+        }
+        public void getDamage(int damage){
+            health-= damage;
+
         }
 }
