@@ -29,6 +29,14 @@ public class RobotTest {
         Location startLoc = new Location(0,0);
         assertThat(startLoc, is(myRobot.getPosition()));
     }
+    @Test
+    public void RobotGetDamages(){
+        myRobot.getDamage(1);
+        assertThat(myRobot.getHealth(), is(7));
+        myRobot.getDamage(2);
+        assertThat(myRobot.getHealth(), is(5));
+
+    }
 
 
 }
