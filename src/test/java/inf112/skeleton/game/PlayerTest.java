@@ -21,7 +21,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void PlayerOnCheckPoint(){
+    public void PlayerHasCheckPoint(){
         Location startLoc = new Location(0,0);
         assertThat(startLoc, is(myPlayer.getLastCheckPoint()));
     }
