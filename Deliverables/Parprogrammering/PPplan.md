@@ -23,3 +23,13 @@ Trym & Aleksander;dd.mm.yyyy;00:00
 Morten & Anas;dd.mm.yyyy;00:00
 
 
+###Week 7.1
+Anas & Aleksander;dd.mm.yyyy;00:00
+
+Trym & Morten;dd.mm.yyyy;00:00
+
+
+
+
+
+
