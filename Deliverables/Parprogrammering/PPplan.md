@@ -27,9 +27,11 @@ Anas & Aleksander;dd.mm.yyyy;00:00
 
 Trym & Morten;dd.mm.yyyy;00:00
 
+Erlend & Anas;dd.mm.yyyy;00:00
+
 ### Week 8
 
-Aleksander Morten;03.03.2021;18:00    - Arbeide med ProjectBoard
+Aleksander & Morten;03.03.2021;18:00    - Arbeide med ProjectBoard
 
 Trym & Anas;3.03.2021;14:15           - Resterende arbeid Projectboard
 
