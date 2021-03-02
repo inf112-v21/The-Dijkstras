@@ -1,4 +1,4 @@
-##The Dijkstras Møte 03.02.21 
+## The Dijkstras Møte 03.02.21 
 
 Tilstede: 
 - Anas
@@ -10,8 +10,7 @@ Tilstede:
 Setter opp Team- med egne erfaringer.
 
 
-
-###The DIJKSTRAS- Lagbeskrivelse
+### The DIJKSTRAS- Lagbeskrivelse
 
 Erlend
 -  Java, Python, Haskell
@@ -51,7 +50,7 @@ Anas
 
 
 
-###Rolledefinisjoner og ansvar
+### Rolledefinisjoner og ansvar
 
 Teamleder-rolle (Erlend Haugen)
 - Sette opp møter
@@ -73,7 +72,7 @@ Alle sender email- får å få  koblet til github.
 Teamet gjør seg kjent med Github prosjekt
 
 
-###TIL NESTE MØTE:
+### TIL NESTE MØTE:
 Alle ser video om Robo-Rally
 Sette seg inn i LibGdx
 Lese litt på sammenhengen mellom github issues og github projectboard
