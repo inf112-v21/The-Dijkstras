@@ -36,14 +36,13 @@ public class Grid<T> implements IGrid<T> {
         return rows;
     }
 
-
     @Override
     public int numCols() {
         return cols;
     }
 
     @Override
-    public int getLayer() { return layer; }
+    public int numLayers() { return layer; }
 
     @Override
     public void set(Location loc, T elem) {
@@ -69,7 +68,7 @@ public class Grid<T> implements IGrid<T> {
     private Location locationFromIndex(int index) {
         if(index<0 || index > cells.size())
             throw new IndexOutOfBoundsException("index is not a valid index of the board");
-        return new Location(index/cols,index%cols);
+        return new Location(index/cols,index%cols, layer);
     }
 
     @Override
@@ -81,10 +80,9 @@ public class Grid<T> implements IGrid<T> {
 
     @Override
     public IGrid<T> copy() {
-        Grid<T> newGrid = new Grid<>(numRows(), numCols(), null, getLayer());
+        Grid<T> newGrid = new Grid<>(numRows(), numCols(), null, numLayers());
         copy(newGrid);
         return newGrid;
-
     }
 
     protected void copy(IGrid<T> newGrid) {
