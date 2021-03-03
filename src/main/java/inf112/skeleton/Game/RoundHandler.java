@@ -4,6 +4,7 @@ package inf112.skeleton.Game;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 
 public class RoundHandler {
@@ -19,7 +20,7 @@ public class RoundHandler {
         if ( player.isPowerDown()) {
             return 0;
         }
-        return 1+player.getRobot().getHealth();
+        return player.getRobot().getHealth();
     }
 
     public void dealProgramCards(HashSet<Player> players) {
