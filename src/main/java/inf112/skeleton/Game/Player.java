@@ -14,6 +14,7 @@ public class Player {
 
     private boolean powerDown= false;
     private List<Card> hand = new ArrayList<>();
+    private HashMap<Integer, Card> currentCards = new HashMap<Integer, Card>();
 
     public Player(Location startPosition){
         this.life = 3;
@@ -55,10 +56,23 @@ public class Player {
         hand.addAll(cards);
     }
 
-    public List<Card> getHand() {
-        if( hand==null){
-            throw new NullPointerException("The player does not get any card yet");
-        }
-        return hand;
+    public List<Card> getHand() { return hand; }
+
+    public int cardChoiceAmount() {
+        int health = getRobot().getHealth();
+        if (health >= 5) return 5;
+        return health;
     }
+
+    public boolean allowedToChooseCards() {
+        boolean allowed = true;
+        if (getCurrentCards().size() >= cardChoiceAmount()) allowed = false;
+        return allowed;
+    }
+
+    public void addCurrentCards(Card card, int place) {
+        currentCards.put(place,card);
+    }
+
+    public HashMap<Integer, Card> getCurrentCards() { return currentCards;}
 }

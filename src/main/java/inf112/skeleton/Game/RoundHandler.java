@@ -39,4 +39,35 @@ public class RoundHandler {
             player.setHand(hand);
         }
     }
+
+    private boolean chooseCard(Player player, Card card){
+        //player must have hand here
+        //if (player.getHand().isEmpty()) { throw new Exception("The player has no cards in their hand");}
+        if (!player.allowedToChooseCards()) {return false;}
+
+        int place = player.getCurrentCards().size() + 1;
+        player.addCurrentCards(card, place);
+
+        return true;
+    }
+
+    private void chooseRandomCard(Player player){
+        List<Card> hand= player.getHand();
+        Collections.shuffle(hand);
+        chooseCard(player,hand.remove(0));
+
+    }
+
+    public void chooseCardsManage(Player player){ //Må kalles før spiller velger noen kort for den runden
+        int allowed = player.cardChoiceAmount();
+
+        while(allowed>0){
+            allowed--;
+            //chooseCard(player,)
+        }
+        if (player.getCurrentCards().size()<5){
+            chooseRandomCard(player);
+        }
+
+    }
 }
