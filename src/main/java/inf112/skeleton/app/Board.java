@@ -1,9 +1,6 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -11,16 +8,22 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g3d.particles.ParticleSorter;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
+import inf112.skeleton.RoboRally;
+import inf112.skeleton.screens.TitleScreen;
+
 
 public class Board extends InputAdapter implements ApplicationListener  {
+    private final RoboRally game;
+
     private SpriteBatch batch;
     private BitmapFont font;
 
@@ -37,8 +40,21 @@ public class Board extends InputAdapter implements ApplicationListener  {
     private Vector2 playerPos;
     private int xPos=0, yPos=0;
 
-    private int mapWidth;
-    private int mapHeight;
+    public String mapName;
+
+    public int mapWidth;
+    public int mapHeight;
+
+
+
+    public Board(RoboRally game, String map_filename) {
+        mapName = map_filename;
+        this.game = game;
+        create();
+        render();
+        dispose();
+        System.out.println(playerPos);
+    }
 
     @Override
     public void create() {
@@ -46,7 +62,7 @@ public class Board extends InputAdapter implements ApplicationListener  {
         font = new BitmapFont();
         font.setColor(Color.RED);
 
-        map = new TmxMapLoader().load("assets/map001.tmx");
+        map = new TmxMapLoader().load(mapName);
 
         boardLayer= (TiledMapTileLayer) map.getLayers().get("Board");
         playerLayer= (TiledMapTileLayer) map.getLayers().get("Player");
@@ -73,12 +89,14 @@ public class Board extends InputAdapter implements ApplicationListener  {
                 }
             }
         }
+        if (spawns.size == 0) {
+            spawns.add(new Vector2(0, 0));
+            System.out.println("Couldn't find a spawnpoint, setting spawnposition @ xy(0,0)");
+        }
+        Vector2 spawnPoint = spawns.get(0);             //Getting first Vector2 in list
 
-        int randomNum = (int)Math.floor(Math.random() * spawns.size);
-        Vector2 randomSpawn = (spawns.removeIndex(randomNum));              //Getting one random Vector2
-
-        xPos = (int)randomSpawn.x;                                          //Applying random Vector2 as player-spawn position.
-        yPos = (int)randomSpawn.y;
+        xPos = (int)spawnPoint.x;                       //Applying Vector2 as player-spawn position.
+        yPos = (int)spawnPoint.y;
 
 
         myCam = new OrthographicCamera();
@@ -89,34 +107,13 @@ public class Board extends InputAdapter implements ApplicationListener  {
         myRenderer= new OrthogonalTiledMapRenderer(map,1F/300F);
         myRenderer.setView(myCam);
 
-
         TextureRegion[][] playerTextures = TextureRegion.split( new Texture("assets/player.png"),300,300);
         playerCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][0]));
         playerDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][1]));
         playerWonCell =  new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][2]));
 
         playerPos = new Vector2(xPos,yPos);
-
-        Gdx.input.setInputProcessor(this);
-
-
-    }
-    @Override
-    public boolean keyUp (int keycode){
-        if (keycode== Input.Keys.LEFT && xPos>0){
-            playerLayer.setCell(xPos,yPos,null);
-            xPos-=1;
-        }else if ( keycode == Input.Keys.RIGHT && xPos<mapWidth-1){
-            playerLayer.setCell(xPos,yPos,null);
-            xPos +=1;
-        }else if (keycode== Input.Keys.DOWN && yPos >0){
-            playerLayer.setCell(xPos,yPos,null);
-            yPos-=1;
-        }else if (keycode== Input.Keys.UP && yPos<mapHeight-1){
-            playerLayer.setCell(xPos,yPos,null);
-            yPos +=1;
-        }
-        return false;
+        playerLayer.setCell(xPos, yPos, playerCell);
     }
 
     @Override
@@ -134,12 +131,11 @@ public class Board extends InputAdapter implements ApplicationListener  {
 
         if (holeLayer.getCell(xPos,yPos)!= null){
             playerLayer.setCell(xPos,yPos,playerDiedCell);
-        }
-        else if (flagLayer.getCell(xPos,yPos)!= null){
-            playerLayer.setCell(xPos,yPos,playerWonCell);
-        }else
-
+        } else if (flagLayer.getCell(xPos,yPos)!= null) {
+            playerLayer.setCell(xPos, yPos, playerWonCell);
+        } else {
             playerLayer.setCell(xPos,yPos,playerCell);
+        }
     }
 
     @Override
@@ -148,9 +144,12 @@ public class Board extends InputAdapter implements ApplicationListener  {
 
     @Override
     public void pause() {
+
     }
 
     @Override
     public void resume() {
     }
+
+
 }
