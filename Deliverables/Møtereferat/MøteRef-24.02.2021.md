@@ -40,6 +40,8 @@ Lekser
 
 
 Retrospektiv Del 2
+
+
 -------------
 Hvordan er gruppedynamikken?
 Flinke å bli enige. Villige til å strekke seg litt.
@@ -52,8 +54,12 @@ Folk er ikke redde for si sin mening
 Hva dere har klart til nå, og hva som kan forbedres. Dette skal handle om prosjektstruktur, ikke kode. Dere kan selvsagt diskutere kode, men dette handler ikke om feilretting, men om hvordan man jobber og kommuniserer.
 
 Planlegging. Prosjektmetodikk,og strukturen i arbeid.
+
+
 --------------
 Under vurdering vil det vektlegges at alle bidrar til kodebasen. Hvis det er stor forskjell i hvem som committer, må dere legge ved en kort forklaring for hvorfor det er sånn. Husk å committe alt. (Også designfiler)
+
+
 --------------
 Bli enige om maks tre forbedringspunkter fra retrospektivet, som skal følges opp under neste sprint.
 Planlegging. Testing, og felles bidrag til kodebasen
