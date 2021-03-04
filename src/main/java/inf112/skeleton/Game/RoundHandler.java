@@ -1,11 +1,9 @@
 package inf112.skeleton.Game;
 
-
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
+import java.util.NoSuchElementException;
 
 public class RoundHandler {
     public Deck deck;
@@ -41,34 +39,56 @@ public class RoundHandler {
         }
     }
 
-    private boolean chooseCard(Player player, Card card){
+    /**
+     * This method receive an input card from a player throw GUI
+     * @param player
+     * @return card
+     */
+    public Card getInputCardFromPlayer(Player player){
+        //TODO find a way to get input card from the player
+        return player.getHand().get(0);// this line should change and replace with a input card
+    }
+
+    /**
+     *
+     * @param player
+     */
+    public void chooseCardsManage(Player player)  { //Må kalles før spiller velger noen kort for den runden
         //player must have hand here
-        //if (player.getHand().isEmpty()) { throw new Exception("The player has no cards in their hand");}
-        if (!player.allowedToChooseCards()) {return false;}
+        if (player.getHand().isEmpty()) { throw new NoSuchElementException("The player has no cards in their hand");}
+
+
+        while(player.allowedToChooseCards()){
+            Card card = getInputCardFromPlayer(player);
+            addChosenCard(player,card);
+        }
+        // This condition is always false now until the
+        // allowedToChooseCards() method takes time into account
+        if (player.getCurrentCards().size()<5){
+            chooseRandomCard(player);
+        }
+    }
+
+    private void addChosenCard(Player player, Card card){
+        if (!player.allowedToChooseCards()) {return;}
 
         int place = player.getCurrentCards().size() + 1;
         player.addCurrentCards(card, place);
 
-        return true;
+
     }
 
-    private void chooseRandomCard(Player player){
+    /**This method should be called when a player har no more time
+     * to choose  programming card from his hand
+     * @param player the current player
+     * @return card: return random card from the player hand
+     */
+    public Card chooseRandomCard(Player player){
         List<Card> hand= player.getHand();
         Collections.shuffle(hand);
-        chooseCard(player,hand.remove(0));
+        return hand.remove(0);
 
     }
 
-    public void chooseCardsManage(Player player){ //Må kalles før spiller velger noen kort for den runden
-        int allowed = player.cardChoiceAmount();
 
-        while(allowed>0){
-            allowed--;
-            //chooseCard(player,)
-        }
-        if (player.getCurrentCards().size()<5){
-            chooseRandomCard(player);
-        }
-
-    }
 }

@@ -70,7 +70,17 @@ public class Player {
         currentCards.put(place,card);
     }
 
+    /**
+     * This method should check two conditions, the number of current chosen cards
+     * and if the player still has time to choose
+     * @return true if player has time and place in currentCards to choose, false otherwise
+     */
     public boolean allowedToChooseCards() {
+        // Should check if player still has time to choose
+        // Should check if getCurrentCards().size() < 5
+        // in case there is some locked cards, the currentCards is not empty
+        //at the start of this round and this statement " getCurrentCards().size() < cardChoiceAmount()"
+        // will not do well in this case.
         return getCurrentCards().size() < cardChoiceAmount();
     }
 }

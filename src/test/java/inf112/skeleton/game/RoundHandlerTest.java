@@ -4,24 +4,50 @@ import inf112.skeleton.Game.Player;
 import inf112.skeleton.Game.Robot;
 import inf112.skeleton.Game.RoundHandler;
 import inf112.skeleton.grid.Location;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashSet;
 
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 public class RoundHandlerTest {
+    public RoundHandler rh;
+    Player player1;
+    Player player2;
+    Player player3;
+    HashSet<Player> players;
+
+    @Before
+    public void setUp(){
+        rh = new RoundHandler();
+
+        player1= new Player(new Location(0,0));
+        player1.setRobot(new Robot());
+
+        player2= new Player(new Location(2,0));
+        player2.setRobot(new Robot());
+
+        player3= new Player(new Location(2,0));
+        player3.setRobot(new Robot());
+
+        players= new HashSet<>();
+
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+    }
+
     @Test
     public void hasRoundHandlerADeckOf84CardsTest(){
-        RoundHandler rh = new RoundHandler();
+
 
         assertThat (rh.deck.cardDeck.size(), is(84));
     }
     @Test
     public void DetermineTheNumberOfCardsTest(){
-        RoundHandler rh = new RoundHandler();
-        Player player1= new Player(new Location(0,0));
-        player1.setRobot(new Robot());
+
 
         assertThat(rh.DetermineTheNumberOfCards(player1), is(9));
 
@@ -36,22 +62,8 @@ public class RoundHandlerTest {
     }
     @Test
     public void dealProgramCardsTest(){
-        RoundHandler rh = new RoundHandler();
 
-        Player player1= new Player(new Location(0,0));
-        player1.setRobot(new Robot());
 
-        Player player2= new Player(new Location(2,0));
-        player2.setRobot(new Robot());
-
-        Player player3= new Player(new Location(2,0));
-        player3.setRobot(new Robot());
-
-        HashSet<Player> players= new HashSet<>();
-
-        players.add(player1);
-        players.add(player2);
-        players.add(player3);
 
         player2.getRobot().getDamage(2);
         player3.announcePowerDown();
@@ -61,6 +73,31 @@ public class RoundHandlerTest {
         assertThat(player2.getHand().size(), is(7));
         assertThat(player3.getHand().size(), is(0));
 
+    }
+    // Combining JUnit test with hamcrest is a bad idea
+    // hamcrest has no assert expression to match exception
+    // @Test
+    // public void chooseCardManageThrowExceptionTest(){
+
+    //   assertThrows(NoSuchElementException.class,()-> rh.chooseCardsManage(player1)  );
+    // }
+    @Test
+    public void chooseCardManageTest(){
+        //The currentCards should be empty at the start with round
+        assertThat(player1.getCurrentCards().size(),is(0));
+
+        player2.getRobot().getDamage(5);
+        player3.getRobot().getDamage(7);
+
+        rh.dealProgramCards(players);
+
+        rh.chooseCardsManage(player1);
+        rh.chooseCardsManage(player2);
+        rh.chooseCardsManage(player3);
+
+        assertThat(player1.getCurrentCards().size(),is(5));
+        assertThat(player2.getCurrentCards().size(),is(4));
+        assertThat(player3.getCurrentCards().size(),is(2));
 
 
     }
