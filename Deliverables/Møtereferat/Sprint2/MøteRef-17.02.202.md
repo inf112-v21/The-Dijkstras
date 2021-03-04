@@ -23,20 +23,20 @@ MVP KRAV
 
 Lekse til neste gang: skrive ut en brukerhistorie, akseptansekriterie, Løsningsbeskrivelse
 
-###Robot besøker flagg
-####Brukerhistorie:
+### Robot besøker flagg
+#### Brukerhistorie:
 Som Robot må jeg kunne besøke flagg, da det er delmålet for å vinne spillet.
 
-####Løsningsbeskrivelse:
+#### Løsningsbeskrivelse:
 Flagg må eksistere på brettet og robot må kunne besøke det.
 
-####Akseptansekriterier:
+#### Akseptansekriterier:
 Gitt at det eksisterer et brett med roboter som kan bevege seg må:
 Flagg-objektet eksistere på brett,
 Robot kunne besøke et flagg.
 Besøket må registreres.
 
-####Arbeidsoppgaver:
+#### Arbeidsoppgaver:
 Flag counter i Robot klasse
 Flagget må ha en verdi
 Lage Flag-klasse
