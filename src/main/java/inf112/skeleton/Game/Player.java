@@ -15,7 +15,7 @@ public class Player {
 
     private boolean powerDown= false;
     private List<Card> hand = new ArrayList<>();
-    private HashMap<Integer, Card> currentCards = new HashMap<Integer, Card>();
+    private HashMap<Integer, Card> currentCards = new HashMap<>();
 
     public Player(Location startPosition){
         this.life = 3;
@@ -50,7 +50,7 @@ public class Player {
     }
 
     public int getNumberOfDamages(){
-        return 8-myRobot.getHealth();
+        return 9-myRobot.getHealth();
     }
 
     public void setHand(HashSet<Card> cards){
@@ -61,19 +61,16 @@ public class Player {
 
     public int cardChoiceAmount() {
         int health = getRobot().getHealth();
-        if (health >= 5) return 5;
-        return health;
+        return Math.min(5, health);
     }
 
-    public boolean allowedToChooseCards() {
-        boolean allowed = true;
-        if (getCurrentCards().size() >= cardChoiceAmount()) allowed = false;
-        return allowed;
-    }
+    public HashMap<Integer, Card> getCurrentCards() { return currentCards;}
 
     public void addCurrentCards(Card card, int place) {
         currentCards.put(place,card);
     }
 
-    public HashMap<Integer, Card> getCurrentCards() { return currentCards;}
+    public boolean allowedToChooseCards() {
+        return getCurrentCards().size() < cardChoiceAmount();
+    }
 }
