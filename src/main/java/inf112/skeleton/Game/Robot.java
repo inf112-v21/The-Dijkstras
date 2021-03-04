@@ -15,7 +15,7 @@ import inf112.skeleton.grid.Location;
 
         public Robot() {
             this.life = 3;
-            this.health = 9;
+            this.health =9;
             this.position= new Location(0,0);
             // this.direction = new Directions(0, -1); // North == (0, -1)?
 
