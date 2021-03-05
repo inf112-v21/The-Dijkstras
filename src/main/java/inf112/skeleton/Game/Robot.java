@@ -3,11 +3,11 @@ import inf112.skeleton.grid.Location;
 
     /**
      * Robot Class
-     * - Has 8 health. Loss life if 0
+     * - Has 9 health. Loss life if 0
      * - StartPosition = (0,0)
      */
     public class Robot {
-        private int layer = 4;
+        private final int layer = 4;
         private int health;
         private Location position;
         // TODO Implement Direction
