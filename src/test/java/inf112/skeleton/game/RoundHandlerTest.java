@@ -22,15 +22,17 @@ public class RoundHandlerTest {
     @Before
     public void setUp(){
         rh = new RoundHandler();
+        Location loc1 = new Location(0,0);
+        Location loc2 = new Location(2,0);
 
-        player1= new Player(new Location(0,0));
-        player1.setRobot(new Robot());
+        player1= new Player(loc1);
+        player1.setRobot(new Robot(loc1));
 
-        player2= new Player(new Location(2,0));
-        player2.setRobot(new Robot());
+        player2= new Player(loc2);
+        player2.setRobot(new Robot(loc2));
 
-        player3= new Player(new Location(2,0));
-        player3.setRobot(new Robot());
+        player3= new Player(loc2);
+        player3.setRobot(new Robot(loc2));
 
         players= new HashSet<>();
 
