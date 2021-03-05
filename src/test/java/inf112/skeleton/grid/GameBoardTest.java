@@ -44,8 +44,8 @@ public class GameBoardTest {
         GameBoard gameboard1 = new GameBoard(3,3,null,3);
         Location loc1 = new Location(1,2,1);
         Location loc2 = new Location(2,1,2);
-        Location loc3 = new Location(1,2,2);
         String a = "hei";
+
         gameboard1.set(loc1, a);
         gameboard1.set(loc2, a);
 
@@ -54,5 +54,22 @@ public class GameBoardTest {
 
         assertNotEquals(gameboard1.get(loc1), gameboard1Copy.get(loc1));
         assertEquals(gameboard1.get(loc2), gameboard1Copy.get(loc2));
+    }
+
+    @Test
+    public void testContains() {
+        GameBoard gameboard1 = new GameBoard(3,3,null,3);
+        Location loc1 = new Location(1,2,1);
+        String a = "hei";
+        String b = "hadet bra";
+        gameboard1.set(loc1, a);
+
+        assertTrue(gameboard1.contains(a));
+        assertFalse(gameboard1.contains(b));
+    }
+
+    @Test
+    public void testGeneral() {
+
     }
 }
