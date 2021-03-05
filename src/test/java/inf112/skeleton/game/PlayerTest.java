@@ -1,4 +1,6 @@
 package inf112.skeleton.game;
+import inf112.skeleton.Game.Card;
+import inf112.skeleton.Game.CardType;
 import inf112.skeleton.Game.Flag;
 import inf112.skeleton.Game.Player;
 import inf112.skeleton.Game.Robot;
@@ -11,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class PlayerTest {
-    Player myPlayer;
+    public Player myPlayer;
 
     @Before
     public void makePlayer(){
@@ -53,7 +55,7 @@ public class PlayerTest {
     @Test
     public void checkDefaultPowerDownValues(){
         assertThat(myPlayer.isPowerDown(), is(false));
-        
+
     }
     @Test
     public void checkAnnounceAndCancelPowerDown(){
@@ -77,4 +79,34 @@ public class PlayerTest {
         assertThat(myPlayer.getNumberOfDamages(), is(2));
 
     }
+    @Test
+    public void cardChoiceAmountTest(){
+
+        assertThat(myPlayer.cardChoiceAmount(),is(5));
+
+        myPlayer.getRobot().getDamage(6);
+        assertThat(myPlayer.cardChoiceAmount(),is(3));
+    }
+    @Test
+    public void addCurrentCardsTest(){
+        assertThat(myPlayer.getCurrentCards().size(),is(0));
+        myPlayer.addCurrentCards(new Card(CardType.MOVE1,490),1);
+        assertThat(myPlayer.getCurrentCards().size(),is(1));
+    }
+    @Test
+    public void allowedToChooseCardsTest(){
+        assertThat(myPlayer.allowedToChooseCards(),is(true));
+
+        myPlayer.addCurrentCards(new Card(CardType.MOVE1,490),1);
+        myPlayer.addCurrentCards(new Card(CardType.MOVE2,670),2);
+        myPlayer.addCurrentCards(new Card(CardType.MOVE3,790),3);
+        myPlayer.addCurrentCards(new Card(CardType.BACKUP,430),4);
+
+        assertThat(myPlayer.allowedToChooseCards(),is(true));
+
+        myPlayer.addCurrentCards(new Card(CardType.MOVE1,500),5);
+
+        assertThat(myPlayer.allowedToChooseCards(),is(false));
+    }
 }
+

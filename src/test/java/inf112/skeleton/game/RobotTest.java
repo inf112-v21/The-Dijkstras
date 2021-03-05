@@ -26,10 +26,13 @@ public class RobotTest {
     }
     @Test
     public void RobotGetDamages(){
+        int health= myRobot.getHealth();
         myRobot.getDamage(1);
-        assertThat(myRobot.getHealth(), is(7));
+        assertThat(myRobot.getHealth(), is(health-1));
+
+        health= myRobot.getHealth();
         myRobot.getDamage(2);
-        assertThat(myRobot.getHealth(), is(5));
+        assertThat(myRobot.getHealth(), is(health-2));
 
     }
 
