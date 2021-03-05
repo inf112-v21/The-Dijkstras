@@ -17,9 +17,9 @@ Trym & Morten;11.02.2021;14:15
 ### Week 6.1
 Morten & Erlend;dd.mm.yyyy;00:00
 
-Trym & Aleksander;dd.mm.yyyy;00:00
+Trym & Aleksander;19.02.2021;12:00 Mål: Klassediagram /v Trym
 
-Morten & Anas;dd.mm.yyyy;00:00
+Morten & Anas;16.02.2021;10:00 Mål: Klassediagram /v Trym
 
 
 ### Week 7.1
