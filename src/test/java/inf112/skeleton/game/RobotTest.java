@@ -1,4 +1,5 @@
-package inf112.skeleton.app;
+
+package inf112.skeleton.game;
 import inf112.skeleton.Game.Robot;
 import inf112.skeleton.grid.Location;
 import org.junit.*;
@@ -10,12 +11,7 @@ public class RobotTest {
 
     @Before
     public void MakeRobot(){
-        myRobot = new Robot();
-    }
-
-    @Test
-    public void RobotHasLife(){
-        assertThat(myRobot.getLife(), not(0));
+        myRobot = new Robot(new Location(0,0));
     }
 
     @Test
@@ -27,6 +23,17 @@ public class RobotTest {
     public void RobotOnStartPosition(){
         Location startLoc = new Location(0,0);
         assertThat(startLoc, is(myRobot.getPosition()));
+    }
+    @Test
+    public void RobotGetDamages(){
+        int health= myRobot.getHealth();
+        myRobot.getDamage(1);
+        assertThat(myRobot.getHealth(), is(health-1));
+
+        health= myRobot.getHealth();
+        myRobot.getDamage(2);
+        assertThat(myRobot.getHealth(), is(health-2));
+
     }
 
 

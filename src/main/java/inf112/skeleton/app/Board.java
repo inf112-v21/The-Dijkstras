@@ -18,13 +18,14 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 public class Board extends InputAdapter implements ApplicationListener  {
     private SpriteBatch batch;
     private BitmapFont font;
 
     private TiledMap map;
-    private TiledMapTileLayer boardLayer, playerLayer, holeLayer, flagLayer;
+    private TiledMapTileLayer boardLayer, playerLayer, holeLayer, flagLayer, laserLayer, movementLayer, barriersLayer;
 
     private OrthogonalTiledMapRenderer myRenderer;
     private OrthographicCamera myCam;
@@ -32,8 +33,12 @@ public class Board extends InputAdapter implements ApplicationListener  {
     private TiledMapTileLayer.Cell playerCell;
     private TiledMapTileLayer.Cell playerWonCell;
     private TiledMapTileLayer.Cell playerDiedCell;
+
     private Vector2 playerPos;
     private int xPos=0, yPos=0;
+
+    private int mapWidth;
+    private int mapHeight;
 
     @Override
     public void create() {
@@ -41,17 +46,44 @@ public class Board extends InputAdapter implements ApplicationListener  {
         font = new BitmapFont();
         font.setColor(Color.RED);
 
-        map = new TmxMapLoader().load("assets/exampleMap.tmx");
+        map = new TmxMapLoader().load("assets/map001.tmx");
 
         boardLayer= (TiledMapTileLayer) map.getLayers().get("Board");
         playerLayer= (TiledMapTileLayer) map.getLayers().get("Player");
         holeLayer= (TiledMapTileLayer) map.getLayers().get("Hole");
         flagLayer= (TiledMapTileLayer) map.getLayers().get("Flag");
+        laserLayer= (TiledMapTileLayer) map.getLayers().get("Laser");
+        movementLayer = (TiledMapTileLayer) map.getLayers().get("Movement");
+        barriersLayer = (TiledMapTileLayer) map.getLayers().get("Barriers");
+
+        mapWidth = boardLayer.getWidth();
+        mapHeight = boardLayer.getHeight();
+
+        Array<Vector2> spawns = new Array<Vector2>();                       //Spawn-points' list.
+
+        for (int i = 0; i < mapWidth; i++){                                 //Parsing playerLayer for spawn-point coordinates.
+            for (int j = 0; j < mapHeight; j++) {
+                TiledMapTileLayer.Cell cell = playerLayer.getCell(i, j);
+                try {
+                    if (cell.getTile() != null) {
+                        spawns.add(new Vector2(i,j));
+                    }
+                } catch (Exception e) {
+                    //Ignoring exceptions
+                }
+            }
+        }
+
+        int randomNum = (int)Math.floor(Math.random() * spawns.size);
+        Vector2 randomSpawn = (spawns.removeIndex(randomNum));              //Getting one random Vector2
+
+        xPos = (int)randomSpawn.x;                                          //Applying random Vector2 as player-spawn position.
+        yPos = (int)randomSpawn.y;
 
 
         myCam = new OrthographicCamera();
-        myCam.setToOrtho(false,5,5);
-        myCam.position.set(2.5F, 2.5F, 0.0F);
+        myCam.setToOrtho(false,mapWidth,mapHeight);
+        myCam.position.set(mapWidth/2F, mapHeight/2F, 0.0F);
         myCam.update();
 
         myRenderer= new OrthogonalTiledMapRenderer(map,1F/300F);
@@ -74,13 +106,13 @@ public class Board extends InputAdapter implements ApplicationListener  {
         if (keycode== Input.Keys.LEFT && xPos>0){
             playerLayer.setCell(xPos,yPos,null);
             xPos-=1;
-        }else if ( keycode == Input.Keys.RIGHT && xPos<4){
+        }else if ( keycode == Input.Keys.RIGHT && xPos<mapWidth-1){
             playerLayer.setCell(xPos,yPos,null);
             xPos +=1;
         }else if (keycode== Input.Keys.DOWN && yPos >0){
             playerLayer.setCell(xPos,yPos,null);
             yPos-=1;
-        }else if (keycode== Input.Keys.UP && yPos<4){
+        }else if (keycode== Input.Keys.UP && yPos<mapHeight-1){
             playerLayer.setCell(xPos,yPos,null);
             yPos +=1;
         }

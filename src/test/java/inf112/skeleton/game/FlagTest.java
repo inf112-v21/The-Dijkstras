@@ -1,4 +1,4 @@
-package inf112.skeleton.app;
+package inf112.skeleton.game;
 import inf112.skeleton.Game.Flag;
 import inf112.skeleton.grid.Location;
 import org.junit.*;
@@ -11,7 +11,7 @@ public class FlagTest {
 
     @Before
     public void makeFlag(){
-        myFlag = new Flag(new Location(1,1));
+        myFlag = new Flag(new Location(1,1, 0), 1);
     }
 
     @Test

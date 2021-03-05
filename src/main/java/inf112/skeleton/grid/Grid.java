@@ -13,17 +13,22 @@ public class Grid<T> implements IGrid<T> {
     private List<T> cells;
     private int rows;
     private int cols;
+    private int layer;
 
-    public Grid(int rows, int cols, T initElement) {
+    public Grid(int rows, int cols, T initElement, int layer) {
         if(cols <= 0 || rows <= 0)
             throw new IllegalArgumentException("number of rows and columns must be positive");
 
         this.rows = rows;
         this.cols = cols;
+        this.layer = layer;
         cells = new ArrayList<>(rows * cols);
         for(int i = 0; i<rows*cols; i++) {
             cells.add(initElement);
         }
+    }
+
+    public Grid() {
     }
 
     @Override
@@ -31,12 +36,13 @@ public class Grid<T> implements IGrid<T> {
         return rows;
     }
 
-
     @Override
     public int numCols() {
         return cols;
     }
 
+    @Override
+    public int numLayers() { return layer; }
 
     @Override
     public void set(Location loc, T elem) {
@@ -62,7 +68,7 @@ public class Grid<T> implements IGrid<T> {
     private Location locationFromIndex(int index) {
         if(index<0 || index > cells.size())
             throw new IndexOutOfBoundsException("index is not a valid index of the board");
-        return new Location(index/cols,index%cols);
+        return new Location(index/cols,index%cols, layer);
     }
 
     @Override
@@ -74,10 +80,9 @@ public class Grid<T> implements IGrid<T> {
 
     @Override
     public IGrid<T> copy() {
-        Grid<T> newGrid = new Grid<>(numRows(), numCols(), null);
+        Grid<T> newGrid = new Grid<>(numRows(), numCols(), null, numLayers());
         copy(newGrid);
         return newGrid;
-
     }
 
     protected void copy(IGrid<T> newGrid) {

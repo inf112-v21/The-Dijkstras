@@ -9,9 +9,18 @@ public class Location {
 
     private int row;
     private int col;
-    public Location (int x,int y){
+    private int layer;
+
+    public Location (int x, int y, int layer){
         this.row = x;
         this.col = y;
+        this.layer = layer;
+    }
+
+    public Location (int x, int y) {
+        this.row = x;
+        this.col = y;
+        this.layer = -1;
     }
 
     public int getRow(){
@@ -22,8 +31,12 @@ public class Location {
         return col;
     }
 
+    public int getLayer() { return layer; }
+
+    public boolean hasLayer() { return !(getLayer() == -1);}
+
     public Location move(Directions dir){
-        return new Location(row +dir.getDy(), col +dir.getDx());
+        return new Location(row +dir.getDy(), col +dir.getDx(), layer);
     }
 
     @Override
@@ -32,7 +45,7 @@ public class Location {
             return false;
         }
         Location loc = (Location) obj;
-        return this.getRow()==loc.getRow() && this.getCol()==loc.getCol();
+        return this.getRow()==loc.getRow() && this.getCol()==loc.getCol() && this.getLayer()==loc.getLayer();
     }
 
 }

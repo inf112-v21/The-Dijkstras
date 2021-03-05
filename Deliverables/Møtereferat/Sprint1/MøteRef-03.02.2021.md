@@ -10,7 +10,6 @@ Tilstede:
 Setter opp Team- med egne erfaringer.
 
 
-
 ### The DIJKSTRAS- Lagbeskrivelse
 
 Erlend
