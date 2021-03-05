@@ -66,7 +66,7 @@ Erlend: Leder\
 Usikker på hvor å legge balansen i det å være leder.
 Kunne tatt en mer bestemt approach. Prøver å være åpen om ting som anses som problem.
 Å få det frem uten å fremstå som negativ.
-Noen Gruppen sier seg enig i å at man kunne være mer bestemt
+Noen i gruppen sier seg enig i å at man kunne være mer bestemt
 
 Trym: ProduksjonsAnsvarlig\DokumentAnsvarlig
 Litt usikker om hva en prodansvarlig . Gjør det han tror en produksjonsansvarlig skal gjøre.
@@ -75,14 +75,14 @@ Kunne tenkt seg å være litt mer ledende.
 Morten Grafikk og kundeansvarlig:
 Laget ikon, laget brukersnittforslag. Blir mer aktuelt med kundeansvarlig etter hvert.
 
-Aleks - Produksjonansvarlig\
-Erlend foreslår å endre produksjonansvarlig til frontend ansvarlig. Alex svarer med at de henger sånn 
-sammen at det gir mer mening å ha to produksjonansvarlig.
+Aleksander - Produksjonansvarlig\
+Det blir foreslått å endre produksjonansvarlig til frontend ansvarlig. Vi blir enig og at de henger sånn 
+sammen at det er greit å ha to produksjonansvarlige.
 
 Anas - Git- og testansvarlig\
 Vi har ikke skrevet så mange tester inn i master, men når vi begynner å få et volum blir det mer aktuelt.
 Det er greit å ha en git ansvarlig som har litt mer kontroll og kan veilede resten av gruppen. 
-Anas har vært god å ha som git ansvarlig
+Anas har vært god å ha som git ansvarlig så langt.
 
 Tre forbedrinsgpunkter til neste sprint:
 
@@ -102,13 +102,11 @@ arbeidsoppgaver. Husk at akseptansekriterier ofte skrives mer eller mindre som t
 Dersom dere har oppgaver som dere skal til å starte med, hvor dere har oversikt over både
 brukerhistorie, akseptansekriterier og arbeidsoppgaver, kan dere ta med disse i innleveringen også.
 
-Forklar kort hvordan dere har prioritert oppgavene fremover
-
-Vi har satt opp diverse oppgaver på project board på github hvor vi velger oppgaver som er viktigst å få gjort samt oppgaver personen mener de klarer å få til
-Viktigheten av oppgavene har vi diskutert noe på møtene
-
-Har dere gjort justeringer på kravene som er med i MVP? Forklar i så fall hvorfor. Hvis det er gjort
-endringer i rekkefølge utfra hva som er gitt fra kunde, hvorfor er dette gjort?
+Vi har satt opp oppgaver fra brukerhistorier på project board på github. Der velger vi oppgaver
+som er viktigst å få gjort samt oppgaver personen mener de klarer å få til. Så setter vi en tidsramme om når 
+vi ønsker at oppgaven skal være ferdig.
+Viktigheten av oppgavene har vi diskutert på møtene, da det ikke alltid er de greieste oppgavene og ta
+som haster mest.
 
 Her er våre nåværende MVP krav:
 1. Vise et spillebrett
@@ -128,15 +126,15 @@ Vi velger å ikke oppfylle krav 6 til oblig 2 fordi vi estimerte at det ble for 
 Da vi skulle begynne på nye brukerhistorier, tenkte vi å utvide MVP. Kravene 10 og 11 er de nye vi bestemte oss for, da vi
 følte de passet med hvor vi i progresjon.
 
-####Brettet har hull
+#### Brettet har hull:
 Vi valgte dette kravet fordi det allerede var en hindring vi hadde på brettet. Det 
 kan diskuteres om dette egentlig burde være MVP da det utgjør liten forskjell og er ikke så viktig for en runde.
 
-####Robot flytter på andre roboter
+#### Robot flytter på andre roboter:
 Vi valgte dette kravet for å håndtere kræsj mellom roboter. Dette er nødvendig i en runder slik at robot ikke 
 står ovenpå hverandre.
 
-####Refleksjon over arbeid
+#### Refleksjon over arbeid
 Vi ser i etterkant av det var nok ikke nødvendig å utvide mvp i denne omgang.
 Fokuset burde vært på de arbeidsoppgavene som fulgte med forrige brukerhistorier og de kravene som allerede var satt.
 
@@ -148,7 +146,7 @@ Dette har vært et stort knutepunkt i arbeidet vårt, noe som har bidratt til fo
 
 -----
 
-###Deloppgave 3: Kode
+### Deloppgave 3: Kode
 
 Prosjektet kjøres ved kjøre main class i src/inf112/skeleton/app/Main.java\
 Testene finner man i test/java/inf112/skeleton/*\
