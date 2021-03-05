@@ -10,10 +10,17 @@ public class Location {
     private int row;
     private int col;
     private int layer;
-    public Location (int x,int y,int layer){
+
+    public Location (int x, int y, int layer){
         this.row = x;
         this.col = y;
         this.layer = layer;
+    }
+
+    public Location (int x, int y) {
+        this.row = x;
+        this.col = y;
+        this.layer = -1;
     }
 
     public int getRow(){
@@ -25,6 +32,8 @@ public class Location {
     }
 
     public int getLayer() { return layer; }
+
+    public boolean hasLayer() { return !(getLayer() == -1);}
 
     public Location move(Directions dir){
         return new Location(row +dir.getDy(), col +dir.getDx(), layer);
