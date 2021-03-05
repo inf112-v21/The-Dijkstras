@@ -86,12 +86,14 @@ Anas har vært god å ha som git ansvarlig
 
 Tre forbedrinsgpunkter til neste sprint:
 
-Mål for uken.
+Mål for uken
 Planlegging av sprintene
 OverOrdnet oversikt.
 
 Morten har ikke fått commitet noe kode, men har deltatt på parprogrammeringer, og bidratt
 med grafisk design og layout.
+
+------
 
 ### Deloppgave 2: Krav
 For hvert krav dere jobber med, må dere lage 1) ordentlige brukerhistorier, 2) akseptansekriterier og 3)
@@ -126,27 +128,31 @@ Vi velger å ikke oppfylle krav 6 til oblig 2 fordi vi estimerte at det ble for 
 Da vi skulle begynne på nye brukerhistorier, tenkte vi å utvide MVP. Kravene 10 og 11 er de nye vi bestemte oss for, da vi
 følte de passet med hvor vi i progresjon.
 
-Brettet har hull:\
+####Brettet har hull
 Vi valgte dette kravet fordi det allerede var en hindring vi hadde på brettet. Det 
 kan diskuteres om dette egentlig burde være MVP da det utgjør liten forskjell og er ikke så viktig for en runde.
 
-Robot flytter på andre roboter:\
+####Robot flytter på andre roboter
 Vi valgte dette kravet for å håndtere kræsj mellom roboter. Dette er nødvendig i en runder slik at robot ikke 
 står ovenpå hverandre.
 
+####Refleksjon over arbeid
 Vi ser i etterkant av det var nok ikke nødvendig å utvide mvp i denne omgang.
-Vi burde heller fokusert på de arbeidsoppgavene som fulgte med forrige brukerhistorier
+Fokuset burde vært på de arbeidsoppgavene som fulgte med forrige brukerhistorier og de kravene som allerede var satt.
 
-Sprinten vår startet med fokus på klassediagrammet. Vi ønsket å få et klassediagram på plass for å skape oversikt 
+Sprinten vår startet med fokus på å få laget klassediagrammet. Ønsket var å få et klassediagram på plass for å skape oversikt 
 over hva vi trengte for å gui til å snakke med grid.
 
-Vi har fokusert på å få UI, gameboard, og roundhandler til å fungere for å få funkskjonalitet og forbindelse mellom front-end og back-end.
-Dette har vært et stort knutepunkt i arbeidet vårt, noe som har skapt forsinkelser i kodeproduksjon.
+Mye av jobben videre var å få UI, gameboard, og roundhandler til å fungere for å få funkskjonalitet og forbindelse mellom front-end og back-end.
+Dette har vært et stort knutepunkt i arbeidet vårt, noe som har bidratt til forsinkelser i kodeproduksjon.
 
+-----
 
-### Deloppgave 3: Kode
+###Deloppgave 3: Kode
 
-Prosjektet kjøres ved kjøre main class i src/inf112/skeleton/app/Main.java
-Testene finner man i test/java/inf112/skeleton/*
+Prosjektet kjøres ved kjøre main class i src/inf112/skeleton/app/Main.java\
+Testene finner man i test/java/inf112/skeleton/*\
 Ingen manuelle tester for Gui Enda.
+
+
 
