@@ -9,7 +9,6 @@ When you run main:
 ## Running it
 *To run:*  
 You simply need to run the main class.
-The-Dijkstras/src/main/java/inf112/skeleton/app/
 
 
 ## Deliverables
@@ -19,7 +18,6 @@ Deliverables contains documents:
 - Pair Programming Scheduele
 - Pair Programming reports
 - Klassediagram
-- Grafisk modell forslag  
 - ObligDoc1
 - ObligDoc2
 
