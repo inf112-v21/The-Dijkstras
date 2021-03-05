@@ -16,7 +16,6 @@ Morten meldte seg frivillig til å ta på seg den rollen framover.
 | TestAnsvarlig, Gitansvarlig | Anas
 | GrafikkAnsvarlig, Kundeansvarlig | Morten
 
-### //TODO: DISKUTERE GRUPPEROLLER
 
 Vi ble enige om at vi siden git hadde skapt så mye trøbbel, så kunne vi sette av en person til 
 å holde styr på hvordan vi jobber med git. 
@@ -57,10 +56,33 @@ Planleggingen har vi blitt bedre på.
 I starten var det ofte utydelig hva en burde jobbe med, men nå er vi blitt bedre her ved å blant annet bruke project board på git. 
 Vi har alle blitt bedre på å utnytte programvare som gitKraken, og generelt bedre på git-commit-push oppsettet, noe som har gjort arbeid mer strukturert.
 
+
+Diskusjon Roller i teamet:
+
+Erlend: Leder\
+Usikker på hvor å legge balansen i det å være leder.
+Om noen ting kunne blitt gjort mer bestemt. Prøver å være åpen om ting som jeg anser som problem.
+Å få det frem uten at det fremstår negativ.
+Trym sier seg enig i å at man kunne være mer bestemt
+
+Trym: ProduksjonsAnsvarlig\DokumentAnsvarlig
+Litt usikker om hva en prodansvarlig . Gjør det han tror en produksjonsansvarlig skal gjøre.
+Kunne tenkt seg å være litt mer ledende.
+
+Morten Grafikk og kundeansvarlig:
+Laget ikon, laget brukersnittforslag. Blir mer aktuelt med kundeansvarlig etter hvert.
+
+Aleks - Produksjonansvarlig\
+Erlend foreslår å endre produksjonansvarlig til frontend ansvarlig. Alex svarer med at de henger sånn sammen at det gir mer mening å ha to produksjonansvarlig.
+
+Anas - Git- og testansvarlig\
+Vi har ikke skrevet så mange tester inn i master, men når vi begynner å få et volum blir det greit å a oversikto ver Det blir mer aktuelt
+Det er greit å ha en git ansvarlig som har litt mer kontortll
+
 Tre forbedrinsgpunkter:
 
-ParProg planleggings mål
-Oblig planleggings mål.
+Mål for uken.
+Planlegging av sprintene
 OverOrdnet oversikt.
 
 
@@ -89,11 +111,11 @@ Her er våre nåværende MVP krav:
 4. Robot besøker flagg
 5. Robot vinner ved å besøke flagg
 6. Spille fra flere maskiner (vise brikker for alle spillere, flytte brikker for alle spillere) - Ikke en del av oblig2
-7. Dele ut kort - Anas
-8. Velge 5 kort - Trym
-9. Bevege robot ut fra valgte kort. Morten
-10. Brettet har hull. - Aleksander - åpen til kritikk
-11. Robot flytter på andre roboter. Erlend
+7. Dele ut kort 
+8. Velge 5 kort 
+9. Bevege robot ut fra valgte kort.
+10. Brettet har hull.
+11. Robot flytter på andre roboter. 
 
 Vi velger å ikke oppfylle krav 6 til oblig 2 fordi vi estimerte at det ble for mye arbeid.
 
@@ -152,7 +174,7 @@ Utføre de tildelte oppgavene under og mellom disse ukentlige møtene, som avtal
 Rapportere tilbake til teamet om framdrift og/eller problemer som oppstår, som avtalt i teamet.  
 Vektlegging: Denne leveransen teller 12,5% av sluttkarakteren.
 
-Tips
+###//TODO Tips
 Husk å lese gjennom retteskjema for å få med alle punktene vi gir poeng for.  
 Mockito kan være et bra mock-rammeverk i tillegg til JUnit. Generelt sett er det også mulig å skrive  
 manuelle tester. Husk at testene dere skriver skal brukes. (Som nevnt i deloppgave 3)  
