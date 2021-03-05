@@ -16,4 +16,5 @@ public class Flag {
     public Object getIndex() {
         return this.flagIndex;
     }
+
 }

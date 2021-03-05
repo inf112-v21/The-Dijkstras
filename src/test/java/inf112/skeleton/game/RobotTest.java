@@ -11,12 +11,7 @@ public class RobotTest {
 
     @Before
     public void MakeRobot(){
-        myRobot = new Robot();
-    }
-
-    @Test
-    public void RobotHasLife(){
-        assertThat(myRobot.getLife(), not(0));
+        myRobot = new Robot(new Location(0,0));
     }
 
     @Test
@@ -26,7 +21,7 @@ public class RobotTest {
 
     @Test
     public void RobotOnStartPosition(){
-        Location startLoc = new Location(0,0, 0);
+        Location startLoc = new Location(0,0);
         assertThat(startLoc, is(myRobot.getPosition()));
     }
     @Test

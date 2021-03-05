@@ -16,7 +16,7 @@ public class PlayerTest {
     @Before
     public void makePlayer(){
         myPlayer = new Player(new Location(0,0));
-        myPlayer.setRobot(new Robot());
+        myPlayer.setRobot(new Robot(myPlayer.getSpawnPoint()));
     }
 
     @Test
