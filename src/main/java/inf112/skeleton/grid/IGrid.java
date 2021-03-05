@@ -17,7 +17,7 @@ public interface IGrid<T> extends Iterable<T> {
      */
     int numCols();
 
-    int getLayer();
+    int numLayers();
 
     /**
      *

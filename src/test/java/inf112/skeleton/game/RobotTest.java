@@ -26,7 +26,7 @@ public class RobotTest {
 
     @Test
     public void RobotOnStartPosition(){
-        Location startLoc = new Location(0,0);
+        Location startLoc = new Location(0,0, 0);
         assertThat(startLoc, is(myRobot.getPosition()));
     }
     @Test

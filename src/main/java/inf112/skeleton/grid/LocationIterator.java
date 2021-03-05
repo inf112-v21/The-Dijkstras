@@ -12,13 +12,15 @@ public class LocationIterator implements Iterator<Location>, Iterable<Location>{
     int numCols;
     int currentRow;
     int currentCol;
+    int numLayers;
+    int currentLayer;
 
     /**
      * Constructs a GridLocationIterator
      * @param grid - the inf112.skeleton.grid which we want to iterate through
      */
     public LocationIterator(Grid<?> grid) {
-        this(grid.numRows(),grid.numCols());
+        this(grid.numRows(),grid.numCols(),grid.numLayers());
     }
 
     /**
@@ -26,9 +28,10 @@ public class LocationIterator implements Iterator<Location>, Iterable<Location>{
      * @param numRows - number of rows in the inf112.skeleton.grid
      * @param numCols - number of columns in the inf112.skeleton.grid
      */
-    public LocationIterator(int numRows,int numCols) {
+    public LocationIterator(int numRows,int numCols,int numLayers) {
         this.numRows = numRows;
         this.numCols = numCols;
+        this.currentLayer = numLayers;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class LocationIterator implements Iterator<Location>, Iterable<Location>{
 
     @Override
     public Location next() {
-        Location elem = new Location(currentRow, currentCol);
+        Location elem = new Location(currentRow, currentCol, currentLayer);
         currentCol++;
         if(currentCol>=numCols) {
             currentCol=0;
@@ -49,6 +52,6 @@ public class LocationIterator implements Iterator<Location>, Iterable<Location>{
 
     @Override
     public Iterator<Location> iterator() {
-        return new LocationIterator(numRows,numCols);
+        return new LocationIterator(numRows,numCols,numLayers);
     }
 }
