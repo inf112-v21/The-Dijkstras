@@ -70,6 +70,15 @@ public class GameBoardTest {
 
     @Test
     public void testGeneral() {
+        GameBoard gameboard1 = new GameBoard(3,3,null,3);
+        Location loc1 = new Location(1,2,1);
+        Location loc2 = new Location(1,2,2);
+        String a = "hei";
+        String b = "hadet";
 
+        gameboard1.set(loc1, a);
+        gameboard1.set(loc2, b);
+
+        assertTrue(gameboard1.sameXYLocation(a,b));
     }
 }

@@ -45,7 +45,7 @@ public class GameBoard<T> extends Grid<T>{
     }
 
     public T get(Location loc){
-        return (T) getGridLayer(loc.getLayer());
+        return (T) getGridLayer(loc.getLayer()).get(loc);
     }
 
     public GameBoard copy() {
