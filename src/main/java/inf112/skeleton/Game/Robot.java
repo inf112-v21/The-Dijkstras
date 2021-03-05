@@ -8,6 +8,7 @@ import inf112.skeleton.grid.Location;
      * - StartPosition = (0,0)
      */
     public class Robot {
+        private int layer = 4;
         private int health;
         private Location position;
         // TODO Implement Direction
@@ -17,7 +18,7 @@ import inf112.skeleton.grid.Location;
             this.health = 8;
             this.position= new Location(0,0, 0);
             // this.direction = new Directions(0, -1); // North == (0, -1)?
-
+            //TODO se
         }
 
         public int getHealth() {
