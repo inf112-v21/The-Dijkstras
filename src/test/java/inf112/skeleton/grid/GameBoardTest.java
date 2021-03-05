@@ -67,7 +67,7 @@ public class GameBoardTest {
         assertTrue(gameboard1.contains(a));
         assertFalse(gameboard1.contains(b));
     }
-
+    
     @Test
     public void testGeneral() {
         GameBoard gameboard1 = new GameBoard(3,3,null,3);
