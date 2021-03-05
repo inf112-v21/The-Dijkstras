@@ -15,11 +15,6 @@ public class RobotTest {
     }
 
     @Test
-    public void RobotHasLife(){
-        assertThat(myRobot.getLife(), not(0));
-    }
-
-    @Test
     public void RobotHasHealth(){
         assertThat(myRobot.getHealth(), not(0));
     }
