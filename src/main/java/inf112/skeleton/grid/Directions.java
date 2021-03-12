@@ -9,24 +9,20 @@ import java.util.List;
  */
 
 public enum Directions {
-    EAST(1, 0),
-    NORTH(0, -1),
-    WEST(-1, 0),
-    SOUTH(0, 1),
-    CENTER(0, 0);
+    NORTH(0, +1, 0),
+    EAST(+1, 0, 1),
+    SOUTH(0, -1, 2),
+    WEST(-1, 0, 3);
 
-    /**
-     * The four cardinal directions: {@link #NORTH}, {@link #SOUTH}, {@link #EAST},
-     * {@link #WEST}.
-     */
-    public static final List<Directions> FOUR_DIRECTIONS = Arrays.asList(EAST, NORTH, WEST, SOUTH);
 
     private final int dx;
     private final int dy;
+    private final int dir;
 
-    private Directions(int dx, int dy) {
+     Directions(int dx, int dy, int dir) {
         this.dx = dx;
         this.dy = dy;
+        this.dir = dir;
     }
 
 
@@ -44,5 +40,46 @@ public enum Directions {
      */
     public int getDy() {
         return dy;
+    }
+
+    /**
+     * @return The value of the direction the robot is facing
+     */
+    public int getDir() {
+        return dir;
+    }
+
+    /**
+     * Rotates direction 90 degrees clockwise for every int amountToRotate
+     * @param amountToRotate 
+     * @return direction, new direction after rotate
+     */
+    public Directions rotate(int amountToRotate) {
+        int newDirection = (dir + amountToRotate) % 4;
+        switch(newDirection) {
+            case 1:
+                return EAST;
+            case 2:
+                return SOUTH;
+            case 3:
+                return WEST;
+            default:
+                return NORTH;
+        }
+    }
+
+    /**
+     * give the opposite direction of the current direction
+     * @return opposite direction
+     */
+
+    public Directions opposite() {
+        switch(this) {
+            case NORTH: return Directions.SOUTH;
+            case SOUTH: return Directions.NORTH;
+            case EAST: return Directions.WEST;
+            case WEST: return Directions.EAST;
+            default: throw new IllegalStateException("This should never happen: " + this + " has no opposite.");
+        }
     }
 }
