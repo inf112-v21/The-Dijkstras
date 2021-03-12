@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 public enum Directions {
-    NORTH(0, 1, 0),
+    NORTH(0, +1, 0),
     EAST(1, 0, 1),
     SOUTH(0, -1, 2),
     WEST(-1, 0, 3);
