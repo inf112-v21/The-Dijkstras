@@ -8,4 +8,9 @@ public class Card {
         this.type= type;
 
     }
+    @Override
+    public String toString(){
+        return "Card type:"+type+
+                " PriorityNr:"+priorityNr;
+    }
 }
