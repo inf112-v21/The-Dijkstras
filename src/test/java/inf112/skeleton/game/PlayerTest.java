@@ -1,12 +1,12 @@
 package inf112.skeleton.game;
-import inf112.skeleton.Game.Card;
-import inf112.skeleton.Game.CardType;
-import inf112.skeleton.Game.Flag;
 import inf112.skeleton.Game.Player;
 import inf112.skeleton.Game.Robot;
+import inf112.skeleton.Game.Flag;
+import inf112.skeleton.Game.Card;
+import inf112.skeleton.Game.CardType;
+import inf112.skeleton.grid.Directions;
 import inf112.skeleton.grid.Location;
 import org.junit.*;
-import org.lwjgl.system.CallbackI;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -107,6 +107,48 @@ public class PlayerTest {
         myPlayer.addCurrentCards(new Card(CardType.MOVE1,500),5);
 
         assertThat(myPlayer.allowedToChooseCards(),is(false));
+    }
+    @Test
+    public void makeMoveTest(){
+
+        Card move1 = new Card(CardType.MOVE1, 490);
+        Card move2 = new Card(CardType.MOVE2, 670);
+        Card move3 = new Card(CardType.MOVE3, 790);
+        Card backup = new Card(CardType.BACKUP, 430);
+
+        Card rotRight = new Card(CardType.ROTRIGHT, 80);
+        Card rotLeft = new Card(CardType.ROTLEFT, 70);
+        Card uTurn = new Card(CardType.UTURN, 10);
+
+
+
+        myPlayer.makeMove(move1);
+
+        assertThat(myPlayer.getRobot().getPosition().getCol(),is (0));
+        assertThat(myPlayer.getRobot().getPosition().getRow(),is (1));
+
+        myPlayer.makeMove(move2);
+        assertThat(myPlayer.getRobot().getPosition().getRow(),is (3));
+        assertThat(myPlayer.getRobot().getPosition().getCol(),is (0));
+
+        myPlayer.makeMove(move3);
+        assertThat(myPlayer.getRobot().getPosition().getRow(),is (6));
+        assertThat(myPlayer.getRobot().getPosition().getCol(),is (0));
+
+        myPlayer.makeMove(backup);
+        assertThat(myPlayer.getRobot().getPosition().getRow(),is (5));
+        assertThat(myPlayer.getRobot().getPosition().getCol(),is (0));
+        // When we add a new robot, the start robot direction is North
+        myPlayer.makeMove(rotRight);
+        assertThat(myPlayer.getRobot().getDirection(),is (Directions.EAST));
+
+        myPlayer.makeMove(rotLeft);
+        assertThat(myPlayer.getRobot().getDirection(),is (Directions.NORTH));
+
+        myPlayer.makeMove(uTurn);
+        assertThat(myPlayer.getRobot().getDirection(),is (Directions.SOUTH));
+
+
     }
 }
 

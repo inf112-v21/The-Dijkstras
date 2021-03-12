@@ -96,4 +96,29 @@ public class Player {
         // will not do well in this case.
         return getCurrentCards().size() < cardChoiceAmount();
     }
+
+    public void makeMove(Card movingCard) {
+        switch (movingCard.type){
+            case MOVE1:    myRobot.moveForward();
+                           break;
+            case MOVE2:    myRobot.moveForward();
+                           myRobot.moveForward();
+                           break;
+            case MOVE3:    myRobot.moveForward();
+                           myRobot.moveForward();
+                           myRobot.moveForward();
+                           break;
+            case BACKUP:   myRobot.reverse();
+                           break;
+            case ROTLEFT:  myRobot.rotate(-1);
+                           break;
+            case ROTRIGHT: myRobot.rotate(+1);
+                           break;
+            case UTURN:    myRobot.rotate(2);
+                           break;
+            default: throw new IllegalArgumentException(movingCard+" is not a valide card");
+
+        }
+
+    }
 }
