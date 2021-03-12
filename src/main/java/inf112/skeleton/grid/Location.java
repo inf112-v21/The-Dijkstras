@@ -7,19 +7,19 @@ package inf112.skeleton.grid;
 
 public class Location {
 
-    private int row;
-    private int col;
+    private final int row;
+    private final int col;
     private int layer;
 
     public Location (int x, int y, int layer){
-        this.row = x;
-        this.col = y;
+        this.row = y;
+        this.col = x;
         this.layer = layer;
     }
 
     public Location (int x, int y) {
-        this.row = x;
-        this.col = y;
+        this.row = y;
+        this.col = x;
         this.layer = -1;
     }
 
@@ -36,7 +36,7 @@ public class Location {
     public boolean hasLayer() { return !(getLayer() == -1);}
 
     public Location move(Directions dir){
-        return new Location(row +dir.getDy(), col +dir.getDx(), layer);
+        return new Location(col +dir.getDx(),row +dir.getDy(), layer);
     }
 
     @Override

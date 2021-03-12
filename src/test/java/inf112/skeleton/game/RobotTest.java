@@ -35,6 +35,10 @@ public class RobotTest {
         assertThat(myRobot.getHealth(), is(health-2));
 
     }
-
-
+    @Test
+    public void RobotMovesForward(){
+        Location endLocation = new Location(0, 1);
+        myRobot.moveForward();
+        assertThat(myRobot.getPosition(), is(endLocation));
+    }
 }

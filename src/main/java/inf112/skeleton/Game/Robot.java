@@ -1,4 +1,5 @@
 package inf112.skeleton.Game;
+import inf112.skeleton.grid.Directions;
 import inf112.skeleton.grid.Location;
 
     /**
@@ -10,13 +11,12 @@ import inf112.skeleton.grid.Location;
         private final int layer = 4;
         private int health;
         private Location position;
-        // TODO Implement Direction
+        private Directions direction;
 
         public Robot(Location loc) {
-
             this.health =9;
             this.position= loc;
-            // this.direction = new Directions(0, -1); // North == (0, -1)?
+            this.direction = Directions.SOUTH;
         }
 
         public int getHealth() {
@@ -30,4 +30,8 @@ import inf112.skeleton.grid.Location;
             health-= damage;
 
         }
-}
+
+        public void moveForward(){
+            this.position = this.position.move(direction);
+        }
+    }
