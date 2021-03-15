@@ -18,6 +18,10 @@ import inf112.skeleton.grid.Location;
             this.direction = Directions.NORTH;
         }
 
+        public Location getLocation() {
+            return position;
+        }
+
         public int getHealth() {
             return health;
         }
@@ -28,11 +32,6 @@ import inf112.skeleton.grid.Location;
 
         public void getDamage(int damage){
             health-= damage;
-
-        }
-
-        public void moveForward(){
-            this.position = this.position.move(direction);
         }
 
         public Directions getDirection(){

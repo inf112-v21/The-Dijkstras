@@ -33,7 +33,19 @@ public class Location {
 
     public int getLayer() { return layer; }
 
-    public boolean hasLayer() { return !(getLayer() == -1);}
+    public boolean hasLayer() { return (getLayer() != -1);}
+
+    public boolean setLayer(int layer1) {
+        if (hasLayer()) return false;
+        else {
+            layer = layer1;
+            return true;
+        }
+    }
+
+    public boolean sameRowCol(Location loc) {
+        return((getRow() == loc.getRow()) && (getCol() == loc.getCol()));
+    }
 
     public Location move(Directions dir){
         return new Location(col +dir.getDx(),row +dir.getDy(), layer);

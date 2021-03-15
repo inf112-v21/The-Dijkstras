@@ -15,9 +15,13 @@ public class GameBoardTest {
 
         Location loc1 = new Location(2,1, 1);
         String a = "hei";
+        int b = 3;
 
         grid1.set(loc1, a);
         gameboard1.set(loc1, a);
+
+        grid1.set(loc1, b);
+        gameboard1.set(loc1, b);
 
         assertThat(grid1.get(loc1), is (gameboard1.get(loc1)));
     }
