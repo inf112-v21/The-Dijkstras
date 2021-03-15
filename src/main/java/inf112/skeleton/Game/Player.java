@@ -116,7 +116,7 @@ public class Player {
                            myRobot.moveForward();
                            myRobot.moveForward();
                            break;
-            case BACKUP:   myRobot.reverse();
+            case BACKUP:   myRobot.moveBackward();
                            break;
             case ROTLEFT:  myRobot.rotate(-1);
                            break;

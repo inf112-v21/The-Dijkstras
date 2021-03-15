@@ -51,7 +51,10 @@ public enum Directions {
 
     /**
      * Rotates direction 90 degrees clockwise for every int amountToRotate
-     * @param amountToRotate 
+     * @param amountToRotate
+     *                      Rotate 90 dg right = + 1
+     *                      Rotate 90 dg left = - 1
+     *                      Backwards = +2
      * @return direction, new direction after rotate
      */
     public Directions rotate(int amountToRotate) {
@@ -68,18 +71,5 @@ public enum Directions {
         }
     }
 
-    /**
-     * give the opposite direction of the current direction
-     * @return opposite direction
-     */
 
-    public Directions opposite() {
-        switch(this) {
-            case NORTH: return Directions.SOUTH;
-            case SOUTH: return Directions.NORTH;
-            case EAST: return Directions.WEST;
-            case WEST: return Directions.EAST;
-            default: throw new IllegalStateException("This should never happen: " + this + " has no opposite.");
-        }
-    }
 }
