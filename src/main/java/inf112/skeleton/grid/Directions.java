@@ -54,7 +54,12 @@ public enum Directions {
         return dir;
     }
 
-
+    /**
+     * Rotates direction 90 degrees clockwise for every int amountToRotate
+     *
+     * @param amountToRotate
+     * @return
+     */
     public Directions rotate(int amountToRotate) {
         int newDirection = (dir + amountToRotate) % 4;
         switch(newDirection) {

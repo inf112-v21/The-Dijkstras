@@ -1,6 +1,7 @@
 
 package inf112.skeleton.game;
 import inf112.skeleton.Game.Robot;
+import inf112.skeleton.grid.Directions;
 import inf112.skeleton.grid.Location;
 import org.junit.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -40,5 +41,19 @@ public class RobotTest {
         Location endLocation = new Location(0, 1);
         myRobot.moveForward();
         assertThat(myRobot.getPosition(), is(endLocation));
+    }
+
+    @Test
+    public void RobotMovesBackwards(){
+        Location endLocation = new Location(0, -1);
+        myRobot.moveForward();
+        assertThat(myRobot.getPosition(), is(endLocation));
+    }
+
+    @Test
+    public void RobotRotates(){
+        Directions westDir = Directions.WEST;
+        myRobot.rotate(2);
+        assertThat(myRobot.getDirection(), is(westDir));
     }
 }

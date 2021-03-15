@@ -16,7 +16,7 @@ import inf112.skeleton.grid.Location;
         public Robot(Location loc) {
             this.health =9;
             this.position= loc;
-            this.direction = Directions.SOUTH;
+            this.direction = Directions.NORTH;
         }
 
         public int getHealth() {
@@ -26,6 +26,7 @@ import inf112.skeleton.grid.Location;
         public Location getPosition() {
             return this.position;
         }
+
         public void getDamage(int damage){
             health-= damage;
 
@@ -34,4 +35,34 @@ import inf112.skeleton.grid.Location;
         public void moveForward(){
             this.position = this.position.move(direction);
         }
+
+        public Directions getDirection(){
+            return this.direction;
+        }
+
+        public void setDirection(Directions direction) {
+            this.direction = direction;
+        }
+
+        public void moveForward(){
+            this.position = this.position.move(direction);
+        }
+
+        public void moveBackward(){
+            this.position = this.position.move(direction.rotate(2));
+        }
+
+        /**
+         * Rotates robot
+         *
+         * @param amountToRotate
+         * Rotate 90 dg right = + 1
+         * Rotate 90 dg left = - 1
+         * Backwards = +2
+         */
+        public void rotate(int amountToRotate){
+            this.direction = direction.rotate(amountToRotate);
+        }
+
+
     }
