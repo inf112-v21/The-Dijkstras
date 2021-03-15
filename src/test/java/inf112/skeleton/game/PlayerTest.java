@@ -35,7 +35,7 @@ public class PlayerTest {
     @Test
     public void nextFlagIndexIncreased(){
         Flag myFlag = new Flag(new Location(0,0),1);
-        myPlayer.robotOnFlagEvent(myFlag);
+        myPlayer.flagCheck(myFlag);
         assertThat(myPlayer.getNextFlagIndex(), is(2));
     }
 

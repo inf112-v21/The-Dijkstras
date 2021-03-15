@@ -9,11 +9,10 @@ import java.util.List;
  */
 
 public enum Directions {
-    EAST(1, 0),
-    NORTH(0, -1),
-    WEST(-1, 0),
-    SOUTH(0, 1),
-    CENTER(0, 0);
+    NORTH(0, -1, 0),
+    EAST(1, 0, 1),
+    SOUTH(0, 1, 2),
+    WEST(-1, 0, 3);
 
     /**
      * The four cardinal directions: {@link #NORTH}, {@link #SOUTH}, {@link #EAST},
@@ -23,10 +22,12 @@ public enum Directions {
 
     private final int dx;
     private final int dy;
+    private final int dir;
 
-    private Directions(int dx, int dy) {
+    private Directions(int dx, int dy, int dir) {
         this.dx = dx;
         this.dy = dy;
+        this.dir = dir;
     }
 
 
@@ -44,5 +45,32 @@ public enum Directions {
      */
     public int getDy() {
         return dy;
+    }
+
+    /**
+     * @return The value of the direction the robot is facing
+     */
+    public int getDir() {
+        return dir;
+    }
+
+    /**
+     * Rotates direction 90 degrees clockwise for every int amountToRotate
+     *
+     * @param amountToRotate
+     * @return
+     */
+    public Directions rotate(int amountToRotate) {
+        int newDirection = (dir + amountToRotate) % 4;
+        switch(newDirection) {
+            case 1:
+                return EAST;
+            case 2:
+                return SOUTH;
+            case 3:
+                return WEST;
+            default:
+                return NORTH;
+        }
     }
 }

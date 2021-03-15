@@ -33,10 +33,18 @@ public class Player {
         return nextFlagIndex;
     }
 
-    public void robotOnFlagEvent(Flag flag){
-        if (flag.getIndex().equals(nextFlagIndex)){
+    public void checkFlagIndex(Flag flag){
+        if (flag.getIndex() == nextFlagIndex){
             this.nextFlagIndex++;
         }
+    }
+
+    public boolean flagCheck(Flag flag) {
+        if (myRobot.getLocation().sameRowCol(flag.getLocation())) {
+            checkFlagIndex(flag);
+            return true;
+        }
+        return false;
     }
 
     public void decreaseLife(){
