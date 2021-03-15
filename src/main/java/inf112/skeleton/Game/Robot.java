@@ -5,7 +5,6 @@ import inf112.skeleton.grid.Location;
     /**
      * Robot Class
      * - Has 9 health. Loss life if 0
-     * - StartPosition = (0,0)
      */
     public class Robot {
         private final int layer = 4;
@@ -51,6 +50,11 @@ import inf112.skeleton.grid.Location;
         public void moveBackward(){
             this.position = this.position.move(direction.rotate(2));
         }
+
+        public void moveInDirection(Directions dir){
+            this.position = this.position.move(dir);
+        }
+
 
         /**
          * Rotates robot

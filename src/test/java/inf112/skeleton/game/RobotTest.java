@@ -38,22 +38,29 @@ public class RobotTest {
     }
     @Test
     public void RobotMovesForward(){
-        Location endLocation = new Location(0, 1);
-        myRobot.moveForward();
-        assertThat(myRobot.getPosition(), is(endLocation));
-    }
-
-    @Test
-    public void RobotMovesBackwards(){
         Location endLocation = new Location(0, -1);
         myRobot.moveForward();
         assertThat(myRobot.getPosition(), is(endLocation));
     }
 
     @Test
+    public void RobotMovesBackwards(){
+        Location endLocation = new Location(0, 1);
+        myRobot.moveBackward();
+        assertThat(myRobot.getPosition(), is(endLocation));
+    }
+
+    @Test
+    public void RobotMovesInDirection(){
+        Location endLocation = new Location(1, 0);
+        myRobot.moveInDirection(Directions.EAST);
+        assertThat(myRobot.getPosition(), is(endLocation));
+    }
+
+    @Test
     public void RobotRotates(){
         Directions westDir = Directions.WEST;
-        myRobot.rotate(2);
+        myRobot.rotate(3);
         assertThat(myRobot.getDirection(), is(westDir));
     }
 }
