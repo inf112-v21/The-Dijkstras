@@ -43,20 +43,20 @@ public class LocationTest {
         Location newLoc;
 
         newLoc= loc1.move(Directions.NORTH);
-        assertThat(newLoc.getCol(),is(4));
-        assertThat(newLoc.getRow(),is(5));
+        assertThat(newLoc,is(new Location(4,5)));
+
 
         newLoc= loc1.move(Directions.SOUTH);
-        assertThat(newLoc.getCol(),is(4));
-        assertThat(newLoc.getRow(),is(3));
+        assertThat(newLoc,is(new Location(4,3)));
+
 
         newLoc= loc1.move(Directions.EAST);
-        assertThat(newLoc.getCol(),is(5));
-        assertThat(newLoc.getRow(),is(4));
+        assertThat(newLoc,is(new Location(5,4)));
+
 
         newLoc= loc1.move(Directions.WEST);
-        assertThat(newLoc.getCol(),is(3));
-        assertThat(newLoc.getRow(),is(4));
+        assertThat(newLoc,is(new Location(3,4)));
+
     }
 
 }
