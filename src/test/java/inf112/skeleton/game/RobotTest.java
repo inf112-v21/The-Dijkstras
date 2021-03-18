@@ -49,16 +49,16 @@ public class RobotTest {
     public void RobotMovesForward(){
         // Robot has direction North and moving forward
         myRobot.moveForward();
-        assertThat(myRobot.getPosition().getCol(),is( 0));
-        assertThat(myRobot.getPosition().getRow(),is( 1));
+        assertThat(myRobot.getPosition(),is(new Location(0,1)));
     }
 
     @Test
     public void RobotMovesBackwards(){
         // Robot has direction North and moving backwards
         myRobot.moveBackward();
-        assertThat(myRobot.getPosition().getCol(),is( 0));
-        assertThat(myRobot.getPosition().getRow(),is( -1));
+
+        assertThat(myRobot.getPosition(),is(new Location(0,-1)));
+
     }
 
     @Test

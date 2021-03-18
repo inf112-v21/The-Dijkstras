@@ -42,6 +42,7 @@ public class PlayerTest {
     @Test
     public void checkSetNewCheckPoint(){
         Location newCheckPoint = new Location(1,1);
+        assertThat(myPlayer.getSpawnPoint(), is(not((newCheckPoint))));
         myPlayer.newCheckPoint(newCheckPoint);
         assertThat(myPlayer.getSpawnPoint(), is(newCheckPoint));
     }
@@ -123,21 +124,19 @@ public class PlayerTest {
 
 
         myPlayer.makeMove(move1);
+        assertThat(myPlayer.getRobot().getPosition(), is(new Location(0,1)));
 
-        assertThat(myPlayer.getRobot().getPosition().getCol(),is (0));
-        assertThat(myPlayer.getRobot().getPosition().getRow(),is (1));
 
         myPlayer.makeMove(move2);
-        assertThat(myPlayer.getRobot().getPosition().getRow(),is (3));
-        assertThat(myPlayer.getRobot().getPosition().getCol(),is (0));
+        assertThat(myPlayer.getRobot().getPosition(), is(new Location(0,3)));
+
 
         myPlayer.makeMove(move3);
-        assertThat(myPlayer.getRobot().getPosition().getRow(),is (6));
-        assertThat(myPlayer.getRobot().getPosition().getCol(),is (0));
+        assertThat(myPlayer.getRobot().getPosition(), is(new Location(0,6)));
 
         myPlayer.makeMove(backup);
-        assertThat(myPlayer.getRobot().getPosition().getRow(),is (5));
-        assertThat(myPlayer.getRobot().getPosition().getCol(),is (0));
+        assertThat(myPlayer.getRobot().getPosition(), is(new Location(0,5)));
+
         // When we add a new robot, the start robot direction is North
         myPlayer.makeMove(rotRight);
         assertThat(myPlayer.getRobot().getDirection(),is (Directions.EAST));

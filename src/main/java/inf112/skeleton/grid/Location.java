@@ -67,5 +67,9 @@ public class Location {
         Location loc = (Location) obj;
         return this.getRow()==loc.getRow() && this.getCol()==loc.getCol() && this.getLayer()==loc.getLayer();
     }
+    @Override
+    public String toString(){
+        return "x= "+col+" y= "+row+" layer="+layer;
+    }
 
 }
