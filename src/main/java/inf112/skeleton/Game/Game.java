@@ -1,7 +1,7 @@
 package inf112.skeleton.Game;
 
 import inf112.skeleton.grid.*;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Game {
@@ -15,7 +15,27 @@ public class Game {
         this.players = players;
     }
 
+    public GameBoard getGameBoard() { return gameboard; }
 
+    public void wall(Location loc, Directions dir) {
+        if (gameboard.get(loc) instanceof Barricade) {
+            Barricade b = (Barricade) gameboard.get(loc);
+            b.addBarricade(dir);
+            gameboard.set(loc, b);
+        } else {
+            gameboard.set(loc, new Barricade(loc, dir));
+        }
+        Location loc2 = loc.move(dir);
+        Directions dir2 = dir.rotate(2);
+        if (gameboard.get(loc2) instanceof Barricade) {
+            Barricade b = (Barricade) gameboard.get(loc2);
+            b.addBarricade(dir2);
+            gameboard.set(loc2, b);
+        } else {
+            gameboard.set(loc, new Barricade(loc2, dir2));
+        }
+
+    }
 
     public void flagCheck() {
         for (Player player : players) {
