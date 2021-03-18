@@ -15,6 +15,8 @@ public class Game {
         this.players = players;
     }
 
+
+
     public void flagCheck() {
         for (Player player : players) {
             for (Flag flag : flags) {
