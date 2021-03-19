@@ -34,7 +34,7 @@ public class PlayerTest {
 
     @Test
     public void nextFlagIndexIncreased(){
-        Flag myFlag = new Flag(new Location(0,0),1);
+        Flag myFlag = new Flag(1);
         myPlayer.flagCheck(myFlag);
         assertThat(myPlayer.getNextFlagIndex(), is(2));
     }

@@ -18,7 +18,7 @@ public class Game {
     public void flagCheck() {
         for (Player player : players) {
             for (Flag flag : flags) {
-                if (gameboard.sameXYLocation(player, flag)) {
+                if (gameboard.sameXYLocation(player.getRobot(), flag)) {
                     player.checkFlagIndex(flag);
                 }
             }

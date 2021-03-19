@@ -1,5 +1,8 @@
 package inf112.skeleton.grid;
 
+import inf112.skeleton.Game.Flag;
+import inf112.skeleton.Game.TileObject;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -7,21 +10,29 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
 
 public class GameBoardTest {
+    GameBoard gameboard1;
+    TileObject myobj;
+    TileObject myobj2;
+
+    @Before
+    public void ConstructTestObjects(){
+        gameboard1 = new GameBoard(3, 3, 3);
+        myobj = new Flag(0);
+        myobj2 = new Flag(1);
+    }
+
 
     @Test
     public void makeGameBoardTest() {
-        Grid grid1 = new Grid(3,3,null,1);
-        GameBoard gameboard1 = new GameBoard(3,3,null,3);
+        Grid<TileObject> grid1 = new Grid<>(3, 3,null, 1);
 
         Location loc1 = new Location(2,1, 1);
-        String a = "hei";
-        int b = 3;
 
-        grid1.set(loc1, a);
-        gameboard1.set(loc1, a);
+        grid1.set(loc1, myobj);
+        gameboard1.set(loc1, myobj);
 
-        grid1.set(loc1, b);
-        gameboard1.set(loc1, b);
+        grid1.set(loc1, myobj);
+        gameboard1.set(loc1, myobj);
 
         assertThat(grid1.get(loc1), is (gameboard1.get(loc1)));
     }
@@ -33,12 +44,9 @@ public class GameBoardTest {
         assertFalse(gameboard1.validCoordinate(1,3));
 
         Location loc1 = new Location(2,1,1);
-        Location loc2 = new Location(2,1,2);
-        Location loc3 = new Location(1,2,1);
-        String a = "hei";
 
-        gameboard1.set(loc1, a);
-        Location myloc = gameboard1.locationOf(a);
+        gameboard1.set(loc1, myobj);
+        Location myloc = gameboard1.locationOf(myobj);
         System.out.println(myloc.getLayer());
         System.out.println(myloc.getCol());
         System.out.println(myloc.getRow());
@@ -49,13 +57,11 @@ public class GameBoardTest {
 
     @Test
     public void testCopy() {
-        GameBoard gameboard1 = new GameBoard(3,3,null,3);
         Location loc1 = new Location(1,2,1);
         Location loc2 = new Location(2,1,2);
-        String a = "hei";
 
-        gameboard1.set(loc1, a);
-        gameboard1.set(loc2, a);
+        gameboard1.set(loc1, myobj);
+        gameboard1.set(loc2, myobj);
 
         GameBoard gameboard1Copy = gameboard1.copy();
         gameboard1Copy.set(loc1, null);
@@ -66,27 +72,24 @@ public class GameBoardTest {
 
     @Test
     public void testContains() {
-        GameBoard gameboard1 = new GameBoard(3,3,null,3);
+        GameBoard gameboard1 = new GameBoard(3,3,3);
         Location loc1 = new Location(1,2,1);
-        String a = "hei";
-        String b = "hadet bra";
-        gameboard1.set(loc1, a);
 
-        assertTrue(gameboard1.contains(a));
-        assertFalse(gameboard1.contains(b));
+        gameboard1.set(loc1, myobj);
+
+        assertTrue(gameboard1.contains(myobj));
+        assertFalse(gameboard1.contains(myobj));
     }
     
     @Test
     public void testGeneral() {
-        GameBoard gameboard1 = new GameBoard(3,3,null,3);
+        GameBoard gameboard1 = new GameBoard(3,3,3);
         Location loc1 = new Location(1,2,1);
         Location loc2 = new Location(1,2,2);
-        String a = "hei";
-        String b = "hadet";
 
-        gameboard1.set(loc1, a);
-        gameboard1.set(loc2, b);
+        gameboard1.set(loc1, myobj);
+        gameboard1.set(loc2, myobj);
 
-        assertTrue(gameboard1.sameXYLocation(a,b));
+        assertTrue(gameboard1.sameXYLocation(myobj,myobj));
     }
 }

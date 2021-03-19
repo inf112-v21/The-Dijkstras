@@ -40,7 +40,7 @@ public class Player {
     }
 
     public boolean flagCheck(Flag flag) {
-        if (myRobot.getLocation().sameRowCol(flag.getLocation())) {
+        if ("flag"=="flag2") {
             checkFlagIndex(flag);
             return true;
         }

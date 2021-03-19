@@ -1,7 +1,11 @@
 package inf112.skeleton.grid;
 
+import inf112.skeleton.Game.IRobot;
+import inf112.skeleton.Game.TileObject;
+import inf112.skeleton.Game.emptyTile;
+
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -9,36 +13,58 @@ import java.util.List;
  * Gives increased functionality, mainly in the form of "layered" grids, such that it can represent a game board
  * The class holds a list of Grids
  *
- * @param <T>
  */
 
-public class GameBoard<T> extends Grid<T>{
-    private List<Grid> grids;
+public class GameBoard{
+    private List<Grid<TileObject>> grids;
     private int layers;
+    private HashMap<IRobot,Location> robotsOnBoard;
 
-    public GameBoard(int rows, int cols, T initElement, int layers) {
+    public GameBoard(int rows, int cols, int layers) {
         grids = new ArrayList<>(layers);
         for (int i = 0; i < layers; i++) {
-            Grid tempgrid = new Grid(rows, cols, initElement, i);
+            TileObject empty = new emptyTile();
+            Grid<TileObject> tempgrid = new Grid<>(rows, cols, empty, i);
             grids.add(tempgrid);
         }
         this.layers = layers;
+        robotsOnBoard = new HashMap<>();
     }
 
     public GameBoard() {
     }
 
-    public List<Grid> getGrids() {
+    public List<Grid<TileObject>> getGrids() {
         return grids;
     }
 
     public int getLayers() {return layers;}
 
-    public Grid getGridLayer(int layer) {
+    public Grid<TileObject> getGridLayer(int layer) {
         return grids.get(layer);
     }
 
-    private Grid getReferenceLayer() { return grids.get(0); }
+    private Grid<TileObject> getReferenceLayer() { return grids.get(0); }
+
+    public Location getRobotLocation(IRobot robot){
+        return robotsOnBoard.get(robot);
+    }
+
+    public void setRobotLocation(Location loc, IRobot robot){
+        getGridLayer(loc.getLayer()).set(loc, robot);
+        robotsOnBoard.put(robot, loc);
+    }
+
+    public void moveRobot(Directions dir, IRobot robot){
+        Location loc = robotsOnBoard.get(robot);
+        Location loc2 = loc.move(dir);
+        setRobotLocation(loc2,robot);
+        clearLocation(loc);
+    }
+
+    public boolean canGoTo(Location loc, Directions dir){
+        return true;
+    }
 
     public void set(Location loc, T elem){
         getGridLayer(loc.getLayer()).set(loc, elem);
@@ -48,9 +74,13 @@ public class GameBoard<T> extends Grid<T>{
         return (T) getGridLayer(loc.getLayer()).get(loc);
     }
 
+    private void clearLocation(Location loc){
+        set(loc, new emptyTile());
+    }
+
     public GameBoard copy() {
-        Grid tempgrid = getReferenceLayer();
-        GameBoard gameBoardCopy = new GameBoard(tempgrid.numRows(), tempgrid.numCols(), null, getLayers());
+        Grid<TileObject> tempgrid = getReferenceLayer();
+        GameBoard gameBoardCopy = new GameBoard(tempgrid.numRows(), tempgrid.numCols(), getLayers());
         for (int i = 0; i < getLayers(); i++) {
             gameBoardCopy.grids.set(i, getGridLayer(i).copy());
         }
@@ -61,7 +91,7 @@ public class GameBoard<T> extends Grid<T>{
         return getReferenceLayer().validCoordinate(x,y);
     }
 
-    public boolean contains(Object obj) {
+    public boolean contains(TileObject obj) {
         boolean contains = false;
         for (int i = 0; i < getLayers(); i++) {
             if (getGridLayer(i).contains(obj)) {
@@ -72,7 +102,7 @@ public class GameBoard<T> extends Grid<T>{
         return contains;
     }
 
-    public Location locationOf(Object target) {
+    public Location locationOf(TileObject target) {
         Location loc;
         for (int i = 0; i < getLayers(); i++) {
             loc = getGridLayer(i).locationOf(target);
@@ -83,15 +113,16 @@ public class GameBoard<T> extends Grid<T>{
         return null;
     }
 
-    public boolean sameXYLocation(Object obj1, Object obj2) {
+    public boolean sameXYLocation(TileObject obj1, TileObject obj2) {
         Location loc1 = locationOf(obj1);
         Location loc2 = locationOf(obj2);
         return (loc1.getRow() == loc2.getRow() && loc1.getCol() == loc2.getCol());
     }
 
-    public List<Object> getXYObjects(Location loc) {
-        List<Object> returnList = new ArrayList<Object>(layers);
-        for (Grid grid : grids) {
+
+    public List<TileObject> getXYObjects(Location loc) {
+        List<TileObject> returnList = new ArrayList<>(layers);
+        for (Grid<TileObject> grid : grids) {
             returnList.add(grid.get(loc));
         }
         return returnList;

@@ -2,22 +2,16 @@ package inf112.skeleton.Game;
 
 import inf112.skeleton.grid.Location;
 
-public class Flag {
-
-    private final Location location;
+public class Flag implements TileObject {
     private final int flagIndex;
+    //TODO
 
-    public Flag(Location location, int flagindex) { //Start with the first flag having flagIndex = 1
-        this.location = location;
+    public Flag(int flagindex) { //Start with the first flag having flagIndex = 1
         this.flagIndex = flagindex;
     }
 
     public boolean playerHasVisited(Player player) {
         return (player.getNextFlagIndex() > flagIndex);
-    }
-
-    public Location getLocation(){
-        return location;
     }
 
     public int getIndex() {

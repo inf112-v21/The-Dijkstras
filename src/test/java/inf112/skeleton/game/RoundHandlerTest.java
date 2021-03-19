@@ -58,7 +58,7 @@ public class RoundHandlerTest {
         assertThat(rh.DetermineTheNumberOfCards(player1), is(0));
 
         player1.cancelPowerDown();
-        player1.getRobot().getDamage(2);
+        player1.getRobot().addDamage(2);
 
         assertThat(rh.DetermineTheNumberOfCards(player1), is(7));
     }
@@ -67,7 +67,7 @@ public class RoundHandlerTest {
 
 
 
-        player2.getRobot().getDamage(2);
+        player2.getRobot().addDamage(2);
         player3.announcePowerDown();
         rh.dealProgramCards(players);
 
@@ -88,8 +88,8 @@ public class RoundHandlerTest {
         //The currentCards should be empty at the start with round
         assertThat(player1.getCurrentCards().size(),is(0));
 
-        player2.getRobot().getDamage(5);
-        player3.getRobot().getDamage(7);
+        player2.getRobot().addDamage(5);
+        player3.getRobot().addDamage(7);
 
         rh.dealProgramCards(players);
 

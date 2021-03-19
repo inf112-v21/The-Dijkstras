@@ -28,33 +28,13 @@ public class RobotTest {
     @Test
     public void RobotGetDamages(){
         int health= myRobot.getHealth();
-        myRobot.getDamage(1);
+        myRobot.addDamage(1);
         assertThat(myRobot.getHealth(), is(health-1));
 
         health= myRobot.getHealth();
-        myRobot.getDamage(2);
+        myRobot.addDamage(2);
         assertThat(myRobot.getHealth(), is(health-2));
 
-    }
-    @Test
-    public void RobotMovesForward(){
-        Location endLocation = new Location(0, -1);
-        myRobot.moveForward();
-        assertThat(myRobot.getPosition(), is(endLocation));
-    }
-
-    @Test
-    public void RobotMovesBackwards(){
-        Location endLocation = new Location(0, 1);
-        myRobot.moveBackward();
-        assertThat(myRobot.getPosition(), is(endLocation));
-    }
-
-    @Test
-    public void RobotMovesInDirection(){
-        Location endLocation = new Location(1, 0);
-        myRobot.moveInDirection(Directions.EAST);
-        assertThat(myRobot.getPosition(), is(endLocation));
     }
 
     @Test
