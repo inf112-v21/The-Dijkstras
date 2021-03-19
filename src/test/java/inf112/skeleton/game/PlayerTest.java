@@ -36,7 +36,7 @@ public class PlayerTest {
     @Test
     public void nextFlagIndexIncreased(){
         Flag myFlag = new Flag(1);
-        myPlayer.flagCheck(myFlag);
+        myPlayer.checkFlagIndex(myFlag);
         assertThat(myPlayer.getNextFlagIndex(), is(2));
     }
 
@@ -109,48 +109,6 @@ public class PlayerTest {
 
         assertThat(myPlayer.allowedToChooseCards(),is(false));
     }
-    @Test
-    public void makeMoveTest(){
-        Robot myRobot= myPlayer.getRobot();
-        GameBoard gb = new GameBoard(10,10,5);
-        gb.setRobotLocation(new Location(0,0),myRobot);
 
-        Card move1 = new Card(CardType.MOVE1, 490);
-        Card move2 = new Card(CardType.MOVE2, 670);
-        Card move3 = new Card(CardType.MOVE3, 790);
-        Card backup = new Card(CardType.BACKUP, 430);
-
-        Card rotRight = new Card(CardType.ROTRIGHT, 80);
-        Card rotLeft = new Card(CardType.ROTLEFT, 70);
-        Card uTurn = new Card(CardType.UTURN, 10);
-
-
-
-        myPlayer.makeMove(move1,gb);
-        assertThat(gb.getRobotLocation(myRobot), is(new Location(0,1)));
-
-
-        myPlayer.makeMove(move2,gb);
-        assertThat(myRobot, is(new Location(0,3)));
-
-
-        myPlayer.makeMove(move3,gb);
-        assertThat(myRobot, is(new Location(0,6)));
-
-        myPlayer.makeMove(backup,gb);
-        assertThat(myRobot, is(new Location(0,5)));
-
-        // When we add a new robot, the start robot direction is North
-        myPlayer.makeMove(rotRight,gb);
-        assertThat(myRobot.getDirection(),is (Directions.EAST));
-
-        myPlayer.makeMove(rotLeft,gb);
-        assertThat(myRobot.getDirection(),is (Directions.NORTH));
-
-        myPlayer.makeMove(uTurn,gb);
-        assertThat(myRobot.getDirection(),is (Directions.SOUTH));
-
-
-    }
 }
 

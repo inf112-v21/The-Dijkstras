@@ -47,13 +47,6 @@ public class Player implements TileObject{
         }
     }
 
-    public boolean flagCheck(Flag flag) {
-        if ("flag"=="flag2") {
-            checkFlagIndex(flag);
-            return true;
-        }
-        return false;
-    }
 
     public void decreaseLife(){
         this.life -= 1;

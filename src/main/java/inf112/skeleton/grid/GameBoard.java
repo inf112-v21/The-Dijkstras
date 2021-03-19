@@ -57,8 +57,9 @@ public class GameBoard{
         Location loc2 = loc.move(dir);
         if (!validCoordinate(loc2)){
             robot.addDamage(1);
-            debugPrint("Robo: "+dir+" Out of bounds. "+loc2.toString());
+            debugPrint("Robo: "+dir+" Out of bounds. "+loc2.toString()+ "| Added 1 dmg");
         }
+
         else if (roboCanGo(robot,loc,dir)){
             setRobotLocation(loc2,robot);
             clearLocation(loc);

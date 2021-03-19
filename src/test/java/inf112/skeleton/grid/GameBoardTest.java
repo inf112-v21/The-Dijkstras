@@ -47,9 +47,6 @@ public class GameBoardTest {
         System.out.println(myloc.getLayer());
         System.out.println(myloc.getCol());
         System.out.println(myloc.getRow());
-        //assertTrue(gameboard1.locationOf(a).equals(loc1));
-        //assertFalse(gameboard1.locationOf(a).equals(loc2));
-        //assertFalse(gameboard1.locationOf(a).equals(loc3));
     }
 
     @Test
@@ -69,18 +66,16 @@ public class GameBoardTest {
 
     @Test
     public void testContains() {
-        GameBoard gameboard1 = new GameBoard(3,3,3);
         Location loc1 = new Location(1,2,1);
 
         gameboard1.set(loc1, myobj);
 
         assertTrue(gameboard1.contains(myobj));
-        assertFalse(gameboard1.contains(myobj));
+        assertFalse(gameboard1.contains(myobj2));
     }
     
     @Test
     public void testGeneral() {
-        GameBoard gameboard1 = new GameBoard(3,3,3);
         Location loc1 = new Location(1,2,1);
         Location loc2 = new Location(1,2,2);
 
