@@ -4,7 +4,9 @@ import inf112.skeleton.Game.CardType;
 import inf112.skeleton.Game.Flag;
 import inf112.skeleton.Game.Player;
 import inf112.skeleton.Game.Robot;
+import inf112.skeleton.grid.GameBoard;
 import inf112.skeleton.grid.Location;
+import inf112.skeleton.grid.Directions;
 import org.junit.*;
 import org.lwjgl.system.CallbackI;
 
@@ -74,7 +76,7 @@ public class PlayerTest {
     public void checkNumberOfDamages(){
         assertThat(myPlayer.getNumberOfDamages(), is(0));
 
-        myPlayer.getRobot().getDamage(2);
+        myPlayer.getRobot().addDamage(2);
         assertThat(myPlayer.getNumberOfDamages(), is(2));
 
     }
@@ -83,7 +85,7 @@ public class PlayerTest {
 
         assertThat(myPlayer.cardChoiceAmount(),is(5));
 
-        myPlayer.getRobot().getDamage(6);
+        myPlayer.getRobot().addDamage(6);
         assertThat(myPlayer.cardChoiceAmount(),is(3));
     }
     @Test
@@ -106,6 +108,49 @@ public class PlayerTest {
         myPlayer.addCurrentCards(new Card(CardType.MOVE1,500),5);
 
         assertThat(myPlayer.allowedToChooseCards(),is(false));
+    }
+    @Test
+    public void makeMoveTest(){
+        Robot myRobot= myPlayer.getRobot();
+        GameBoard gb = new GameBoard(10,10,5);
+        gb.setRobotLocation(new Location(0,0),myRobot);
+
+        Card move1 = new Card(CardType.MOVE1, 490);
+        Card move2 = new Card(CardType.MOVE2, 670);
+        Card move3 = new Card(CardType.MOVE3, 790);
+        Card backup = new Card(CardType.BACKUP, 430);
+
+        Card rotRight = new Card(CardType.ROTRIGHT, 80);
+        Card rotLeft = new Card(CardType.ROTLEFT, 70);
+        Card uTurn = new Card(CardType.UTURN, 10);
+
+
+
+        myPlayer.makeMove(move1,gb);
+        assertThat(gb.getRobotLocation(myRobot), is(new Location(0,1)));
+
+
+        myPlayer.makeMove(move2,gb);
+        assertThat(myRobot, is(new Location(0,3)));
+
+
+        myPlayer.makeMove(move3,gb);
+        assertThat(myRobot, is(new Location(0,6)));
+
+        myPlayer.makeMove(backup,gb);
+        assertThat(myRobot, is(new Location(0,5)));
+
+        // When we add a new robot, the start robot direction is North
+        myPlayer.makeMove(rotRight,gb);
+        assertThat(myRobot.getDirection(),is (Directions.EAST));
+
+        myPlayer.makeMove(rotLeft,gb);
+        assertThat(myRobot.getDirection(),is (Directions.NORTH));
+
+        myPlayer.makeMove(uTurn,gb);
+        assertThat(myRobot.getDirection(),is (Directions.SOUTH));
+
+
     }
 }
 

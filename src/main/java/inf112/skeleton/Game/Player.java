@@ -1,5 +1,7 @@
 package inf112.skeleton.Game;
 
+import inf112.skeleton.grid.Directions;
+import inf112.skeleton.grid.GameBoard;
 import inf112.skeleton.grid.Location;
 
 import java.util.ArrayList;
@@ -109,5 +111,33 @@ public class Player {
         //at the start of this round and this statement " getCurrentCards().size() < cardChoiceAmount()"
         // will not do well in this case.
         return getCurrentCards().size() < cardChoiceAmount();
+    }
+    public void makeMove(Card movingCard, GameBoard gb) {
+        Directions currentDir= myRobot.getDirection();
+        switch (movingCard.type){
+            case MOVE1:
+                gb.moveRobot(currentDir,myRobot);
+                break;
+            case MOVE2:
+                gb.moveRobot(currentDir,myRobot);
+                gb.moveRobot(currentDir,myRobot);
+                break;
+            case MOVE3:
+                gb.moveRobot(currentDir,myRobot);
+                gb.moveRobot(currentDir,myRobot);
+                gb.moveRobot(currentDir,myRobot);
+                break;
+            case BACKUP:   gb.moveRobot(currentDir.rotate(2),myRobot);
+                break;
+            case ROTLEFT:  myRobot.rotate(-1);
+                break;
+            case ROTRIGHT: myRobot.rotate(+1);
+                break;
+            case UTURN:    myRobot.rotate(2);
+                break;
+            default: throw new IllegalArgumentException(movingCard+" is not a valid card");
+
+        }
+
     }
 }

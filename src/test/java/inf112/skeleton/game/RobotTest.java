@@ -20,11 +20,7 @@ public class RobotTest {
         assertThat(myRobot.getHealth(), not(0));
     }
 
-    @Test
-    public void RobotOnStartPosition(){
-        Location startLoc = new Location(0,0);
-        assertThat(startLoc, is(myRobot.getPosition()));
-    }
+
     @Test
     public void RobotGetDamages(){
         int health= myRobot.getHealth();

@@ -30,8 +30,6 @@ public class GameBoard{
         robotsOnBoard = new HashMap<>();
     }
 
-    public GameBoard() {
-    }
 
     public List<Grid<TileObject>> getGrids() {
         return grids;
