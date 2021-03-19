@@ -62,7 +62,5 @@ public class Board extends InputAdapter {
         gameScreen = new GameScreen(gameInit, this, inputMultiplexer);
         game.setScreen(gameScreen);
 
-        System.out.println(playerPos);
-
     }
 }
