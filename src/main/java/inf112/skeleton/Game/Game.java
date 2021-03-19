@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private GameBoard<Object> gameboard;
+    private GameBoard gameboard;
     private final List<Flag> flags;
     private final List<Player> players;
 

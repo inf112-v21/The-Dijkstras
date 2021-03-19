@@ -80,12 +80,12 @@ public class GameBoard{
     }
 
 
-    public void set(Location loc, T elem){
+    public void set(Location loc, TileObject elem){
         getGridLayer(loc.getLayer()).set(loc, elem);
     }
 
-    public T get(Location loc){
-        return (T) getGridLayer(loc.getLayer()).get(loc);
+    public TileObject get(Location loc){
+        return getGridLayer(loc.getLayer()).get(loc);
     }
 
     private void clearLocation(Location loc){
@@ -96,7 +96,7 @@ public class GameBoard{
         Grid<TileObject> tempgrid = getReferenceLayer();
         GameBoard gameBoardCopy = new GameBoard(tempgrid.numRows(), tempgrid.numCols(), getLayers());
         for (int i = 0; i < getLayers(); i++) {
-            gameBoardCopy.grids.set(i, getGridLayer(i).copy());
+            gameBoardCopy.grids.set(i, (Grid<TileObject>) getGridLayer(i).copy());
         }
         return gameBoardCopy;
     }

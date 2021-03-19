@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-public class Player {
+public class Player implements TileObject{
 
     private int life;
     private Location robotSpawnPoint;

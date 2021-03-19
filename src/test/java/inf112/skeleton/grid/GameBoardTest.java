@@ -39,9 +39,6 @@ public class GameBoardTest {
 
     @Test
     public void testSuperMethods() {
-        GameBoard<String> gameboard1 = new GameBoard<>(3,3,null,3);
-        assertTrue(gameboard1.validCoordinate(1,1));
-        assertFalse(gameboard1.validCoordinate(1,3));
 
         Location loc1 = new Location(2,1,1);
 
