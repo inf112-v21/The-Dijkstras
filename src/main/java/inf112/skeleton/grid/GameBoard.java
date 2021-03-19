@@ -1,8 +1,6 @@
 package inf112.skeleton.grid;
 
-import inf112.skeleton.Game.IRobot;
-import inf112.skeleton.Game.TileObject;
-import inf112.skeleton.Game.emptyTile;
+import inf112.skeleton.Game.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +17,7 @@ public class GameBoard{
     private List<Grid<TileObject>> grids;
     private int layers;
     private HashMap<IRobot,Location> robotsOnBoard;
+    private final boolean debugMode = true;
 
     public GameBoard(int rows, int cols, int layers) {
         grids = new ArrayList<>(layers);
@@ -58,13 +57,30 @@ public class GameBoard{
     public void moveRobot(Directions dir, IRobot robot){
         Location loc = robotsOnBoard.get(robot);
         Location loc2 = loc.move(dir);
-        setRobotLocation(loc2,robot);
-        clearLocation(loc);
+        if (!validCoordinate(loc2)){
+            robot.addDamage(1);
+            debugPrint("Robo: "+dir+" Out of bounds. "+loc2.toString());
+        }
+        else if (roboCanGo(robot,loc,dir)){
+            setRobotLocation(loc2,robot);
+            clearLocation(loc);
+            debugPrint("Moved Robot from "+loc.toString()+" to "+loc2.toString());
+        }
     }
 
-    public boolean canGoTo(Location loc, Directions dir){
+    public boolean roboCanGo(IRobot robo, Location loc, Directions dir){
+        Location endloc = loc.move(dir);
+        if (get(endloc) instanceof Robot){
+            IRobot robot = (IRobot) get(loc);
+            if (roboCanGo(robot, endloc, dir)){
+                moveRobot(dir, robot);
+                return true;
+            } else{
+                return false;}
+        }
         return true;
     }
+
 
     public void set(Location loc, T elem){
         getGridLayer(loc.getLayer()).set(loc, elem);
@@ -87,8 +103,8 @@ public class GameBoard{
         return gameBoardCopy;
     }
 
-    public boolean validCoordinate(int x, int y) {
-        return getReferenceLayer().validCoordinate(x,y);
+    public boolean validCoordinate(Location loc) {
+        return getReferenceLayer().validCoordinate(loc.getCol(),loc.getRow());
     }
 
     public boolean contains(TileObject obj) {
@@ -125,6 +141,13 @@ public class GameBoard{
         for (Grid<TileObject> grid : grids) {
             returnList.add(grid.get(loc));
         }
+
         return returnList;
+    }
+
+    private void debugPrint(String debugString){
+        if (debugMode){
+        System.out.println(debugString);
+        }
     }
 }

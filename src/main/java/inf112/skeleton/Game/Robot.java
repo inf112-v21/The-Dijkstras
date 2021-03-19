@@ -12,7 +12,7 @@ import inf112.skeleton.grid.Location;
         private int health;
         private Directions direction;
 
-        public Robot(Location loc) {
+        public Robot() {
             this.health =9;
             this.direction = Directions.NORTH;
         }

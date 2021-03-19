@@ -20,8 +20,14 @@ public class Player {
     public Player(Location startPosition){
         this.life = 3;
         this.robotSpawnPoint = startPosition;
+        this.myRobot = new Robot();
     }
     public void setRobot(Robot myRobot){ this.myRobot= myRobot; }
+
+    public void placeRobotAtSpawn(GameBoard gb){
+        gb.setRobotLocation(robotSpawnPoint, myRobot);
+    }
+
 
     public Robot getRobot(){ return myRobot; }
 

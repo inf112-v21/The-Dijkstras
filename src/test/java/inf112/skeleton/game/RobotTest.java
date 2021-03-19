@@ -12,7 +12,7 @@ public class RobotTest {
 
     @Before
     public void MakeRobot(){
-        myRobot = new Robot(new Location(0,0));
+        myRobot = new Robot();
     }
 
     @Test

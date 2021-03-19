@@ -26,13 +26,10 @@ public class RoundHandlerTest {
         Location loc2 = new Location(2,0);
 
         player1= new Player(loc1);
-        player1.setRobot(new Robot(loc1));
 
         player2= new Player(loc2);
-        player2.setRobot(new Robot(loc2));
 
         player3= new Player(loc2);
-        player3.setRobot(new Robot(loc2));
 
         players= new HashSet<>();
 
