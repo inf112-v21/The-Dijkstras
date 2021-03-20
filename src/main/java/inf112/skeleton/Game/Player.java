@@ -33,10 +33,18 @@ public class Player {
         return nextFlagIndex;
     }
 
-    public void robotOnFlagEvent(Flag flag){
-        if (flag.getIndex().equals(nextFlagIndex)){
+    public void checkFlagIndex(Flag flag){
+        if (flag.getIndex() == nextFlagIndex){
             this.nextFlagIndex++;
         }
+    }
+
+    public boolean flagCheck(Flag flag) {
+        if (myRobot.getLocation().sameRowCol(flag.getLocation())) {
+            checkFlagIndex(flag);
+            return true;
+        }
+        return false;
     }
 
     public void decreaseLife(){
@@ -95,5 +103,30 @@ public class Player {
         //at the start of this round and this statement " getCurrentCards().size() < cardChoiceAmount()"
         // will not do well in this case.
         return getCurrentCards().size() < cardChoiceAmount();
+    }
+
+    public void makeMove(Card movingCard) {
+        switch (movingCard.type){
+            case MOVE1:    myRobot.moveForward();
+                           break;
+            case MOVE2:    myRobot.moveForward();
+                           myRobot.moveForward();
+                           break;
+            case MOVE3:    myRobot.moveForward();
+                           myRobot.moveForward();
+                           myRobot.moveForward();
+                           break;
+            case BACKUP:   myRobot.moveBackward();
+                           break;
+            case ROTLEFT:  myRobot.rotate(-1);
+                           break;
+            case ROTRIGHT: myRobot.rotate(+1);
+                           break;
+            case UTURN:    myRobot.rotate(2);
+                           break;
+            default: throw new IllegalArgumentException(movingCard+" is not a valide card");
+
+        }
+
     }
 }
