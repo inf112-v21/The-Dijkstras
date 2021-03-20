@@ -1,12 +1,11 @@
 package inf112.skeleton.Game;
 import inf112.skeleton.grid.Directions;
-import inf112.skeleton.grid.GameBoard;
-import inf112.skeleton.grid.Location;
+
 
     /**
      * Robot Class
      * - Has 9 health. Loss life if 0
-     * TODO KOBLE MOT GAMEBOARD
+     *
      */
     public class Robot implements IRobot{
         private int health;
