@@ -68,7 +68,7 @@ public class Grid<T> implements IGrid<T> {
     private Location locationFromIndex(int index) {
         if(index<0 || index > cells.size())
             throw new IndexOutOfBoundsException("index is not a valid index of the board");
-        return new Location(index%cols,index/cols, layer);
+        return new Location(index/cols,index%cols, layer);
     }
 
     @Override

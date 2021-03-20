@@ -88,12 +88,4 @@ public class GameBoard<T> extends Grid<T>{
         Location loc2 = locationOf(obj2);
         return (loc1.getRow() == loc2.getRow() && loc1.getCol() == loc2.getCol());
     }
-
-    public List<Object> getXYObjects(Location loc) {
-        List<Object> returnList = new ArrayList<Object>(layers);
-        for (Grid grid : grids) {
-            returnList.add(grid.get(loc));
-        }
-        return returnList;
-    }
 }

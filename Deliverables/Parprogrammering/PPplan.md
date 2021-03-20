@@ -38,12 +38,7 @@ Trym & Anas;3.03.2021;14:15           - Resterende arbeid Projectboard
 Aleksander & Erlend;03.03.2021;16:00  - Finne Arbeid i ProjectBoard
 
 
-### Week 10
 
-Erlend & Morten;09.03.2021;12:00		MÅL: PRESENTASJON
 
-Erlend & Trym;12.03.2021;14:00		    MÅL: FLAG
-
-Aleksander Anas;12.03.2021;14:15		MÅL: Velge kort i GUI
 
 
