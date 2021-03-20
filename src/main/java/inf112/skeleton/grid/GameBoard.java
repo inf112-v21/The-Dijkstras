@@ -1,63 +1,78 @@
 package inf112.skeleton.grid;
 
-import inf112.skeleton.Game.*;
-
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * An extension of the Grid class
  * Gives increased functionality, mainly in the form of "layered" grids, such that it can represent a game board
  * The class holds a list of Grids
- *TODO write documents to all methods
+ *
+ * @param <T>
  */
 
-public class GameBoard{
-    private List<Grid<TileObject>> grids;
+public class GameBoard<T> extends Grid<T>{
+    private List<Grid> grids;
     private int layers;
-    private HashMap<IRobot,Location> robotsOnBoard;
-    private final boolean debugMode = true;
 
-    public GameBoard(int rows, int cols, int layers) {
+    public GameBoard(int rows, int cols, T initElement, int layers) {
         grids = new ArrayList<>(layers);
         for (int i = 0; i < layers; i++) {
-            TileObject empty = new emptyTile();
-            Grid<TileObject> tempGrid = new Grid<>(rows, cols, empty, i);
-            grids.add(tempGrid);
-
+            Grid tempgrid = new Grid(rows, cols, initElement, i);
+            grids.add(tempgrid);
         }
         this.layers = layers;
-        robotsOnBoard = new HashMap<>();
     }
 
-// grid og layer metoder
-    public List<Grid<TileObject>> getGrids() {
+    public GameBoard() {
+    }
+
+    public List<Grid> getGrids() {
         return grids;
     }
 
     public int getLayers() {return layers;}
 
-    public Grid<TileObject> getGridLayer(int layer) {
+    public Grid getGridLayer(int layer) {
         return grids.get(layer);
     }
 
-    private Grid<TileObject> getReferenceLayer() { return grids.get(0); }
+    private Grid getReferenceLayer() { return grids.get(0); }
 
-
-    // Location methods
-
-    public Location getRobotLocation(IRobot robot){
-        return robotsOnBoard.get(robot);
+    public void set(Location loc, T elem){
+        getGridLayer(loc.getLayer()).set(loc, elem);
     }
 
-    public void setRobotLocation(Location loc, IRobot robot){
-        getGridLayer(loc.getLayer()).set(loc, robot);
-        robotsOnBoard.put(robot, loc);
+    public T get(Location loc){
+        return (T) getGridLayer(loc.getLayer()).get(loc);
     }
 
-    //TODO in locatonOf and contains methods the check should be in robotsOnBoard (with new name may be? or another hashMap with tileObjects as keys)
-    public Location locationOf(TileObject target) {
+    public GameBoard copy() {
+        Grid tempgrid = getReferenceLayer();
+        GameBoard gameBoardCopy = new GameBoard(tempgrid.numRows(), tempgrid.numCols(), null, getLayers());
+        for (int i = 0; i < getLayers(); i++) {
+            gameBoardCopy.grids.set(i, getGridLayer(i).copy());
+        }
+        return gameBoardCopy;
+    }
+
+    public boolean validCoordinate(int x, int y) {
+        return getReferenceLayer().validCoordinate(x,y);
+    }
+
+    public boolean contains(Object obj) {
+        boolean contains = false;
+        for (int i = 0; i < getLayers(); i++) {
+            if (getGridLayer(i).contains(obj)) {
+                contains = true;
+                break;
+            }
+        }
+        return contains;
+    }
+
+    public Location locationOf(Object target) {
         Location loc;
         for (int i = 0; i < getLayers(); i++) {
             loc = getGridLayer(i).locationOf(target);
@@ -68,104 +83,17 @@ public class GameBoard{
         return null;
     }
 
-    public boolean contains(TileObject obj) {
-
-        for (int i = 0; i < getLayers(); i++) {
-            if (getGridLayer(i).contains(obj)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    public void set(Location loc, TileObject tile){
-        getGridLayer(loc.getLayer()).set(loc, tile);
-    }
-
-
-    public TileObject get(Location loc){
-        return getGridLayer(loc.getLayer()).get(loc);
-    }
-
-    private void clearLocation(Location loc){
-        set(loc, new emptyTile());
-    }
-
-    public boolean sameXYLocation(TileObject obj1, TileObject obj2) {
+    public boolean sameXYLocation(Object obj1, Object obj2) {
         Location loc1 = locationOf(obj1);
         Location loc2 = locationOf(obj2);
         return (loc1.getRow() == loc2.getRow() && loc1.getCol() == loc2.getCol());
     }
 
-    public List<TileObject> getXYObjects(Location loc) {
-        List<TileObject> returnList = new ArrayList<>(layers);
-        for (Grid<TileObject> grid : grids) {
+    public List<Object> getXYObjects(Location loc) {
+        List<Object> returnList = new ArrayList<Object>(layers);
+        for (Grid grid : grids) {
             returnList.add(grid.get(loc));
         }
-
         return returnList;
-    }
-
-
-
-
-
-    // Moving methods
-    public void moveRobot(Directions dir, IRobot robot){
-        Location currLoc = robotsOnBoard.get(robot);
-        Location endLoc = currLoc.move(dir);
-        if (!validCoordinate(endLoc)){
-            robot.addDamage(1);
-            debugPrint("Robo: "+dir+" Out of bounds. "+endLoc.toString()+ "| Added 1 dmg");
-           //TODO set robot on his spawn point
-        }
-
-        else if (robotCanGo(robot,currLoc,dir)){
-            setRobotLocation(endLoc,robot);
-            clearLocation(currLoc);
-            debugPrint("Moved Robot from "+currLoc.toString()+" to "+endLoc.toString());
-        }
-    }
-
-    public boolean robotCanGo(IRobot robotOnMove, Location currLoc, Directions dir){
-        Location endLoc = currLoc.move(dir);
-        if (get(endLoc) instanceof Robot){
-            IRobot placidRobot = (IRobot) get(endLoc);
-            if (robotCanGo(placidRobot, endLoc, dir)){
-                moveRobot(dir, placidRobot);
-                return true;
-            } else{
-                return false;}
-        }
-        return true;
-    }
-
-    public boolean validCoordinate(Location loc) {
-        return getReferenceLayer().validCoordinate(loc.getCol(),loc.getRow());
-    }
-
-
-
-
-    //copy method
-
-    public GameBoard copy() {
-        Grid<TileObject> tempGrid = getReferenceLayer();
-        GameBoard gameBoardCopy = new GameBoard(tempGrid.numRows(), tempGrid.numCols(), getLayers());
-        for (int i = 0; i < getLayers(); i++) {
-            gameBoardCopy.grids.set(i, (Grid<TileObject>) getGridLayer(i).copy());
-        }
-        return gameBoardCopy;
-    }
-
-
-
-//Print method
-
-    private void debugPrint(String debugString){
-        if (debugMode){
-        System.out.println(debugString);
-        }
     }
 }

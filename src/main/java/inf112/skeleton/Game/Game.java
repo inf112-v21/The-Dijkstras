@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private GameBoard gameboard;
+    private GameBoard<Object> gameboard;
     private final List<Flag> flags;
     private final List<Player> players;
 
@@ -18,7 +18,7 @@ public class Game {
     public void flagCheck() {
         for (Player player : players) {
             for (Flag flag : flags) {
-                if (gameboard.sameXYLocation(player.getRobot(), flag)) {
+                if (gameboard.sameXYLocation(player, flag)) {
                     player.checkFlagIndex(flag);
                 }
             }

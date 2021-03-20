@@ -10,21 +10,16 @@ import java.util.List;
 
 public enum Directions {
     NORTH(0, +1, 0),
-    EAST(1, 0, 1),
+    EAST(+1, 0, 1),
     SOUTH(0, -1, 2),
     WEST(-1, 0, 3);
 
-    /**
-     * The four cardinal directions: {@link #NORTH}, {@link #SOUTH}, {@link #EAST},
-     * {@link #WEST}.
-     */
-    public static final List<Directions> FOUR_DIRECTIONS = Arrays.asList(EAST, NORTH, WEST, SOUTH);
 
     private final int dx;
     private final int dy;
     private final int dir;
 
-    private Directions(int dx, int dy, int dir) {
+     Directions(int dx, int dy, int dir) {
         this.dx = dx;
         this.dy = dy;
         this.dir = dir;
@@ -56,9 +51,11 @@ public enum Directions {
 
     /**
      * Rotates direction 90 degrees clockwise for every int amountToRotate
-     *
      * @param amountToRotate
-     * @return
+     *                      Rotate 90 dg right = + 1
+     *                      Rotate 90 dg left = - 1
+     *                      Backwards = +2
+     * @return direction, new direction after rotate
      */
     public Directions rotate(int amountToRotate) {
         int newDirection = (dir + amountToRotate) % 4;
@@ -73,4 +70,6 @@ public enum Directions {
                 return NORTH;
         }
     }
+
+
 }
