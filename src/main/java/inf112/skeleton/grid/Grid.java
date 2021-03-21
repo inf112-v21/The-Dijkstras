@@ -143,4 +143,19 @@ public class Grid<T> implements IGrid<T> {
     public LocationIterator locations() {
         return new LocationIterator(this);
     }
+
+    @Override
+    public String  toString(){
+        return "layer= "+layer+"\n"+cells.toString();
+    }
+    @Override
+    public boolean equals(Object obj){
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Grid<T> grid= (Grid<T>) obj;
+        return this.cells.equals(grid.cells)&& this.layer==grid.layer;
+
+    }
 }
