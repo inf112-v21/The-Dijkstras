@@ -1,8 +1,6 @@
 package inf112.skeleton.Game;
 
-import inf112.skeleton.grid.Location;
-
-public class Flag implements TileObject {
+public class Flag implements ITileObject {
     private final int flagIndex;
     //TODO
 

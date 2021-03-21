@@ -2,7 +2,7 @@ package inf112.skeleton.grid;
 
 import inf112.skeleton.Game.Robot;
 import inf112.skeleton.Game.ITileObject;
-import inf112.skeleton.Game.EmptyITile;
+import inf112.skeleton.Game.EmptyTile;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -53,7 +53,7 @@ public class GridTest {
 
     @Test
     public void equalsTest() {
-        EmptyITile e = new EmptyITile();
+        EmptyTile e = new EmptyTile();
         Grid<ITileObject> g1= new Grid<>(3,3,e,3);
         Grid<ITileObject> g2= new Grid<>(3,3,e,3);
 
