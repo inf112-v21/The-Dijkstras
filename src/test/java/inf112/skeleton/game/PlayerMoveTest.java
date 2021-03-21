@@ -37,25 +37,25 @@ public class PlayerMoveTest {
     @Test
     public void move1Test() {
         myPlayer.makeMove(move1, gb);
-        assertThat(gb.getRobotLocation(myPlayer.getRobot()), is(new Location(0, 6,2)));
+        assertThat(gb.locationOf(myPlayer.getRobot()), is(new Location(0, 6,2)));
 
     }
 
     @Test
     public void move2Test() {
         myPlayer.makeMove(move2, gb);
-        assertThat(gb.getRobotLocation(myPlayer.getRobot()), is(new Location(0, 7,2)));
+        assertThat(gb.locationOf(myPlayer.getRobot()), is(new Location(0, 7,2)));
 
     }
     @Test
     public void move3Test() {
         myPlayer.makeMove(move3, gb);
-        assertThat(gb.getRobotLocation(myPlayer.getRobot()), is(new Location(0, 8,2)));
+        assertThat(gb.locationOf(myPlayer.getRobot()), is(new Location(0, 8,2)));
     }
     @Test
     public void backupTest() {
         myPlayer.makeMove(backup, gb);
-        assertThat(gb.getRobotLocation(myPlayer.getRobot()), is(new Location(0, 4,2)));
+        assertThat(gb.locationOf(myPlayer.getRobot()), is(new Location(0, 4,2)));
     }
 
     @Test

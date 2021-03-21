@@ -32,7 +32,7 @@ public class Player implements TileObject{
 
     // kanskje denne metoden børe flyttes til GameBoard klasse fordi GameBoard styrer med posisjoner
     public void placeRobotAtSpawn(GameBoard gb){
-        gb.setRobotLocation(robotSpawnPoint, myRobot);
+        gb.set(robotSpawnPoint, myRobot);
     }
 
     // checkPoint
