@@ -1,7 +1,6 @@
 package inf112.skeleton.Game;
 
 import inf112.skeleton.grid.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
