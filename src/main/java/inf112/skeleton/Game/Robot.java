@@ -10,10 +10,19 @@ import inf112.skeleton.grid.Directions;
     public class Robot implements IRobot{
         private int health;
         private Directions direction;
-
+        private String name;
         public Robot() {
             this.health =9;
             this.direction = Directions.NORTH;
+            this.name= "Default name";
+        }
+        public Robot(String name) {
+            this.health =9;
+            this.direction = Directions.NORTH;
+            this.name= name;
+        }
+        public String getName(){
+            return name;
         }
 
 

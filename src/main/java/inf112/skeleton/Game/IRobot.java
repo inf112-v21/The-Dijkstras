@@ -18,4 +18,5 @@ public interface IRobot extends ITileObject {
     Directions getDirection();
 
 
+    String getName();
 }
