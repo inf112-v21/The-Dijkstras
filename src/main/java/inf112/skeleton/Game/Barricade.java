@@ -11,7 +11,8 @@ public class Barricade {
 
     public Barricade(Location loc, Directions dir) {
         this.loc = loc;
-        this.facing.add(dir);
+        this.facing = new ArrayList<Directions>();
+        facing.add(dir);
     }
 
     public int getLayer() {
@@ -34,5 +35,7 @@ public class Barricade {
         }
     }
 
-
+    public boolean isFacing(Directions dir) {
+        return facing.contains(dir);
+    }
 }
