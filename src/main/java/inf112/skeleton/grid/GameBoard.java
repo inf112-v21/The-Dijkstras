@@ -157,11 +157,11 @@ public class GameBoard{
             set(endLoc, robot);
             clearLocation(currLoc);
             debugPrint("Moved Robot from " + currLoc.toString() + " to " + endLoc.toString());
-            }
+        }
         else{
             debugPrint("Robot can't move to " + endLoc.toString());
         }
-        }
+    }
 
 
     /**
@@ -203,7 +203,11 @@ public class GameBoard{
     /**
      *  Checks if location is inside grid
      */
-    public boolean validCoordinate(Location loc) {
+    public boolean validCoordinate(Location loc)  {
+        boolean validLayer= Math.max(-1, loc.getLayer()) == Math.min(loc.getLayer(), layers);
+        if (! validLayer)
+            throw new IllegalArgumentException("location should has valid layer between -1 and "+layers);
+
         return getReferenceLayer().validCoordinate(loc.getCol(),loc.getRow());
     }
 
@@ -227,7 +231,7 @@ public class GameBoard{
      */
     private void debugPrint(String debugString){
         if (debugMode){
-        System.out.println(debugString);
+            System.out.println(debugString);
         }
     }
 }
