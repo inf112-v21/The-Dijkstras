@@ -126,7 +126,7 @@ public class GameBoard{
     public boolean sameXYLocation(ITileObject obj1, ITileObject obj2) {
         Location loc1 = locationOf(obj1);
         Location loc2 = locationOf(obj2);
-        return (loc1.getRow() == loc2.getRow() && loc1.getCol() == loc2.getCol());
+        return loc1.sameRowCol(loc2);
     }
 
     /**
