@@ -57,6 +57,9 @@ public class Location {
         return new Location(col +dir.getDx(),row +dir.getDy(), layer);
     }
 
+    /**
+     *  Checks if row, column and layer is the same.
+     */
     @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof Location)) {

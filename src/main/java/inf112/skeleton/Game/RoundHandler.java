@@ -38,9 +38,7 @@ public class RoundHandler {
     }
 
     /**
-     * This method receive an input card from a player throw GUI
-     * @param player
-     * @return card
+     * This method receives an input card from a player through GUI
      */
     public Card getInputCardFromPlayer(Player player){
         //TODO find a way to get input card from the player
@@ -59,7 +57,7 @@ public class RoundHandler {
             Card card = getInputCardFromPlayer(player);
             addChosenCard(player,card);
         }
-        // This condition is always false now until the
+        // This condition is always false until the
         // allowedToChooseCards() method takes time into account
         if (player.getChosenCards().size()<5){
             chooseRandomCard(player);

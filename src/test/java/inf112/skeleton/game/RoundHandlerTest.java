@@ -75,6 +75,11 @@ public class RoundHandlerTest {
 
     //   assertThrows(NoSuchElementException.class,()-> rh.chooseCardsManage(player1)  );
     // }
+
+    /**
+     * Checks if players chooses the correct amount of cards based on amount of lifes left.
+     *
+     */
     @Test
     public void correctAmountOfCardsChosen(){
         //The chosenCards should be empty at the start with round
