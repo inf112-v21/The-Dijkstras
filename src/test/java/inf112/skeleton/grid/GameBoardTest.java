@@ -1,10 +1,7 @@
 
 package inf112.skeleton.grid;
 
-import inf112.skeleton.Game.EmptyTile;
-import inf112.skeleton.Game.Flag;
-import inf112.skeleton.Game.Robot;
-import inf112.skeleton.Game.ITileObject;
+import inf112.skeleton.Game.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -156,14 +153,27 @@ public class GameBoardTest {
         assertThat(gb.getXYObjects(new Location(1,2)),is(objList));
 
     }
-@Test
-    public void validCoordinateTest(){
+    @Test
+        public void validCoordinateTest(){
 
-    Location loc1 = new Location(1,2,0);
-    Location loc2 = new Location(-1,2,1);
+        Location loc1 = new Location(1,2,0);
+        Location loc2 = new Location(-1,2,1);
 
-    assertThat(gb.validCoordinate(loc1),is (true));
-    assertThat(gb.validCoordinate(loc2),is(false));
-}
+        assertThat(gb.validCoordinate(loc1),is (true));
+        assertThat(gb.validCoordinate(loc2),is(false));
+    }
 
+    @Test
+    public void wallTest() {
+        Location loc1 = new Location(2,3, 2);
+        Location loc2 = loc1.move(Directions.EAST);
+
+        gb.wall(loc1, Directions.EAST);
+
+        Barricade a = (Barricade) gb.get(loc1);
+        Barricade b = (Barricade) gb.get(loc2);
+        assertThat(a.isFacing(Directions.EAST), is (true));
+        assertThat(b.isFacing(Directions.WEST), is (true));
+        assertThat(gb.wallCheck(loc1, Directions.EAST), is (false));
+    }
 }

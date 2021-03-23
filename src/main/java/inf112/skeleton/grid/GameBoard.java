@@ -170,16 +170,8 @@ public class GameBoard{
      */
     public boolean robotCanGo(IRobot robotOnMove, Location currLoc, Directions dir){
         Location endLoc = currLoc.move(dir);
-        return noWallCheck(currLoc, dir) && otherBotCheck(robotOnMove, endLoc, dir);
+        return wallCheck(currLoc, dir) && otherBotCheck(robotOnMove, endLoc, dir);
 
-    }
-
-    /**
-     * Checks for wall in direction
-     * TODO impement checker
-     */
-    private boolean noWallCheck(Location loc, Directions dir) {
-        return true;
     }
 
     /**
@@ -209,6 +201,55 @@ public class GameBoard{
             throw new IllegalArgumentException("location should has valid layer between -1 and "+layers);
 
         return getReferenceLayer().validCoordinate(loc.getCol(),loc.getRow());
+    }
+
+    /**
+     * Checks if there is a wall using a location and direction
+     *
+     * @param loc
+     * @param dir
+     * @return true if wall is in way
+     */
+    public boolean wallCheck(Location loc, Directions dir) {
+        Location loc2 = loc.move(dir);
+        List<ITileObject> XYObjects = getXYObjects(loc2);
+        for (Object obj : XYObjects) {
+            if (obj instanceof Barricade) {
+                if (((Barricade) obj).isFacing(dir.rotate(2))) {return false;}
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Used by wall to either place a Barricade or update an existing Barricade
+     *
+     * @param loc
+     * @param dir
+     */
+    private void placeBarricade(Location loc, Directions dir) {
+        if (get(loc) instanceof Barricade) {
+            Barricade b = (Barricade) get(loc);
+            b.addBarricade(dir);
+            set(loc, b);
+        } else {
+            set(loc, new Barricade(loc, dir));
+        }
+    }
+
+    /**
+     * Places a wall between two locations
+     * A "wall" is composed of two Barricade objects, with each Barricade having at least one direction
+     *
+     *
+     * @param loc
+     * @param dir
+     */
+    public void wall(Location loc, Directions dir) {
+        placeBarricade(loc, dir);
+        Location loc2 = loc.move(dir);
+        Directions dir2 = dir.rotate(2);
+        placeBarricade(loc2, dir2);
     }
 
 
