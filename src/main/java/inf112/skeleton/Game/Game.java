@@ -1,12 +1,11 @@
 package inf112.skeleton.Game;
 
 import inf112.skeleton.grid.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private GameBoard<Object> gameboard;
+    private boolean gameActive;
+    private GameBoard gameboard;
     private final List<Flag> flags;
     private final List<Player> players;
 
@@ -20,7 +19,7 @@ public class Game {
 
     public boolean validMove(Location loc, Directions dir) {
         Location loc2 = loc.move(dir);
-        List<Object> XYObjects = gameboard.getXYObjects(loc2);
+        List<ITileObject> XYObjects = gameboard.getXYObjects(loc2);
         for (Object obj : XYObjects) {
             if (obj instanceof Barricade) {
                 if (((Barricade) obj).isFacing(dir.rotate(2))) {return false;}
@@ -29,7 +28,7 @@ public class Game {
         return true;
     }
 
-    public void wall(Location loc, Directions dir) {
+    private void placeBarricade(Location loc, Directions dir) {
         if (gameboard.get(loc) instanceof Barricade) {
             Barricade b = (Barricade) gameboard.get(loc);
             b.addBarricade(dir);
@@ -37,22 +36,19 @@ public class Game {
         } else {
             gameboard.set(loc, new Barricade(loc, dir));
         }
+    }
+
+    public void wall(Location loc, Directions dir) {
+        placeBarricade(loc, dir);
         Location loc2 = loc.move(dir);
         Directions dir2 = dir.rotate(2);
-        if (gameboard.get(loc2) instanceof Barricade) {
-            Barricade b = (Barricade) gameboard.get(loc2);
-            b.addBarricade(dir2);
-            gameboard.set(loc2, b);
-        } else {
-            gameboard.set(loc, new Barricade(loc2, dir2));
-        }
-
+        placeBarricade(loc2, dir2);
     }
 
     public void flagCheck() {
         for (Player player : players) {
             for (Flag flag : flags) {
-                if (gameboard.sameXYLocation(player, flag)) {
+                if (gameboard.sameXYLocation(player.getRobot(), flag)) {
                     player.checkFlagIndex(flag);
                 }
             }
