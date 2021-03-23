@@ -41,7 +41,6 @@ public class GameBoard{
     /**
      * Returns amount of layers in GameBoard
      */
-
     public int getLayers() {return layers;}
 
     public Grid<ITileObject> getGridLayer(int layer) {
@@ -151,12 +150,13 @@ public class GameBoard{
 
         if (!validCoordinate(endLoc)) {
             robot.addDamage(1);
-            debugPrint(robot.getName() +" "+ dir + " Out of bounds. " + endLoc.toString() + "| Added 1 dmg");
+            debugPrint("Robo: " + dir + " Out of bounds. " + endLoc.toString() + "| Added 1 dmg");
+            //TODO maxDmg
         }
         else if (robotCanGo(robot,currLoc,dir)) {
             set(endLoc, robot);
             clearLocation(currLoc);
-            debugPrint("Moved "+robot.getName()+" from " + currLoc.toString() + " to " + endLoc.toString());
+            debugPrint("Moved bot from " + currLoc.toString() + " to " + endLoc.toString());
         }
         else{
             debugPrint(robot.getName()+"can't move to " + endLoc.toString());

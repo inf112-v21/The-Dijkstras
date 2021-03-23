@@ -71,17 +71,22 @@ public class DeckTest {
     }
     public void has18Move2(){
 
-        assertThat(cardCounter(CardType.MOVE2) , is(18));
-    }
-    public void has18Move3(){
-
-        assertThat(cardCounter(CardType.MOVE3), is(18));
+        assertThat(cardCounter(CardType.MOVE2) , is(12));
     }
 
-    private int cardCounter(CardType myCardType){
+    @Test
+    public void has6Move3(){
+
+        assertThat(cardCounter(CardType.MOVE3), is(6));
+    }
+
+    /**
+     * Count instance of a cardType in deck
+     */
+    private int cardCounter(CardType cardType){
         int myCount = 0;
         for(Card card: myDeck.cardDeck){
-            if (card.type.equals(myCardType))
+            if (card.type.equals(cardType))
                 myCount++;
         }
         return myCount;

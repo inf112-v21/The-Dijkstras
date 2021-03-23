@@ -32,6 +32,9 @@ public class Deck {
         makeGenericCard(CardType.MOVE3, 790, 840, 10);
     }
 
+    /**
+     * Method for creating all types of cards.
+     */
     private void makeGenericCard(CardType cardType, int prStart, int prEnd, int prInterval) {
         for (int pr = prStart; pr <= prEnd; pr += prInterval) {
             Card myGenericCard = new Card(cardType, pr);

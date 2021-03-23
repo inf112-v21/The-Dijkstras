@@ -22,7 +22,7 @@ public class RobotTest {
 
 
     @Test
-    public void RobotGetDamages(){
+    public void RobotTakesDamage(){
         int health= myRobot.getHealth();
         myRobot.addDamage(1);
         assertThat(myRobot.getHealth(), is(health-1));

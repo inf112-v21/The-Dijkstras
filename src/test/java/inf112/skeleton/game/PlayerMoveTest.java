@@ -12,16 +12,17 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+/**
+ * Tests for players move methods
+ */
 public class PlayerMoveTest {
 
     public Player myPlayer;
     GameBoard gb;
-
     Card move1 = new Card(CardType.MOVE1, 490);
     Card move2 = new Card(CardType.MOVE2, 670);
     Card move3 = new Card(CardType.MOVE3, 790);
     Card backup = new Card(CardType.BACKUP, 430);
-
     Card rotRight = new Card(CardType.ROTRIGHT, 80);
     Card rotLeft = new Card(CardType.ROTLEFT, 70);
     Card uTurn = new Card(CardType.UTURN, 10);
