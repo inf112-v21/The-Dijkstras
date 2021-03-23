@@ -88,7 +88,6 @@ public class RoundHandler {
         List<Card> hand= player.getHand();
         Collections.shuffle(hand);
         return hand.remove(0);
-
     }
 
     /**
@@ -102,7 +101,6 @@ public class RoundHandler {
             performOneCardMovement(phase,players,gb);
             phase++;
         }
-
     }
 
     private void performOneCardMovement(int phase, HashSet<Player> players, GameBoard gb) {
