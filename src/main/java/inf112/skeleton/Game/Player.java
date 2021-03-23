@@ -16,7 +16,7 @@ public class Player implements ITileObject {
     private int nextFlagIndex = 1;
     private boolean powerDown= false;
     private List<Card> hand = new ArrayList<>();
-    private HashMap<Integer, Card> currentCards = new HashMap<>();
+    private HashMap<Integer, Card> chosenCards = new HashMap<>();
 
     public Player(Location startPosition){
         this.life = 3;
@@ -44,7 +44,7 @@ public class Player implements ITileObject {
         this.robotSpawnPoint = location;}
 
 
-//life and damages
+
     public int getLife() {
         return this.life;
     }
@@ -58,11 +58,13 @@ public class Player implements ITileObject {
     }
 
 
-//flag
     public int getNextFlagIndex(){
         return nextFlagIndex;
     }
 
+    /**
+     *  Checks if flag has correct index.
+     */
     public void checkFlagIndex(Flag flag){
         if (flag.getIndex() == nextFlagIndex){
             this.nextFlagIndex++;
@@ -95,8 +97,8 @@ public class Player implements ITileObject {
     // selected cards
     public HashMap<Integer, Card> getCurrentCards() { return currentCards;}
 
-    public void addCurrentCards(Card card, int place) {
-        currentCards.put(place,card);
+    public void addChosenCard(Card card, int place) {
+        chosenCards.put(place,card);
     }
 
     // Ability to Choose
@@ -115,7 +117,7 @@ public class Player implements ITileObject {
         // in case there is some locked cards, the currentCards is not empty
         //at the start of this round and this statement " getCurrentCards().size() < cardChoiceAmount()"
         // will not do well in this case.
-        return getCurrentCards().size() < cardChoiceAmount();
+        return getChosenCards().size() < cardChoiceAmount();
     }
 
 

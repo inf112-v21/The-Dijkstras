@@ -1,17 +1,14 @@
 package inf112.skeleton.game;
-
 import inf112.skeleton.Game.Player;
-import inf112.skeleton.Game.Robot;
 import inf112.skeleton.Game.RoundHandler;
 import inf112.skeleton.grid.Location;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.HashSet;
-
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
+
+
 public class RoundHandlerTest {
     public RoundHandler rh;
     Player player1;
@@ -39,14 +36,12 @@ public class RoundHandlerTest {
     }
 
     @Test
-    public void hasRoundHandlerADeckOf84CardsTest(){
-
+    public void hasFullDeck(){
 
         assertThat (rh.deck.cardDeck.size(), is(84));
     }
     @Test
-    public void DetermineTheNumberOfCardsTest(){
-
+    public void correctAmountOfCardsToBeReceived(){
 
         assertThat(rh.DetermineTheNumberOfCards(player1), is(9));
 
@@ -60,9 +55,7 @@ public class RoundHandlerTest {
         assertThat(rh.DetermineTheNumberOfCards(player1), is(7));
     }
     @Test
-    public void dealProgramCardsTest(){
-
-
+    public void playerReceivesCorrectAmountOfCards(){
 
         player2.getRobot().addDamage(2);
         player3.announcePowerDown();
@@ -73,6 +66,8 @@ public class RoundHandlerTest {
         assertThat(player3.getHand().size(), is(0));
 
     }
+
+
     // Combining JUnit test with hamcrest is a bad idea
     // hamcrest has no assert expression to match exception
     // @Test
@@ -81,22 +76,22 @@ public class RoundHandlerTest {
     //   assertThrows(NoSuchElementException.class,()-> rh.chooseCardsManage(player1)  );
     // }
     @Test
-    public void chooseCardManageTest(){
-        //The currentCards should be empty at the start with round
-        assertThat(player1.getCurrentCards().size(),is(0));
+    public void correctAmountOfCardsChosen(){
+        //The chosenCards should be empty at the start with round
+        assertThat(player1.getChosenCards().size(),is(0));
 
         player2.getRobot().addDamage(5);
         player3.getRobot().addDamage(7);
 
         rh.dealProgramCards(players);
 
-        rh.chooseCardsManage(player1);
-        rh.chooseCardsManage(player2);
-        rh.chooseCardsManage(player3);
+        rh.chooseCardsManager(player1);
+        rh.chooseCardsManager(player2);
+        rh.chooseCardsManager(player3);
 
-        assertThat(player1.getCurrentCards().size(),is(5));
-        assertThat(player2.getCurrentCards().size(),is(4));
-        assertThat(player3.getCurrentCards().size(),is(2));
+        assertThat(player1.getChosenCards().size(),is(5));
+        assertThat(player2.getChosenCards().size(),is(4));
+        assertThat(player3.getChosenCards().size(),is(2));
 
 
     }

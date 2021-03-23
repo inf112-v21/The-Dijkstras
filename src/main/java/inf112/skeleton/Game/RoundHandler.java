@@ -12,8 +12,6 @@ public class RoundHandler {
         deck= new Deck();
     }
 
-
-
     public int DetermineTheNumberOfCards(Player player) {
         if ( player.isPowerDown()) {
             return 0;
@@ -50,10 +48,9 @@ public class RoundHandler {
     }
 
     /**
-     *
-     * @param player
+     *  Manages the players selection of cards
      */
-    public void chooseCardsManage(Player player)  { //Må kalles før spiller velger noen kort for den runden
+    public void chooseCardsManager(Player player)  { //Må kalles før spiller velger noen kort for den runden
         //player must have hand here
         if (player.getHand().isEmpty()) { throw new NoSuchElementException("The player has no cards in their hand");}
 
@@ -64,7 +61,7 @@ public class RoundHandler {
         }
         // This condition is always false now until the
         // allowedToChooseCards() method takes time into account
-        if (player.getCurrentCards().size()<5){
+        if (player.getChosenCards().size()<5){
             chooseRandomCard(player);
         }
     }
@@ -72,16 +69,15 @@ public class RoundHandler {
     private void addChosenCard(Player player, Card card){
         if (!player.allowedToChooseCards()) {return;}
 
-        int place = player.getCurrentCards().size() + 1;
-        player.addCurrentCards(card, place);
+        int place = player.getChosenCards().size() + 1;
+        player.addChosenCard(card, place);
 
 
     }
 
-    /**This method should be called when a player har no more time
-     * to choose  programming card from his hand
-     * @param player the current player
-     * @return card: return random card from the player hand
+    /**
+     * This method should be called when a player has no more time
+     * to choose programming cards
      */
     public Card chooseRandomCard(Player player){
         List<Card> hand= player.getHand();
