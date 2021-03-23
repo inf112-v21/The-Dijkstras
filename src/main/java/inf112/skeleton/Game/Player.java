@@ -30,12 +30,11 @@ public class Player implements ITileObject {
     public Robot getRobot(){ return myRobot; }
 
 
-    // kanskje denne metoden børe flyttes til GameBoard klasse fordi GameBoard styrer med posisjoner
     public void placeRobotAtSpawn(GameBoard gb){
         gb.set(robotSpawnPoint, myRobot);
     }
 
-    // checkPoint
+
     public Location getSpawnPoint() {
         return this.robotSpawnPoint;
     }
@@ -72,8 +71,6 @@ public class Player implements ITileObject {
     }
 
 
-//power down
-
     public boolean isPowerDown() {
         return powerDown;
     }
@@ -87,21 +84,24 @@ public class Player implements ITileObject {
     }
 
 
-// cards on hand
+    /**
+     *  Gives player cards to choose from.
+     */
     public void setHand(HashSet<Card> cards){
         hand.addAll(cards);
     }
 
     public List<Card> getHand() { return hand; }
 
-    // selected cards
-    public HashMap<Integer, Card> getCurrentCards() { return currentCards;}
+    public HashMap<Integer, Card> getChosenCards() { return chosenCards;}
 
     public void addChosenCard(Card card, int place) {
         chosenCards.put(place,card);
     }
 
-    // Ability to Choose
+    /**
+     *  Checks how many cards the player should get given current life.
+     */
     public int cardChoiceAmount() {
         int health = getRobot().getHealth();
         return Math.min(5, health);
@@ -109,13 +109,13 @@ public class Player implements ITileObject {
     /**
      * This method should check two conditions, the number of current chosen cards
      * and if the player still has time to choose
-     * @return true if player has time and place in currentCards to choose, false otherwise
+     * @return true if player has time and place in chosenCards to choose, false otherwise
      */
     public boolean allowedToChooseCards() {
         // Should check if player still has time to choose
-        // Should check if getCurrentCards().size() < 5
-        // in case there is some locked cards, the currentCards is not empty
-        //at the start of this round and this statement " getCurrentCards().size() < cardChoiceAmount()"
+        // Should check if getChosenCards().size() < 5
+        // in case there is some locked cards, the chosenCards is not empty
+        //at the start of this round and this statement " getChosenCards().size() < cardChoiceAmount()"
         // will not do well in this case.
         return getChosenCards().size() < cardChoiceAmount();
     }

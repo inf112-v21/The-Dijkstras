@@ -69,7 +69,8 @@ public class DeckTest {
 
         assertThat(cardCounter(CardType.MOVE1), is(18));
     }
-    public void has18Move2(){
+    @Test
+    public void has12Move2(){
 
         assertThat(cardCounter(CardType.MOVE2) , is(12));
     }
