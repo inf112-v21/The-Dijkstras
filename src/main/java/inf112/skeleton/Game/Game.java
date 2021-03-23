@@ -1,12 +1,10 @@
 package inf112.skeleton.Game;
 
 import inf112.skeleton.grid.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private GameBoard<Object> gameboard;
+    private GameBoard gameboard;
     private final List<Flag> flags;
     private final List<Player> players;
 
@@ -52,7 +50,7 @@ public class Game {
     public void flagCheck() {
         for (Player player : players) {
             for (Flag flag : flags) {
-                if (gameboard.sameXYLocation(player, flag)) {
+                if (gameboard.sameXYLocation(player.getRobot(), flag)) {
                     player.checkFlagIndex(flag);
                 }
             }

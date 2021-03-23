@@ -1,92 +1,169 @@
+
 package inf112.skeleton.grid;
 
+import inf112.skeleton.Game.EmptyTile;
+import inf112.skeleton.Game.Flag;
+import inf112.skeleton.Game.Robot;
+import inf112.skeleton.Game.ITileObject;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
 
 public class GameBoardTest {
+    GameBoard gb;
+    ITileObject myObj1;
+    ITileObject myObj2;
+    ITileObject myObj3;
+
+    @Before
+    public void ConstructTestObjects(){
+        gb = new GameBoard(5, 5, 3);
+        myObj1 = new Flag(0);
+        myObj2 = new Robot();
+        myObj3 = new Robot();
+    }
+
 
     @Test
     public void makeGameBoardTest() {
-        Grid grid1 = new Grid(3,3,null,1);
-        GameBoard gameboard1 = new GameBoard(3,3,null,3);
+        Grid<ITileObject> grid1 = new Grid<>(3, 3,null, 1);
 
         Location loc1 = new Location(2,1, 1);
-        String a = "hei";
-        int b = 3;
 
-        grid1.set(loc1, a);
-        gameboard1.set(loc1, a);
+        grid1.set(loc1, myObj1);
+        gb.set(loc1, myObj1);
 
-        grid1.set(loc1, b);
-        gameboard1.set(loc1, b);
+        grid1.set(loc1, myObj2);
+        gb.set(loc1, myObj2);
 
-        assertThat(grid1.get(loc1), is (gameboard1.get(loc1)));
+        assertThat(grid1.get(loc1), is (gb.get(loc1)));
+    }
+    @Test
+    public void setAndGetTest() {
+        Location loc1 = new Location(1,2,1);
+        gb.set(loc1, myObj1);
+
+        assertThat(gb.get(loc1),is(myObj1));
     }
 
     @Test
     public void testSuperMethods() {
-        GameBoard<String> gameboard1 = new GameBoard<>(3,3,null,3);
-        assertTrue(gameboard1.validCoordinate(1,1));
-        assertFalse(gameboard1.validCoordinate(1,3));
 
         Location loc1 = new Location(2,1,1);
-        Location loc2 = new Location(2,1,2);
-        Location loc3 = new Location(1,2,1);
-        String a = "hei";
 
-        gameboard1.set(loc1, a);
-        Location myloc = gameboard1.locationOf(a);
-        System.out.println(myloc.getLayer());
-        System.out.println(myloc.getCol());
-        System.out.println(myloc.getRow());
-        //assertTrue(gameboard1.locationOf(a).equals(loc1));
-        //assertFalse(gameboard1.locationOf(a).equals(loc2));
-        //assertFalse(gameboard1.locationOf(a).equals(loc3));
+        gb.set(loc1, myObj1);
+        Location myLoc = gb.locationOf(myObj1);
+
+        assertThat(myLoc,is(loc1));
     }
 
     @Test
     public void testCopy() {
-        GameBoard gameboard1 = new GameBoard(3,3,null,3);
         Location loc1 = new Location(1,2,1);
         Location loc2 = new Location(2,1,2);
-        String a = "hei";
 
-        gameboard1.set(loc1, a);
-        gameboard1.set(loc2, a);
+        gb.set(loc1, myObj1);
+        gb.set(loc2, myObj1);
 
-        GameBoard gameboard1Copy = gameboard1.copy();
-        gameboard1Copy.set(loc1, null);
+        GameBoard gb1Copy = gb.copy();
+        gb1Copy.set(loc1, null);
 
-        assertNotEquals(gameboard1.get(loc1), gameboard1Copy.get(loc1));
-        assertEquals(gameboard1.get(loc2), gameboard1Copy.get(loc2));
+        assertNotEquals(gb.get(loc1), gb1Copy.get(loc1));
+        assertEquals(gb.get(loc2), gb1Copy.get(loc2));
     }
+
 
     @Test
     public void testContains() {
-        GameBoard gameboard1 = new GameBoard(3,3,null,3);
         Location loc1 = new Location(1,2,1);
-        String a = "hei";
-        String b = "hadet bra";
-        gameboard1.set(loc1, a);
 
-        assertTrue(gameboard1.contains(a));
-        assertFalse(gameboard1.contains(b));
+        gb.set(loc1, myObj1);
+
+        assertTrue(gb.contains(myObj1));
+        assertFalse(gb.contains(myObj2));
     }
-    
+
     @Test
     public void testGeneral() {
-        GameBoard gameboard1 = new GameBoard(3,3,null,3);
         Location loc1 = new Location(1,2,1);
         Location loc2 = new Location(1,2,2);
-        String a = "hei";
-        String b = "hadet";
 
-        gameboard1.set(loc1, a);
-        gameboard1.set(loc2, b);
+        gb.set(loc1, myObj1);
+        gb.set(loc2, myObj1);
 
-        assertTrue(gameboard1.sameXYLocation(a,b));
+        assertTrue(gb.sameXYLocation(myObj1, myObj1));
     }
+
+    @Test
+    public void getLayersTest() {
+
+        assertThat(gb.getLayers(),is(3));
+    }
+    @Test
+    public void getGridLayerTest() {
+        EmptyTile e = new EmptyTile();
+
+        assertThat(gb.getGridLayer(0),is (new Grid<ITileObject>(5,5,e,0)));
+    }
+
+
+    @Test
+    public void locationOfTest() {
+        Location loc1 = new Location(1,2,1);
+        Location loc2 = new Location(2,3,2);
+
+        gb.set(loc1, myObj1);
+        gb.set(loc2, myObj2);
+
+        assertThat(gb.locationOf(myObj1),is(loc1));
+        assertThat(gb.locationOf(myObj2),is(loc2));
+
+
+    }
+
+    @Test
+    public void containsTest(){
+        Location loc1 = new Location(1,2,1);
+        gb.set(loc1, myObj1);
+
+        assertThat(gb.contains(myObj1),is(true));
+        assertThat(gb.contains(myObj2),is(false));
+
+    }
+
+
+
+    @Test
+    public void getXYObjectsTest() {
+        Location loc1 = new Location(1,2,0);
+        Location loc2 = new Location(1,2,1);
+        Location loc3 = new Location(1,2,2);
+        gb.set(loc1, myObj1);
+        gb.set(loc2, myObj2);
+        gb.set(loc3, myObj3);
+
+        List<ITileObject> objList= new ArrayList<>();
+        objList.add(myObj1);
+        objList.add(myObj2);
+        objList.add(myObj3);
+
+        assertThat(gb.getXYObjects(new Location(1,2)),is(objList));
+
+    }
+@Test
+    public void validCoordinateTest(){
+
+    Location loc1 = new Location(1,2,0);
+    Location loc2 = new Location(-1,2,1);
+
+    assertThat(gb.validCoordinate(loc1),is (true));
+    assertThat(gb.validCoordinate(loc2),is(false));
+}
+
 }

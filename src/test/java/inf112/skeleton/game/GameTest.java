@@ -21,7 +21,6 @@ public class GameTest {
 
     @Before
     public void makeGame() {
-
         myGameBoard = new GameBoard<Object>(10, 10, null,5);
         flaglist = new ArrayList<>();
         playerlist = new ArrayList<>();

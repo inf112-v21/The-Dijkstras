@@ -1,9 +1,8 @@
 package inf112.skeleton.Game;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.NoSuchElementException;
+import inf112.skeleton.grid.GameBoard;
+
+import java.util.*;
 
 public class RoundHandler {
     public Deck deck;
@@ -46,11 +45,13 @@ public class RoundHandler {
      */
     public Card getInputCardFromPlayer(Player player){
         //TODO find a way to get input card from the player
-        return player.getHand().get(0);// this line should change and replace with a input card
+        Random r = new Random();
+        int bound= player.getHand().size();
+        return player.getHand().get(r.nextInt(bound));// this line should change and replace with a input card
     }
 
     /**
-     *
+     * Allow a player to choose programing cards
      * @param player
      */
     public void chooseCardsManage(Player player)  { //Må kalles før spiller velger noen kort for den runden
@@ -89,6 +90,35 @@ public class RoundHandler {
         return hand.remove(0);
 
     }
+
+    /**
+     * Perform  actions in 5 phases according to programing cards
+     * @param players set of all players
+     * @param gb gameBoard instance
+     */
+    public void performMovements(HashSet<Player> players,GameBoard gb){
+        int phase=1;
+        while(phase<= 5){
+            performOneCardMovement(phase,players,gb);
+            phase++;
+        }
+
+    }
+
+    private void performOneCardMovement(int phase, HashSet<Player> players, GameBoard gb) {
+        PriorityQueue<Player> prioritetPlayers =new PriorityQueue<>((p1,p2)->p2.getCurrentCards().get(phase).priorityNr-p1.getCurrentCards().get(phase).priorityNr);
+        prioritetPlayers.addAll(players);
+        while(!prioritetPlayers.isEmpty()){
+            Player p= prioritetPlayers.poll();
+            Card nextCard= p.getCurrentCards().remove(phase);
+            p.makeMove(nextCard,gb );
+           // touchCheckpoints(List<Flag> flags)
+
+        }
+
+
+    }
+
 
 
 }

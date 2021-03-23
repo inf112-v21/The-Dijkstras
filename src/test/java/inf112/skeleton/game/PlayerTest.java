@@ -4,7 +4,9 @@ import inf112.skeleton.Game.CardType;
 import inf112.skeleton.Game.Flag;
 import inf112.skeleton.Game.Player;
 import inf112.skeleton.Game.Robot;
+import inf112.skeleton.grid.GameBoard;
 import inf112.skeleton.grid.Location;
+import inf112.skeleton.grid.Directions;
 import org.junit.*;
 import org.lwjgl.system.CallbackI;
 
@@ -18,7 +20,6 @@ public class PlayerTest {
     @Before
     public void makePlayer(){
         myPlayer = new Player(new Location(0,0));
-        myPlayer.setRobot(new Robot(myPlayer.getSpawnPoint()));
     }
 
     @Test
@@ -34,8 +35,8 @@ public class PlayerTest {
 
     @Test
     public void nextFlagIndexIncreased(){
-        Flag myFlag = new Flag(new Location(0,0),1);
-        myPlayer.flagCheck(myFlag);
+        Flag myFlag = new Flag(1);
+        myPlayer.checkFlagIndex(myFlag);
         assertThat(myPlayer.getNextFlagIndex(), is(2));
     }
 
@@ -75,7 +76,7 @@ public class PlayerTest {
     public void checkNumberOfDamages(){
         assertThat(myPlayer.getNumberOfDamages(), is(0));
 
-        myPlayer.getRobot().getDamage(2);
+        myPlayer.getRobot().addDamage(2);
         assertThat(myPlayer.getNumberOfDamages(), is(2));
 
     }
@@ -84,7 +85,7 @@ public class PlayerTest {
 
         assertThat(myPlayer.cardChoiceAmount(),is(5));
 
-        myPlayer.getRobot().getDamage(6);
+        myPlayer.getRobot().addDamage(6);
         assertThat(myPlayer.cardChoiceAmount(),is(3));
     }
     @Test
@@ -108,5 +109,6 @@ public class PlayerTest {
 
         assertThat(myPlayer.allowedToChooseCards(),is(false));
     }
+
 }
 

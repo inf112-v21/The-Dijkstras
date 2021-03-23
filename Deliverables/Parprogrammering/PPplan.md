@@ -47,3 +47,10 @@ Erlend & Trym;12.03.2021;14:00		    MÅL: FLAG
 Aleksander Anas;12.03.2021;14:15		MÅL: Velge kort i GUI
 
 
+### Week 11
+Trym & Aleksander;dd.mm.yyyy;00:00
+
+Anas & Erlend;dd.mm.yyyy;00:00
+
+Trym & Morten;dd.mm.yyyy;00:00
+
