@@ -1,10 +1,7 @@
 
 package inf112.skeleton.grid;
 
-import inf112.skeleton.Game.EmptyTile;
-import inf112.skeleton.Game.Flag;
-import inf112.skeleton.Game.Robot;
-import inf112.skeleton.Game.ITileObject;
+import inf112.skeleton.Game.*;
 import org.junit.Before;
 import org.junit.Test;
 
