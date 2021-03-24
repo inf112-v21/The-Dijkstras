@@ -35,7 +35,6 @@ public class Player implements ITileObject {
     }
 
 
-    // kanskje denne metoden børe flyttes til GameBoard klasse fordi GameBoard styrer med posisjoner
     public void placeRobotAtSpawn(GameBoard gb) {
         gb.set(robotSpawnPoint, myRobot);
     }
@@ -48,7 +47,6 @@ public class Player implements ITileObject {
     public void newCheckPoint(Location location) {
         this.robotSpawnPoint = location;
     }
-
 
 
     public int getLife() {
@@ -64,15 +62,15 @@ public class Player implements ITileObject {
     }
 
 
-    public int getNextFlagIndex(){
+    public int getNextFlagIndex() {
         return nextFlagIndex;
     }
 
     /**
-     *  Checks if flag has correct index.
+     * Checks if flag has correct index.
      */
-    public void checkFlagIndex(Flag flag){
-        if (flag.getIndex() == nextFlagIndex){
+    public void checkFlagIndex(Flag flag) {
+        if (flag.getIndex() == nextFlagIndex) {
             this.nextFlagIndex++;
         }
     }
@@ -92,9 +90,9 @@ public class Player implements ITileObject {
 
 
     /**
-     *  Gives player cards to choose from.
+     * Gives player cards to choose from.
      */
-    public void setHand(HashSet<Card> cards){
+    public void setHand(HashSet<Card> cards) {
         hand.addAll(cards);
     }
 
@@ -102,14 +100,16 @@ public class Player implements ITileObject {
         return hand;
     }
 
-    public HashMap<Integer, Card> getChosenCards() { return chosenCards;}
+    public HashMap<Integer, Card> getChosenCards() {
+        return chosenCards;
+    }
 
     public void addChosenCard(Card card, int place) {
-        chosenCards.put(place,card);
+        chosenCards.put(place, card);
     }
 
     /**
-     *  Checks how many cards the player should get given current life.
+     * Checks how many cards the player should get given current life.
      */
     public int cardChoiceAmount() {
         int health = getRobot().getHealth();
@@ -119,6 +119,7 @@ public class Player implements ITileObject {
     /**
      * This method should check two conditions, the number of current chosen cards
      * and if the player still has time to choose
+     *
      * @return true if player has time and place in chosenCards to choose, false otherwise
      */
     public boolean allowedToChooseCards() {
@@ -172,12 +173,12 @@ public class Player implements ITileObject {
 
     }
 
+
     public void updateCurrentCards() {
         if (myRobot.getHealth() >= 5) {
-            restCards.addAll(currentCards.values());
-            currentCards.clear();
-        }
-        else {
+            restCards.addAll(chosenCards.values());
+            chosenCards.clear();
+        } else {
 
             int freeCards = myRobot.getHealth();
             while (freeCards > 0) {
