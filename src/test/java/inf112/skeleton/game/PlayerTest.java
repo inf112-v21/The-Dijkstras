@@ -3,12 +3,8 @@ import inf112.skeleton.Game.Card;
 import inf112.skeleton.Game.CardType;
 import inf112.skeleton.Game.Flag;
 import inf112.skeleton.Game.Player;
-import inf112.skeleton.Game.Robot;
-import inf112.skeleton.grid.GameBoard;
 import inf112.skeleton.grid.Location;
-import inf112.skeleton.grid.Directions;
 import org.junit.*;
-import org.lwjgl.system.CallbackI;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -90,22 +86,22 @@ public class PlayerTest {
     }
     @Test
     public void addCurrentCardsTest(){
-        assertThat(myPlayer.getCurrentCards().size(),is(0));
-        myPlayer.addCurrentCards(new Card(CardType.MOVE1,490),1);
-        assertThat(myPlayer.getCurrentCards().size(),is(1));
+        assertThat(myPlayer.getChosenCards().size(),is(0));
+        myPlayer.addChosenCard(new Card(CardType.MOVE1,490),1);
+        assertThat(myPlayer.getChosenCards().size(),is(1));
     }
     @Test
     public void allowedToChooseCardsTest(){
         assertThat(myPlayer.allowedToChooseCards(),is(true));
 
-        myPlayer.addCurrentCards(new Card(CardType.MOVE1,490),1);
-        myPlayer.addCurrentCards(new Card(CardType.MOVE2,670),2);
-        myPlayer.addCurrentCards(new Card(CardType.MOVE3,790),3);
-        myPlayer.addCurrentCards(new Card(CardType.BACKUP,430),4);
+        myPlayer.addChosenCard(new Card(CardType.MOVE1,490),1);
+        myPlayer.addChosenCard(new Card(CardType.MOVE2,670),2);
+        myPlayer.addChosenCard(new Card(CardType.MOVE3,790),3);
+        myPlayer.addChosenCard(new Card(CardType.BACKUP,430),4);
 
         assertThat(myPlayer.allowedToChooseCards(),is(true));
 
-        myPlayer.addCurrentCards(new Card(CardType.MOVE1,500),5);
+        myPlayer.addChosenCard(new Card(CardType.MOVE1,500),5);
 
         assertThat(myPlayer.allowedToChooseCards(),is(false));
     }

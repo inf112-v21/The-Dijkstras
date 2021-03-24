@@ -1,6 +1,5 @@
 package inf112.skeleton.Game;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,11 +32,21 @@ public class Deck {
         makeGenericCard(CardType.MOVE3, 790, 840, 10);
     }
 
+    /**
+     * Method for creating all types of cards.
+     */
     private void makeGenericCard(CardType cardType, int prStart, int prEnd, int prInterval) {
         for (int pr = prStart; pr <= prEnd; pr += prInterval) {
             Card myGenericCard = new Card(cardType, pr);
             cardDeck.add(myGenericCard);
 
+        }
+    }
+
+    public void addRestCards(List<Card> cards) {
+        for (Card c: cards){
+            if(cardDeck.size()<84)
+            cardDeck.add(c);
         }
     }
 }

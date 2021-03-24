@@ -7,7 +7,7 @@ import inf112.skeleton.grid.Directions;
  * Intereacting with map and other robots
  */
 
-public interface IRobot extends TileObject{
+public interface IRobot extends ITileObject {
 
     int getHealth();
 
@@ -18,4 +18,5 @@ public interface IRobot extends TileObject{
     Directions getDirection();
 
 
+    String getName();
 }

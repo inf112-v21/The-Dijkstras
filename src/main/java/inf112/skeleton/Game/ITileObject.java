@@ -1,4 +1,4 @@
 package inf112.skeleton.Game;
 
-public interface TileObject {
+public interface ITileObject {
 }

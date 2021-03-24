@@ -34,8 +34,6 @@ public enum CardType {
     this.prStart= prStart;
     this.prEnd= prEnd;
     this.interval= interval;
-
-
-}
+ }
 
 }

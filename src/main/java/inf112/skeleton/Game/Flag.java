@@ -1,10 +1,8 @@
 package inf112.skeleton.Game;
 
-import inf112.skeleton.grid.Location;
-
-public class Flag implements TileObject {
+public class Flag implements ITileObject {
     private final int flagIndex;
-    //TODO
+
 
     public Flag(int flagindex) { //Start with the first flag having flagIndex = 1
         this.flagIndex = flagindex;
@@ -16,6 +14,10 @@ public class Flag implements TileObject {
 
     public int getIndex() {
         return this.flagIndex;
+    }
+    @Override
+    public String toString(){
+        return "flag index "+flagIndex;
     }
 
 }
