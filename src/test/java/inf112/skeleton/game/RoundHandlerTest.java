@@ -58,7 +58,7 @@ public class RoundHandlerTest {
         flags.add(flag2);
         gb.set(new Location(5, 5, 1), flag1);
         gb.set(new Location(10, 5, 1), flag2);
-        rh = new RoundHandler(gb, flags, players);
+        rh = new RoundHandler(gb);
     }
 
     @Test
@@ -86,8 +86,8 @@ public class RoundHandlerTest {
     public void playerReceivesCorrectAmountOfCards() {
 
         player2.getRobot().addDamage(2);
-        player3.announcePowerDown();
-        rh.dealProgramCards();
+        player3.announcePowerDown(gb);
+        rh.dealProgramCards(players);
 
         assertThat(player1.getHand().size(), is(9));
         assertThat(player2.getHand().size(), is(7));
@@ -115,7 +115,7 @@ public class RoundHandlerTest {
         player2.getRobot().addDamage(5);
         player3.getRobot().addDamage(7);
 
-        rh.dealProgramCards();
+        rh.dealProgramCards(players);
 
         rh.chooseCardsManager(player1);
         rh.chooseCardsManager(player2);
@@ -137,7 +137,7 @@ public class RoundHandlerTest {
         dealAndChooseCards();
         HashMap<Player, Location> endLocations = findEndLocationsOfStartLocsAccordingToProgramingCards();
 
-        rh.performMovements();
+        rh.performMovements(players);
 
         assertThat(gb.locationOf(player1.getRobot()), is(endLocations.get(player1)));
         assertThat(gb.locationOf(player2.getRobot()), is(endLocations.get(player2)));
@@ -146,7 +146,7 @@ public class RoundHandlerTest {
     }
 
     private void dealAndChooseCards() {
-        rh.dealProgramCards();
+        rh.dealProgramCards(players);
         for (Player p : players) {
             rh.chooseCardsManager(p);
         }
@@ -192,7 +192,7 @@ public class RoundHandlerTest {
         player1.getRobot().addDamage(4);
         player2.getRobot().addDamage(5);
         player3.getRobot().addDamage(7);
-        rh.cleanUP();
+        rh.cleanUP(players);
 
         assertThat(player1.getChosenCards().size(), is(0));
         assertThat(player2.getChosenCards().size(), is(1));
@@ -210,7 +210,7 @@ public class RoundHandlerTest {
         Card move1 = new Card(CardType.MOVE1, 490);
         player1.makeMove(move1, gb);
 
-        rh.touchCheckpoints();
+        rh.touchCheckpoints(flags,players);
 
         assertThat(player1.getNextFlagIndex(), is(2));
 
@@ -222,7 +222,7 @@ public class RoundHandlerTest {
         dealAndChooseCards();
         assertThat(rh.deck.cardDeck.size(), is(84 - 3 * 9));
 
-        rh.collectCards();
+        rh.collectCards(players);
         assertThat(rh.deck.cardDeck.size(), is(84));
     }
 }

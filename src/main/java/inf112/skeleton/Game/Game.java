@@ -9,10 +9,18 @@ import java.util.*;
 public class Game {
     private boolean gameActive;
     private RoundHandler rh;
+    protected final List<Flag> flags;
+    protected final HashSet<Player> players;
+    protected final HashSet<Player> deadPlayers;
+    private boolean debugMode = true;
+    //  GameBoard gameBoard = new GameBoard(50,50,5);
 
-    public Game(boolean gameActive, RoundHandler rh) {
+    public Game(boolean gameActive, GameBoard gameBoard, List<Flag> flags, HashSet<Player> players) {
+        this.flags = flags;
         this.gameActive = gameActive;
-        this.rh = rh;
+        this.players = players;
+        this.deadPlayers = new HashSet<>();
+        this.rh = new RoundHandler(gameBoard);
     }
 
     /**
@@ -54,7 +62,8 @@ public class Game {
     public void startGame() {
 
         while (gameActive) {
-            //Deal programCards
+            rh.dealProgramCards(players);
+
             //Let players register cards
             for (Player player : players) {
                 if (player.isPowerDown()) continue;
@@ -90,6 +99,33 @@ public class Game {
                 gameActive = false;
                 debugPrint("Game over, winner is: " + p.getRobot());
             }
+        }
+    }
+
+    public void isRobotDead() {
+        for (Player player : players) {
+            if (player.getRobot().getHealth() < 1) {
+                player.decreaseLife();
+                if (player.getLife() < 1) {
+                    deadPlayers.add(player);
+                    players.remove(player);
+                    if (players.isEmpty()) {
+                        gameActive = false;
+                    }
+                }
+                player.getRobot().resetHealth();
+                player.placeRobotAtSpawn(rh.gameBoard);
+            }
+        }
+    }
+
+    /**
+     * If debugmode is true:
+     * Allows Printing in methods
+     */
+    private void debugPrint(String debugString) {
+        if (debugMode) {
+            System.out.println(debugString);
         }
     }
 }

@@ -6,17 +6,15 @@ import java.util.*;
 
 public class RoundHandler {
     public Deck deck;
-    private GameBoard gameboard;
-    private final List<Flag> flags;
-    private final HashSet<Player> players;
+    protected GameBoard gameBoard;
+    private boolean debugMode = true;
 
 
-    public RoundHandler(GameBoard gameboard, List<Flag> flags, HashSet<Player> players) {
-        this.gameboard = gameboard;
-        this.flags = flags;
-        this.players = players;
+    public RoundHandler(GameBoard gameboard) {
+        this.gameBoard = gameboard;
         deck = new Deck();
     }
+
 
     public int DetermineTheNumberOfCards(Player player) {
         if (player.isPowerDown()) {
@@ -28,7 +26,7 @@ public class RoundHandler {
         return player.getRobot().getHealth();
     }
 
-    public void dealProgramCards() {
+    public void dealProgramCards(HashSet<Player> players) {
         Collections.shuffle(deck.cardDeck);
 
         for (Player player : players) {
@@ -56,7 +54,6 @@ public class RoundHandler {
         int bound = player.getHand().size();
         return player.getHand().get(r.nextInt(bound));// this line should change and replace with a input card
     }
-
 
     /**
      * Manages the players selection of cards
@@ -98,46 +95,54 @@ public class RoundHandler {
         List<Card> hand = player.getHand();
         Collections.shuffle(hand);
         return hand.remove(0);
+
     }
 
     /**
      * Perform  actions in 5 phases according to programing cards
      */
-    public void performMovements() {
+    public void performMovements(HashSet<Player> players) {
+        HashSet<Player> activePlayer= new HashSet<>();
+        for(Player p: players){
+           if( p.getLife()>0 && p.getChosenCards().size()==5)
+               activePlayer.add(p);
+        }
         int phase = 1;
         while (phase <= 5) {
-            performOneCardMovement(phase);
+            performOneCardMovement(phase, activePlayer);
             phase++;
         }
     }
 
-    private void performOneCardMovement(int phase) {
-        PriorityQueue<Player> prioritetPlayers = new PriorityQueue<>((p1, p2) -> p2.getChosenCards().get(phase).priorityNr - p1.getChosenCards().get(phase).priorityNr);
+    private void performOneCardMovement(int phase, HashSet<Player> players) {
+
+        PriorityQueue<Player> prioritetPlayers =
+                new PriorityQueue<>((p1, p2) -> p2.getChosenCards().get(phase).priorityNr - p1.getChosenCards().get(phase).priorityNr);
         prioritetPlayers.addAll(players);
         while (!prioritetPlayers.isEmpty()) {
             Player p = prioritetPlayers.poll();
-            Card nextCard = p.getCurrentCards().get(phase);
-            p.makeMove(nextCard, gameboard);
-            touchCheckpoints();
+            Card nextCard = p.getChosenCards().get(phase);
+            p.makeMove(nextCard, gameBoard);
+
         }
     }
 
     /**
      * Check if robot has touched flag or repair sites
      */
-    public void touchCheckpoints() {
+    public void touchCheckpoints(List<Flag> flags, HashSet<Player> players) {
         checkWrenchSpace();
-        flagCheck();
+        flagCheck(flags, players);
     }
 
     private void checkWrenchSpace() {
 
     }
 
-    private void flagCheck() {
+    private void flagCheck(List<Flag> flags, HashSet<Player> players) {
         for (Player player : players) {
             for (Flag flag : flags) {
-                if (gameboard.sameXYLocation(player.getRobot(), flag)) {
+                if (gameBoard.sameXYLocation(player.getRobot(), flag)) {
                     player.checkFlagIndex(flag);
                 }
             }
@@ -148,28 +153,38 @@ public class RoundHandler {
     /**
      * Repairs robot on wrenchSpace and update the current cards for each player
      */
-    public void cleanUP() {
+    public void cleanUP(HashSet<Player> players) {
         updateRobotsSpawnPoint();
-        cleanOrLockeCards();
+        cleanOrLockeCards(players);
 
     }
 
     private void updateRobotsSpawnPoint() {
     }
 
-    private void cleanOrLockeCards() {
+    private void cleanOrLockeCards(HashSet<Player> players) {
         for (Player p : players) {
             p.updateCurrentCards();
         }
     }
 
 
-    public void collectCards() {
+    public void collectCards(HashSet<Player> players) {
         for (Player p : players) {
             deck.addRestCards(p.getHand());
             deck.addRestCards(p.getRestCards());
         }
 
+    }
+
+    /**
+     * If debugmode is true:
+     * Allows Printing in methods
+     */
+    private void debugPrint(String debugString) {
+        if (debugMode) {
+            System.out.println(debugString);
+        }
     }
 
 }

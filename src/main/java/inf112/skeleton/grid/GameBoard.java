@@ -27,6 +27,8 @@ public class GameBoard{
      * Constructs Board with given number rows, columns and layers.
      */
     public GameBoard(int rows, int cols, int layers) {
+        this.rows= rows;
+        this.cols= cols;
         grids = new ArrayList<>(layers);
         for (int i = 0; i < layers; i++) {
             ITileObject empty= new EmptyTile();
@@ -120,7 +122,7 @@ public class GameBoard{
     /**
      * Replaces loc with empty Tile.(by layer)
      */
-    private void clearLocation(Location loc){
+    public void clearLocation(Location loc){
         set(loc, new EmptyTile());
     }
 
