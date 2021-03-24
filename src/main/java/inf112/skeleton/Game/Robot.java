@@ -56,6 +56,8 @@ import inf112.skeleton.grid.Directions;
         public void rotate(int amountToRotate){
             this.direction = direction.rotate(amountToRotate);
         }
-
-
+        @Override
+        public String toString(){
+            return this.name;
+        }
     }

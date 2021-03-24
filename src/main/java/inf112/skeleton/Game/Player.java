@@ -84,7 +84,9 @@ public class Player implements ITileObject {
         return powerDown;
     }
 
-    public void announcePowerDown() {
+    public void announcePowerDown(GameBoard gameBoard) {
+        myRobot.resetHealth();
+        placeRobotAtSpawn(gameBoard);
         powerDown = true;
     }
 
