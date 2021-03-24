@@ -56,9 +56,9 @@ public class RoundHandler {
 
 
     /**
-     *  Manages the players selection of cards
+     * Manages the players selection of cards
      */
-    public void chooseCardsManager(Player player)  { //Må kalles før spiller velger noen kort for den runden
+    public void chooseCardsManager(Player player) { //Må kalles før spiller velger noen kort for den runden
         //player must have hand here
         if (player.getHand().isEmpty()) {
             throw new NoSuchElementException("The player has no cards in their hand");
@@ -71,7 +71,7 @@ public class RoundHandler {
         }
         // This condition is always false until the
         // allowedToChooseCards() method takes time into account
-        if (player.getChosenCards().size()<5){
+        if (player.getChosenCards().size() < 5) {
             chooseRandomCard(player);
         }
     }
@@ -109,7 +109,7 @@ public class RoundHandler {
     }
 
     private void performOneCardMovement(int phase) {
-        PriorityQueue<Player> prioritetPlayers = new PriorityQueue<>((p1, p2) -> p2.getCurrentCards().get(phase).priorityNr - p1.getCurrentCards().get(phase).priorityNr);
+        PriorityQueue<Player> prioritetPlayers = new PriorityQueue<>((p1, p2) -> p2.getChosenCards().get(phase).priorityNr - p1.getChosenCards().get(phase).priorityNr);
         prioritetPlayers.addAll(players);
         while (!prioritetPlayers.isEmpty()) {
             Player p = prioritetPlayers.poll();
