@@ -41,6 +41,7 @@ public class GameBoard{
     /**
      * Returns amount of layers in GameBoard
      */
+
     public int getLayers() {return layers;}
 
     public Grid<ITileObject> getGridLayer(int layer) {
@@ -150,13 +151,13 @@ public class GameBoard{
 
         if (!validCoordinate(endLoc)) {
             robot.addDamage(1);
-            debugPrint("Robo: " + dir + " Out of bounds. " + endLoc.toString() + "| Added 1 dmg");
+            debugPrint(robot.getName() +" "+ dir + " Out of bounds. " + endLoc.toString() + "| Added 1 dmg");
             //TODO maxDmg
         }
         else if (robotCanGo(robot,currLoc,dir)) {
             set(endLoc, robot);
             clearLocation(currLoc);
-            debugPrint("Moved bot from " + currLoc.toString() + " to " + endLoc.toString());
+            debugPrint("Moved "+robot.getName()+" from " + currLoc.toString() + " to " + endLoc.toString());
         }
         else{
             debugPrint(robot.getName()+"can't move to " + endLoc.toString());
@@ -183,7 +184,7 @@ public class GameBoard{
             IRobot placidRobot = (IRobot) get(robot2loc);
             if (robotCanGo(placidRobot, robot2loc, dir)){
                 moveRobot(dir, placidRobot);
-                debugPrint(robot1.getName()+" pushes "+placidRobot.getName());
+                debugPrint(robot1+" pushes "+placidRobot);
                 return true;
             }
             else return false;
@@ -270,7 +271,7 @@ public class GameBoard{
      * If debugmode is true:
      * Allows Printing in methods
      */
-    public void debugPrint(String debugString){
+    private void debugPrint(String debugString){
         if (debugMode){
             System.out.println(debugString);
         }

@@ -39,7 +39,7 @@ public class Player implements ITileObject {
         gb.set(robotSpawnPoint, myRobot);
     }
 
-
+    // checkPoint
     public Location getSpawnPoint() {
         return this.robotSpawnPoint;
     }
@@ -182,7 +182,7 @@ public class Player implements ITileObject {
 
             int freeCards = myRobot.getHealth();
             while (freeCards > 0) {
-                restCards.add(currentCards.remove(freeCards));
+                restCards.add(chosenCards.remove(freeCards));
                 freeCards--;
 
             }

@@ -18,6 +18,7 @@ public class RoundHandler {
         deck = new Deck();
     }
 
+
     public int DetermineTheNumberOfCards(Player player) {
         if (player.isPowerDown()) {
             return 0;
@@ -53,7 +54,6 @@ public class RoundHandler {
         int bound = player.getHand().size();
         return player.getHand().get(r.nextInt(bound));// this line should change and replace with a input card
     }
-
 
     /**
      * Manages the players selection of cards
@@ -95,6 +95,7 @@ public class RoundHandler {
         List<Card> hand = player.getHand();
         Collections.shuffle(hand);
         return hand.remove(0);
+
     }
 
     /**
@@ -106,6 +107,8 @@ public class RoundHandler {
             performOneCardMovement(phase);
             phase++;
         }
+        cleanUP();
+
     }
 
     private void performOneCardMovement(int phase) {
@@ -113,7 +116,7 @@ public class RoundHandler {
         prioritetPlayers.addAll(players);
         while (!prioritetPlayers.isEmpty()) {
             Player p = prioritetPlayers.poll();
-            Card nextCard = p.getCurrentCards().get(phase);
+            Card nextCard = p.getChosenCards().get(phase);
             p.makeMove(nextCard, gameboard);
             touchCheckpoints();
         }
