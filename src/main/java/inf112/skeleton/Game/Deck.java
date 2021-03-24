@@ -42,4 +42,11 @@ public class Deck {
 
         }
     }
+
+    public void addRestCards(List<Card> cards) {
+        for (Card c: cards){
+            if(cardDeck.size()<84)
+            cardDeck.add(c);
+        }
+    }
 }
