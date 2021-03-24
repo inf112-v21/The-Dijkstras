@@ -36,6 +36,10 @@ public class Player implements ITileObject {
 
 
     public void placeRobotAtSpawn(GameBoard gb) {
+        if (gb.contains(myRobot)) {
+            Location loc = gb.locationOf(myRobot);
+            gb.clearLocation(loc);
+        }
         gb.set(robotSpawnPoint, myRobot);
     }
 

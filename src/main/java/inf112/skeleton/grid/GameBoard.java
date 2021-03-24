@@ -15,6 +15,8 @@ import java.util.List;
 
 public class GameBoard{
     private List<Grid<ITileObject>> grids;
+    private int rows;
+    private int cols;
     private int layers;
     private HashMap<IRobot,Location> robotsOnBoard;
     private HashMap<ITileObject, Location> objectOnBoard;
@@ -37,6 +39,9 @@ public class GameBoard{
         objectOnBoard = new HashMap<>();
     }
 
+    public int getRows() { return rows; }
+
+    public int getCols() { return cols; }
 
     /**
      * Returns amount of layers in GameBoard

@@ -74,7 +74,7 @@ public class RoundHandlerTest {
 
         assertThat(rh.DetermineTheNumberOfCards(player1), is(9));
 
-        player1.announcePowerDown();
+        player1.announcePowerDown(gb);
 
         assertThat(rh.DetermineTheNumberOfCards(player1), is(0));
 
