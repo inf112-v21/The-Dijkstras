@@ -46,10 +46,7 @@ public class RoundHandler {
     }
 
     /**
-     * This method receive an input card from a player throw GUI
-     *
-     * @param player
-     * @return card
+     * This method receives an input card from a player through GUI
      */
     public Card getInputCardFromPlayer(Player player) {
         //TODO find a way to get input card from the player
@@ -58,28 +55,23 @@ public class RoundHandler {
         return player.getHand().get(r.nextInt(bound));// this line should change and replace with a input card
     }
 
-
     /**
-     * Allow a player to choose programing cards
-     *
-     * @param player
+     *  Manages the players selection of cards
      */
-    public void chooseCardsManage(Player player) { //Må kalles før spiller velger noen kort for den runden
+    public void chooseCardsManage(Player player)  { //Må kalles før spiller velger noen kort for den runden
         //player must have hand here
         if (player.getHand().isEmpty()) {
             throw new NoSuchElementException("The player has no cards in their hand");
         }
 
 
-        while (player.allowedToChooseCards()) {
+        while(player.allowedToChooseCards()){
             Card card = getInputCardFromPlayer(player);
-            addChosenCard(player, card);
+            addChosenCard(player,card);
         }
-
-        // This condition is always false now until the
+        // This condition is always false until the
         // allowedToChooseCards() method takes time into account
-
-        if (player.getCurrentCards().size() < 5) {
+        if (player.getChosenCards().size()<5){
             chooseRandomCard(player);
         }
     }
@@ -89,21 +81,18 @@ public class RoundHandler {
             return;
         }
 
-        int place = player.getCurrentCards().size() + 1;
-        player.addCurrentCards(card, place);
+        int place = player.getChosenCards().size() + 1;
+        player.addChosenCard(card, place);
 
 
     }
 
     /**
-     * This method should be called when a player har no more time
-     * to choose  programming card from his hand
-     *
-     * @param player the current player
-     * @return card: return random card from the player hand
+     * This method should be called when a player has no more time
+     * to choose programming cards
      */
-    public Card chooseRandomCard(Player player) {
-        List<Card> hand = player.getHand();
+    public Card chooseRandomCard(Player player){
+        List<Card> hand= player.getHand();
         Collections.shuffle(hand);
         return hand.remove(0);
 
@@ -127,7 +116,7 @@ public class RoundHandler {
         prioritetPlayers.addAll(players);
         while (!prioritetPlayers.isEmpty()) {
             Player p = prioritetPlayers.poll();
-            Card nextCard = p.getCurrentCards().get(phase);
+            Card nextCard = p.getChosenCards().get(phase);
             p.makeMove(nextCard, gameboard);
             touchCheckpoints();
         }
@@ -180,6 +169,6 @@ public class RoundHandler {
             deck.addRestCards(p.getRestCards());
         }
 
-    }
+}
 
 }

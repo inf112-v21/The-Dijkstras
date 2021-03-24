@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class CardTest {
 
     @Test
-    public void makeCardTest(){
+    public void makeCard(){
         Card card= new Card(CardType.MOVE1,500);
 
         assertThat(card.type, is( CardType.MOVE1) );
