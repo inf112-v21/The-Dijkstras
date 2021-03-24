@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import inf112.skeleton.Game.Card;
 import inf112.skeleton.Game.CardType;
 import inf112.skeleton.app.*;
 
@@ -132,11 +133,6 @@ public class GameScreen extends ScreenAdapter {
             programmingSlotButtons[i] = programmingSlot;
         }
         cardInteractions1();
-/*
-        for (int i = 1; i < 6; i++) {
-            cardsTable.add(new Label(Integer.toString(i), skin));
-        }
-*/
         return programmingCardsTable;
     }
     private void cardInteractions() {
@@ -174,14 +170,14 @@ public class GameScreen extends ScreenAdapter {
     private void updateCards() {
         for (int i = 0; i < 5; i++) {
             ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
-            style.imageUp = cardTexture.get("UTURN");
+            style.imageUp = cardTexture.get("NULL");
             programmingSlotButtons[i].setStyle(style);
 
         }
 
         for (int i = 0; i < 9; i++) {
             ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
-            style.imageUp = cardTexture.get("MOVE1");
+            style.imageUp = cardTexture.get("NULL");
             handSlotButtons[i].setStyle(style);
         }
     }
