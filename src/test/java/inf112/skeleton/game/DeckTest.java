@@ -36,7 +36,7 @@ public class DeckTest {
     @Test
     public void isDeckNotEmpty(){
 
-        assertThat(myDeck.cardDeck.size(), is(not(0)));
+        assertThat(myDeck.cardDeck.size(), is(84));
     }
 
 
@@ -69,13 +69,15 @@ public class DeckTest {
 
         assertThat(cardCounter(CardType.MOVE1), is(18));
     }
-    public void has18Move2(){
+    @Test
+    public void has12Move2(){
 
-        assertThat(cardCounter(CardType.MOVE2) , is(18));
+        assertThat(cardCounter(CardType.MOVE2) , is(12));
     }
-    public void has18Move3(){
+    @Test
+    public void has6Move3(){
 
-        assertThat(cardCounter(CardType.MOVE3), is(18));
+        assertThat(cardCounter(CardType.MOVE3), is(6));
     }
 
     private int cardCounter(CardType myCardType){
