@@ -25,6 +25,9 @@ import inf112.skeleton.grid.Directions;
             return name;
         }
 
+        public void resetHealth() {
+            this.health = 9;
+        }
 
         public int getHealth() {
             return health;
@@ -41,7 +44,6 @@ import inf112.skeleton.grid.Directions;
         public void setDirection(Directions direction) {
             this.direction = direction;
         }
-
 
         /**
          * Rotates robot

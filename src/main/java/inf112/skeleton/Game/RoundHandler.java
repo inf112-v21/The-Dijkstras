@@ -20,8 +20,11 @@ public class RoundHandler {
 
     public int DetermineTheNumberOfCards(Player player) {
         if (player.isPowerDown()) {
+            debugPrint("0 cards for " + player.getRobot());
+
             return 0;
         }
+        debugPrint(player.getRobot().getHealth() + " cards for player" + player.getRobot());
         return player.getRobot().getHealth();
     }
 
@@ -128,6 +131,7 @@ public class RoundHandler {
     }
 
     private void checkWrenchSpace() {
+
     }
 
     private void flagCheck() {
