@@ -7,9 +7,9 @@ When you run main:
 
 
 ## Running it
-*To run:*  
-You simply need to run the main class.
-
+*To run:* 
+Navigate to src/main/java/inf112/skeleton/app/main.java and run the Main file to start the game.
+It will then pop up a screen that shows the board.
 
 ## Deliverables
 
