@@ -273,7 +273,6 @@ public class GameBoard{
         return gameBoardCopy;
     }
 
-
     /**
      * If debugmode is true:
      * Allows Printing in methods
@@ -283,4 +282,5 @@ public class GameBoard{
             System.out.println(debugString);
         }
     }
+
 }
