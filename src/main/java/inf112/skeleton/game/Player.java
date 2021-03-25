@@ -199,7 +199,7 @@ public class Player implements ITileObject {
 
             int freeCards = myRobot.getHealth();
             while (freeCards > 0) {
-                restCards.add(currentCards.remove(freeCards));
+                restCards.add(chosenCards.remove(freeCards));
                 freeCards--;
 
             }
