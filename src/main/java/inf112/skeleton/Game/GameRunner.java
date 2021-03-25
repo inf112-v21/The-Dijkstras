@@ -17,6 +17,7 @@ public class GameRunner {
     static  List<Flag> flags;
     static GameBoard gb;
     static int rows, cols;
+    static Game game;
 
 
 
@@ -30,24 +31,31 @@ public class GameRunner {
         player2 = new Player(new Location(20, 0, 2));
         player3 = new Player(new Location(48, 0, 2));
 
-        player1.setRobot(new Robot("robot1"));
-        player2.setRobot(new Robot("robot2"));
-        player3.setRobot(new Robot("robot3"));
-
         players = new HashSet<>();
         players.add(player1);
         players.add(player2);
         players.add(player3);
-        for (Player p : players) p.placeRobotAtSpawn(gb);
-
         Flag flag1 = new Flag(1);
         Flag flag2 = new Flag(2);
         flags = new ArrayList<>();
         flags.add(flag1);
         flags.add(flag2);
-        gb.set(new Location(5, 5, 1), flag1);
-        gb.set(new Location(10, 5, 1), flag2);
-       // rh = new RoundHandler(gb);
+        game= new Game(true,gb,flags, players);
+
+        game.randomSetUp(players,flags,gb);
+
+
+//        player1.setRobot(new Robot("robot1"));
+//        player2.setRobot(new Robot("robot2"));
+//        player3.setRobot(new Robot("robot3"));
+//
+//
+//        for (Player p : players) p.placeRobotAtSpawn(gb);
+//
+//
+//        gb.set(new Location(5, 5, 1), flag1);
+//        gb.set(new Location(10, 5, 1), flag2);
+//       // rh = new RoundHandler(gb);
     }
 
     public static void main(String[] args) {

@@ -35,7 +35,8 @@ public class RoundHandler {
             int numOfCards = DetermineTheNumberOfCards(player);
 
             while (numOfCards > 0) {
-
+if (deck.cardDeck.size()==0)
+    throw new IllegalStateException(" Deck should have cards for every new round");
                 hand.add(deck.cardDeck.remove(0));
                 numOfCards--;
             }
@@ -52,7 +53,9 @@ public class RoundHandler {
         //TODO find a way to get input card from the player
         Random r = new Random();
         int bound = player.getHand().size();
-        return player.getHand().get(r.nextInt(bound));// this line should change and replace with a input card
+        List<Card> toChoos= new ArrayList<>();
+        toChoos.addAll(player.getHand());
+        return toChoos.remove(r.nextInt(bound));// this line should change and replace with a input card
     }
 
     /**
@@ -141,10 +144,13 @@ public class RoundHandler {
 
     private void flagCheck(List<Flag> flags, HashSet<Player> players) {
         for (Player player : players) {
+            debugPrint("Checking if "+player.getRobot()+" has touched any flag!");
             for (Flag flag : flags) {
                 if (gameBoard.sameXYLocation(player.getRobot(), flag)) {
+                    debugPrint("Yes!! "+player.getRobot()+" har visited flag "+flag);
                     player.checkFlagIndex(flag);
                 }
+                debugPrint("No, "+player.getRobot()+" has not reached any flag yet!");
             }
         }
 
@@ -154,26 +160,37 @@ public class RoundHandler {
      * Repairs robot on wrenchSpace and update the current cards for each player
      */
     public void cleanUP(HashSet<Player> players) {
-        updateRobotsSpawnPoint();
+        debugPrint("Cleaning Up!");
+        updateRobotsSpawnPoint(players);
         cleanOrLockeCards(players);
 
     }
 
-    private void updateRobotsSpawnPoint() {
+    private void updateRobotsSpawnPoint(HashSet<Player> players) {
+        for (Player p : players) {
+           if( p.isPowerDown()) {
+               p.cancelPowerDown();
+               debugPrint(p.getRobot()+" Canceled Power Down! ");
+           }
+        }
     }
 
     private void cleanOrLockeCards(HashSet<Player> players) {
         for (Player p : players) {
             p.updateCurrentCards();
+            debugPrint(p.getRobot()+" har  "+p.getNumberOfDamages()+" damages And "+p.getLife()+" life");
+            debugPrint(p.getRobot()+ " has\n "+p.getChosenCards()+"\n to the next round");
         }
     }
 
 
     public void collectCards(HashSet<Player> players) {
+        debugPrint("collecting the cards!");
         for (Player p : players) {
             deck.addRestCards(p.getHand());
             deck.addRestCards(p.getRestCards());
         }
+
 
     }
 
