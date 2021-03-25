@@ -1,4 +1,4 @@
-package inf112.skeleton.Game;
+package inf112.skeleton.game;
 
 import inf112.skeleton.grid.*;
 
@@ -13,7 +13,7 @@ public class Game {
     protected final HashSet<Player> players;
     protected final HashSet<Player> deadPlayers;
     private boolean mocMode = true;
-    //  GameBoard gameBoard = new GameBoard(50,50,5);
+
 
     public Game(boolean gameActive, GameBoard gameBoard, List<Flag> flags, HashSet<Player> players) {
         this.flags = flags;

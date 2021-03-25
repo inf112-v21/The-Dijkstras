@@ -1,6 +1,6 @@
-package inf112.skeleton.Game;
+package inf112.skeleton.game;
 
-import inf112.skeleton.Game.*;
+import inf112.skeleton.game.*;
 import inf112.skeleton.grid.GameBoard;
 import inf112.skeleton.grid.Location;
 
@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 
 public class GameRunner {
-    static RoundHandler rh;
-    static Player player1;
+    static inf112.skeleton.game.RoundHandler rh;
+    static inf112.skeleton.game.Player player1;
     static Player player2;
     static Player player3;
     static  HashSet<Player> players;

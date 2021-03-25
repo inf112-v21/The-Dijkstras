@@ -1,8 +1,7 @@
 
-package inf112.skeleton.game;
-import inf112.skeleton.Game.Robot;
+package inf112.skeleton.gameTest;
+import inf112.skeleton.game.*;
 import inf112.skeleton.grid.Directions;
-import inf112.skeleton.grid.Location;
 import org.junit.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;

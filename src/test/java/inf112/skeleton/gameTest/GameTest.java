@@ -1,7 +1,5 @@
-package inf112.skeleton.game;
-import inf112.skeleton.Game.Game;
-import inf112.skeleton.Game.RoundHandler;
-import inf112.skeleton.grid.*;
+package inf112.skeleton.gameTest;
+import inf112.skeleton.game.*;
 import org.junit.Before;
 import org.junit.Test;
 
