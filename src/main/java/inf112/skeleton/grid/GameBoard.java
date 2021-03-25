@@ -1,6 +1,6 @@
 package inf112.skeleton.grid;
 
-import inf112.skeleton.Game.*;
+import inf112.skeleton.game.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

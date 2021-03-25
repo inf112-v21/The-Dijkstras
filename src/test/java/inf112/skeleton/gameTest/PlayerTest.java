@@ -1,8 +1,5 @@
-package inf112.skeleton.game;
-import inf112.skeleton.Game.Card;
-import inf112.skeleton.Game.CardType;
-import inf112.skeleton.Game.Flag;
-import inf112.skeleton.Game.Player;
+package inf112.skeleton.gameTest;
+import inf112.skeleton.game.*;
 import inf112.skeleton.grid.GameBoard;
 import inf112.skeleton.grid.Location;
 import org.junit.*;
