@@ -12,7 +12,7 @@ public class Game {
     protected final List<Flag> flags;
     protected final HashSet<Player> players;
     protected final HashSet<Player> deadPlayers;
-    private boolean debugMode = true;
+    private boolean mocMode = true;
     //  GameBoard gameBoard = new GameBoard(50,50,5);
 
     public Game(boolean gameActive, GameBoard gameBoard, List<Flag> flags, HashSet<Player> players) {
@@ -26,32 +26,31 @@ public class Game {
     /**
      * All the player in players set should be initialized
      */
-    public void randomSetup() {
+
+    public void randomSetUp(HashSet<Player> players, List<Flag> flags, GameBoard gb) {
         if (flags.isEmpty() || players.isEmpty()) {
             throw new NullPointerException("Need players and flags to setup");
         }
-        int gbHeight = rh.gameBoard.getRows();
-        int gbWidth = rh.gameBoard.getCols();
 
-        int yFlag = gbHeight - 1;
-
-        int layerFlag = 2;
-
-        List<Integer> xCoordinates = new ArrayList<>();
-        for (int i = 1; i < gbWidth - 1; i++) {
-            xCoordinates.add(i);
-        }
-        Collections.shuffle(xCoordinates);
-        int i = 0;
-        for (Flag flag : flags) {
-            rh.gameBoard.set(new Location(xCoordinates.get(i), yFlag, layerFlag), flag);
+        int i = 1;
+        for (Player p : players) {
+            p.setRobot(new Robot("robot_" + i));
+            p.placeRobotAtSpawn(gb);
             i++;
         }
 
-        i = 0;
-        for (Player player : players) {
-            player.setRobot(new Robot("robot_" + i));
-            player.placeRobotAtSpawn(rh.gameBoard);
+        int rows = gb.getRows();
+        int cols = gb.getCols();
+        List<Integer> xCoordinates = new ArrayList<>();
+        for (int j = 1; j < cols - 1; j++) {
+            xCoordinates.add(j);
+        }
+        Collections.shuffle(xCoordinates);
+        int yFlag = rows - 1;
+        int layerFlag = 2;
+        i = 1;
+        for (Flag f : flags) {
+            gb.set(new Location(xCoordinates.get(i), yFlag, layerFlag), f);
             i++;
         }
     }
@@ -62,29 +61,45 @@ public class Game {
     public void startGame() {
 
         while (gameActive) {
-            rh.dealProgramCards(players);
+            mocPrint("Would you like start a new Round? y/n");
+            Scanner answer = new Scanner(System.in);
+            if (!answer.hasNext() || !answer.next().toLowerCase().startsWith("y")) {
+                mocPrint("End the game !\n God Bay!");
+                gameActive = false;
+            } else {
+                mocPrint("Dealing the programing cards:");
+                rh.dealProgramCards(players);
 
-            //Let players register cards
-            for (Player player : players) {
-                if (player.isPowerDown()) continue;
-                rh.chooseCardsManager(player);
-                //Let players choose whether to continue running or power down
+                //Let players register cards
+                for (Player player : players) {
+                    mocPrint(player.getRobot() + " get: " + player.getHand());
+                    if (player.isPowerDown()) {
+                        mocPrint(player.getRobot() + " is Power Down");
+                        continue;
+                    }
 
+                    rh.chooseCardsManager(player);
+                    mocPrint(player.getRobot() + " has chosen: " + player.getChosenCards());
+                    //Let players choose whether to continue running or power down
+
+                }
+                mocPrint("Moving the robots");
+                rh.performMovements(players);
+
+                rh.touchCheckpoints(flags, players);
+                rh.cleanUP(players);
+                rh.collectCards(players);
+                timeToPowerDown();
+                isRobotDead();
+                isGameOver();
             }
-            System.out.println(players);
-            rh.performMovements(players);
-            rh.touchCheckpoints(flags, players);
-            rh.cleanUP(players);
-            rh.collectCards(players);
-            timeToPowerDown();
-            isRobotDead();
-            isGameOver();
         }
-        return;
+            return;
+
     }
     /**
-    *temporary method
-    */
+     * temporary method
+     */
     private void timeToPowerDown() {
         for (Player p : players) {
             if (p.getRobot().getHealth() < 3) {
@@ -97,7 +112,7 @@ public class Game {
         for (Player p : players) {
             if (p.getNextFlagIndex() > flags.size()) {
                 gameActive = false;
-                debugPrint("Game over, winner is: " + p.getRobot());
+                mocPrint("Game over, winner is: " + p.getRobot());
             }
         }
     }
@@ -123,8 +138,8 @@ public class Game {
      * If debugmode is true:
      * Allows Printing in methods
      */
-    private void debugPrint(String debugString) {
-        if (debugMode) {
+    protected void mocPrint(String debugString) {
+        if (mocMode) {
             System.out.println(debugString);
         }
     }
