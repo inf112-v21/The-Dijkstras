@@ -1,6 +1,5 @@
-package inf112.skeleton.game;
-import inf112.skeleton.Game.Card;
-import inf112.skeleton.Game.CardType;
+package inf112.skeleton.gameTest;
+import inf112.skeleton.game.*;
 import org.junit.Test;
 import org.junit.*;
 import static org.hamcrest.CoreMatchers.*;

@@ -1,7 +1,7 @@
 
 package inf112.skeleton.grid;
 
-import inf112.skeleton.Game.*;
+import inf112.skeleton.game.*;
 import org.junit.Before;
 import org.junit.Test;
 

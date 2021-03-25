@@ -1,4 +1,4 @@
-package inf112.skeleton.Game;
+package inf112.skeleton.game;
 
 import inf112.skeleton.grid.GameBoard;
 
@@ -6,27 +6,27 @@ import java.util.*;
 
 public class RoundHandler {
     public Deck deck;
-    private GameBoard gameboard;
-    private final List<Flag> flags;
-    private final HashSet<Player> players;
+    protected GameBoard gameBoard;
+    private boolean debugMode = true;
 
 
-    public RoundHandler(GameBoard gameboard, List<Flag> flags, HashSet<Player> players) {
-        this.gameboard = gameboard;
-        this.flags = flags;
-        this.players = players;
+    public RoundHandler(GameBoard gameboard) {
+        this.gameBoard = gameboard;
         deck = new Deck();
     }
 
 
     public int DetermineTheNumberOfCards(Player player) {
         if (player.isPowerDown()) {
+            debugPrint("0 cards for " + player.getRobot());
+
             return 0;
         }
+        debugPrint(player.getRobot().getHealth() + " cards for player" + player.getRobot());
         return player.getRobot().getHealth();
     }
 
-    public void dealProgramCards() {
+    public void dealProgramCards(HashSet<Player> players) {
         Collections.shuffle(deck.cardDeck);
 
         for (Player player : players) {
@@ -35,7 +35,8 @@ public class RoundHandler {
             int numOfCards = DetermineTheNumberOfCards(player);
 
             while (numOfCards > 0) {
-
+if (deck.cardDeck.size()==0)
+    throw new IllegalStateException(" Deck should have cards for every new round");
                 hand.add(deck.cardDeck.remove(0));
                 numOfCards--;
             }
@@ -52,7 +53,9 @@ public class RoundHandler {
         //TODO find a way to get input card from the player
         Random r = new Random();
         int bound = player.getHand().size();
-        return player.getHand().get(r.nextInt(bound));// this line should change and replace with a input card
+        List<Card> toChoos= new ArrayList<>();
+        toChoos.addAll(player.getHand());
+        return toChoos.remove(r.nextInt(bound));// this line should change and replace with a input card
     }
 
     /**
@@ -101,44 +104,53 @@ public class RoundHandler {
     /**
      * Perform  actions in 5 phases according to programing cards
      */
-    public void performMovements() {
+    public void performMovements(HashSet<Player> players) {
+        HashSet<Player> activePlayer= new HashSet<>();
+        for(Player p: players){
+           if( p.getLife()>0 && p.getChosenCards().size()==5)
+               activePlayer.add(p);
+        }
         int phase = 1;
         while (phase <= 5) {
-            performOneCardMovement(phase);
+            performOneCardMovement(phase, activePlayer);
             phase++;
         }
-        cleanUP();
-
     }
 
-    private void performOneCardMovement(int phase) {
-        PriorityQueue<Player> prioritetPlayers = new PriorityQueue<>((p1, p2) -> p2.getChosenCards().get(phase).priorityNr - p1.getChosenCards().get(phase).priorityNr);
+    private void performOneCardMovement(int phase, HashSet<Player> players) {
+
+        PriorityQueue<Player> prioritetPlayers =
+                new PriorityQueue<>((p1, p2) -> p2.getChosenCards().get(phase).priorityNr - p1.getChosenCards().get(phase).priorityNr);
         prioritetPlayers.addAll(players);
         while (!prioritetPlayers.isEmpty()) {
             Player p = prioritetPlayers.poll();
             Card nextCard = p.getChosenCards().get(phase);
-            p.makeMove(nextCard, gameboard);
-            touchCheckpoints();
+            p.makeMove(nextCard, gameBoard);
+
         }
     }
 
     /**
      * Check if robot has touched flag or repair sites
      */
-    public void touchCheckpoints() {
+    public void touchCheckpoints(List<Flag> flags, HashSet<Player> players) {
         checkWrenchSpace();
-        flagCheck();
+        flagCheck(flags, players);
     }
 
     private void checkWrenchSpace() {
+
     }
 
-    private void flagCheck() {
+    private void flagCheck(List<Flag> flags, HashSet<Player> players) {
         for (Player player : players) {
+            debugPrint("Checking if "+player.getRobot()+" has touched any flag!");
             for (Flag flag : flags) {
-                if (gameboard.sameXYLocation(player.getRobot(), flag)) {
+                if (gameBoard.sameXYLocation(player.getRobot(), flag)) {
+                    debugPrint("Yes!! "+player.getRobot()+" har visited flag "+flag);
                     player.checkFlagIndex(flag);
                 }
+                debugPrint("No, "+player.getRobot()+" has not reached any flag yet!");
             }
         }
 
@@ -147,28 +159,49 @@ public class RoundHandler {
     /**
      * Repairs robot on wrenchSpace and update the current cards for each player
      */
-    public void cleanUP() {
-        updateRobotsSpawnPoint();
-        cleanOrLockeCards();
+    public void cleanUP(HashSet<Player> players) {
+        debugPrint("Cleaning Up!");
+        updateRobotsSpawnPoint(players);
+        cleanOrLockeCards(players);
 
     }
 
-    private void updateRobotsSpawnPoint() {
+    private void updateRobotsSpawnPoint(HashSet<Player> players) {
+        for (Player p : players) {
+           if( p.isPowerDown()) {
+               p.cancelPowerDown();
+               debugPrint(p.getRobot()+" Canceled Power Down! ");
+           }
+        }
     }
 
-    private void cleanOrLockeCards() {
+    private void cleanOrLockeCards(HashSet<Player> players) {
         for (Player p : players) {
             p.updateCurrentCards();
+            debugPrint(p.getRobot()+" har  "+p.getNumberOfDamages()+" damages And "+p.getLife()+" life");
+            debugPrint(p.getRobot()+ " has\n "+p.getChosenCards()+"\n to the next round");
         }
     }
 
 
-    public void collectCards() {
+    public void collectCards(HashSet<Player> players) {
+        debugPrint("collecting the cards!");
         for (Player p : players) {
             deck.addRestCards(p.getHand());
             deck.addRestCards(p.getRestCards());
         }
 
+
+    }
+
+    /**
+     * If debugmode is true:
+     * Allows Printing in methods
+     */
+    private void debugPrint(String debugString) {
+        if (debugMode) {
+            System.out.println(debugString);
+        }
     }
 
 }

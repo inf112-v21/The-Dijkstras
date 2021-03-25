@@ -1,8 +1,6 @@
-package inf112.skeleton.game;
-import inf112.skeleton.Game.Card;
-import inf112.skeleton.Game.CardType;
-import inf112.skeleton.Game.Flag;
-import inf112.skeleton.Game.Player;
+package inf112.skeleton.gameTest;
+import inf112.skeleton.game.*;
+import inf112.skeleton.grid.GameBoard;
 import inf112.skeleton.grid.Location;
 import org.junit.*;
 
@@ -12,10 +10,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PlayerTest {
     public Player myPlayer;
+    public GameBoard gb;
 
     @Before
     public void makePlayer(){
-        myPlayer = new Player(new Location(0,0));
+        gb = new GameBoard(50, 50, 5);
+        myPlayer = new Player(new Location(0,0, 1));
     }
 
     @Test
@@ -25,7 +25,7 @@ public class PlayerTest {
 
     @Test
     public void playerHasRobotSpawnPoint(){
-        Location startLoc = new Location(0,0);
+        Location startLoc = new Location(0,0, 1);
         assertThat(startLoc, is(myPlayer.getSpawnPoint()));
     }
 
@@ -38,7 +38,7 @@ public class PlayerTest {
 
     @Test
     public void checkSetNewCheckPoint(){
-        Location newCheckPoint = new Location(1,1);
+        Location newCheckPoint = new Location(1,1, 1);
         myPlayer.newCheckPoint(newCheckPoint);
         assertThat(myPlayer.getSpawnPoint(), is(newCheckPoint));
     }
@@ -56,7 +56,7 @@ public class PlayerTest {
     }
     @Test
     public void checkAnnounceAndCancelPowerDown(){
-        myPlayer.announcePowerDown();
+        myPlayer.announcePowerDown(gb);
         assertThat(myPlayer.isPowerDown(), is(true));
 
         myPlayer.cancelPowerDown();
@@ -65,7 +65,7 @@ public class PlayerTest {
 
     @Test
     public void checkCancelPowerDown(){
-        myPlayer.announcePowerDown();
+        myPlayer.announcePowerDown(gb);
 
     }
     @Test

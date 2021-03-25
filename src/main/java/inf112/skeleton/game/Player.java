@@ -1,4 +1,4 @@
-package inf112.skeleton.Game;
+package inf112.skeleton.game;
 
 import inf112.skeleton.grid.Directions;
 import inf112.skeleton.grid.GameBoard;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Player implements ITileObject {
 
-    private int life;
+
     private Location robotSpawnPoint;
     private Robot myRobot;
     private int nextFlagIndex = 1;
@@ -20,7 +20,6 @@ public class Player implements ITileObject {
     private List<Card> restCards = new ArrayList<>();
 
     public Player(Location startPosition) {
-        this.life = 3;
         this.robotSpawnPoint = startPosition;
         this.myRobot = new Robot();
     }
@@ -36,10 +35,14 @@ public class Player implements ITileObject {
 
 
     public void placeRobotAtSpawn(GameBoard gb) {
+        if (gb.contains(myRobot)) {
+            Location loc = gb.locationOf(myRobot);
+            gb.clearLocation(loc);
+        }
         gb.set(robotSpawnPoint, myRobot);
     }
 
-    // checkPoint
+
     public Location getSpawnPoint() {
         return this.robotSpawnPoint;
     }
@@ -50,11 +53,18 @@ public class Player implements ITileObject {
 
 
     public int getLife() {
-        return this.life;
+        return myRobot.getLife();
+    }
+    public void addDamage(int d){
+        if (myRobot.getHealth()==0) {
+            decreaseLife();
+            myRobot.resetHealth();
+        }
+        else myRobot.addDamage(d);
     }
 
     public void decreaseLife() {
-        this.life -= 1;
+       myRobot.decreaseLife();
     }
 
     public int getNumberOfDamages() {
@@ -80,11 +90,16 @@ public class Player implements ITileObject {
         return powerDown;
     }
 
-    public void announcePowerDown() {
+    public void announcePowerDown(GameBoard gameBoard) {
+        myRobot.resetHealth();
+        placeRobotAtSpawn(gameBoard);
         powerDown = true;
+        System.out.println(myRobot+" announced Power Down for next round !");
     }
 
     public void cancelPowerDown() {
+        restCards.addAll(chosenCards.values());
+        chosenCards.clear();
         powerDown = false;
     }
 
@@ -93,6 +108,7 @@ public class Player implements ITileObject {
      * Gives player cards to choose from.
      */
     public void setHand(HashSet<Card> cards) {
+        hand.clear();
         hand.addAll(cards);
     }
 
@@ -175,6 +191,7 @@ public class Player implements ITileObject {
 
 
     public void updateCurrentCards() {
+        restCards.clear();
         if (myRobot.getHealth() >= 5) {
             restCards.addAll(chosenCards.values());
             chosenCards.clear();

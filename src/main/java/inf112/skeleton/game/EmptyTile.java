@@ -1,4 +1,4 @@
-package inf112.skeleton.Game;
+package inf112.skeleton.game;
 
 public class EmptyTile implements ITileObject {
     @Override

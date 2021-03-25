@@ -1,8 +1,6 @@
 package inf112.skeleton.grid;
 
-import inf112.skeleton.Game.Robot;
-import inf112.skeleton.Game.ITileObject;
-import inf112.skeleton.Game.EmptyTile;
+import inf112.skeleton.game.*;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;
