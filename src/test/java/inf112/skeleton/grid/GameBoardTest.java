@@ -22,8 +22,8 @@ public class GameBoardTest {
     public void ConstructTestObjects(){
         gb = new GameBoard(5, 5, 3);
         myObj1 = new Flag(0);
-        myObj2 = new Robot();
-        myObj3 = new Robot();
+        myObj2 = new Robo();
+        myObj3 = new Robo();
     }
 
 

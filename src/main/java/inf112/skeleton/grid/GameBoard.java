@@ -65,7 +65,7 @@ public class GameBoard{
      */
     public Location locationOf(ITileObject target) {
         Location loc;
-        if (target instanceof Robot){
+        if (target instanceof Robo){
             loc = robotsOnBoard.get(target);
         }
         else{
@@ -101,7 +101,7 @@ public class GameBoard{
      * and stores its location
      */
     public void set(Location loc, ITileObject tile){
-        if (tile instanceof Robot){
+        if (tile instanceof Robo){
             getGridLayer(loc.getLayer()).set(loc, tile);
             robotsOnBoard.put((IRobot) tile, loc);
         }
@@ -186,7 +186,7 @@ public class GameBoard{
      * moves other robot
      */
     private boolean otherBotCheck(IRobot robot1, Location robot2loc, Directions dir){
-        if (validCoordinate(robot2loc) && get(robot2loc) instanceof Robot){
+        if (validCoordinate(robot2loc) && get(robot2loc) instanceof Robo){
             IRobot placidRobot = (IRobot) get(robot2loc);
             if (robotCanGo(placidRobot, robot2loc, dir)){
                 moveRobot(dir, placidRobot);

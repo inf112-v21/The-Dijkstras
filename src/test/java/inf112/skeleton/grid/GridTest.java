@@ -58,7 +58,7 @@ public class GridTest {
         assertThat(g1.equals(g2),is(true));
 
 
-        g2.set(new Location(0,0),new Robot());
+        g2.set(new Location(0,0),new Robo());
 
         assertThat(g1.equals(g2),is(false));
 

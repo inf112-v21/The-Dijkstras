@@ -34,7 +34,7 @@ public class Game {
 
         int i = 1;
         for (Player p : players) {
-            p.setRobot(new Robot("robot_" + i));
+            p.setRobot(new Robo("robot_" + i));
             p.placeRobotAtSpawn(gb);
             i++;
         }

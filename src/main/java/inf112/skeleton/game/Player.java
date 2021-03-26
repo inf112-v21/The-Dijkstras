@@ -12,7 +12,7 @@ public class Player implements ITileObject {
 
 
     private Location robotSpawnPoint;
-    private Robot myRobot;
+    private Robo myRobo;
     private int nextFlagIndex = 1;
     private boolean powerDown = false;
     private List<Card> hand = new ArrayList<>();
@@ -21,25 +21,25 @@ public class Player implements ITileObject {
 
     public Player(Location startPosition) {
         this.robotSpawnPoint = startPosition;
-        this.myRobot = new Robot();
+        this.myRobo = new Robo();
     }
 
     // Get && set robot
-    public void setRobot(Robot myRobot) {
-        this.myRobot = myRobot;
+    public void setRobot(Robo myRobo) {
+        this.myRobo = myRobo;
     }
 
-    public Robot getRobot() {
-        return myRobot;
+    public Robo getRobot() {
+        return myRobo;
     }
 
 
     public void placeRobotAtSpawn(GameBoard gb) {
-        if (gb.contains(myRobot)) {
-            Location loc = gb.locationOf(myRobot);
+        if (gb.contains(myRobo)) {
+            Location loc = gb.locationOf(myRobo);
             gb.clearLocation(loc);
         }
-        gb.set(robotSpawnPoint, myRobot);
+        gb.set(robotSpawnPoint, myRobo);
     }
 
 
@@ -53,22 +53,22 @@ public class Player implements ITileObject {
 
 
     public int getLife() {
-        return myRobot.getLife();
+        return myRobo.getLife();
     }
     public void addDamage(int d){
-        if (myRobot.getHealth()==0) {
+        if (myRobo.getHealth()==0) {
             decreaseLife();
-            myRobot.resetHealth();
+            myRobo.resetHealth();
         }
-        else myRobot.addDamage(d);
+        else myRobo.addDamage(d);
     }
 
     public void decreaseLife() {
-       myRobot.decreaseLife();
+       myRobo.decreaseLife();
     }
 
     public int getNumberOfDamages() {
-        return 9 - myRobot.getHealth();
+        return 9 - myRobo.getHealth();
     }
 
 
@@ -91,10 +91,10 @@ public class Player implements ITileObject {
     }
 
     public void announcePowerDown(GameBoard gameBoard) {
-        myRobot.resetHealth();
+        myRobo.resetHealth();
         placeRobotAtSpawn(gameBoard);
         powerDown = true;
-        System.out.println(myRobot+" announced Power Down for next round !");
+        System.out.println(myRobo +" announced Power Down for next round !");
     }
 
     public void cancelPowerDown() {
@@ -156,31 +156,31 @@ public class Player implements ITileObject {
      * @param gb         GameBoard object where the moving is occurring
      */
     public void makeMove(Card movingCard, GameBoard gb) {
-        Directions currentDir = myRobot.getDirection();
+        Directions currentDir = myRobo.getDirection();
         switch (movingCard.type) {
             case MOVE1:
-                gb.moveRobot(currentDir, myRobot);
+                gb.moveRobot(currentDir, myRobo);
                 break;
             case MOVE2:
-                gb.moveRobot(currentDir, myRobot);
-                gb.moveRobot(currentDir, myRobot);
+                gb.moveRobot(currentDir, myRobo);
+                gb.moveRobot(currentDir, myRobo);
                 break;
             case MOVE3:
-                gb.moveRobot(currentDir, myRobot);
-                gb.moveRobot(currentDir, myRobot);
-                gb.moveRobot(currentDir, myRobot);
+                gb.moveRobot(currentDir, myRobo);
+                gb.moveRobot(currentDir, myRobo);
+                gb.moveRobot(currentDir, myRobo);
                 break;
             case BACKUP:
-                gb.moveRobot(currentDir.rotate(2), myRobot);
+                gb.moveRobot(currentDir.rotate(2), myRobo);
                 break;
             case ROTLEFT:
-                myRobot.rotate(-1);
+                myRobo.rotate(-1);
                 break;
             case ROTRIGHT:
-                myRobot.rotate(+1);
+                myRobo.rotate(+1);
                 break;
             case UTURN:
-                myRobot.rotate(2);
+                myRobo.rotate(2);
                 break;
             default:
                 throw new IllegalArgumentException(movingCard + " is not a valid card");
@@ -192,12 +192,12 @@ public class Player implements ITileObject {
 
     public void updateCurrentCards() {
         restCards.clear();
-        if (myRobot.getHealth() >= 5) {
+        if (myRobo.getHealth() >= 5) {
             restCards.addAll(chosenCards.values());
             chosenCards.clear();
         } else {
 
-            int freeCards = myRobot.getHealth();
+            int freeCards = myRobo.getHealth();
             while (freeCards > 0) {
                 restCards.add(chosenCards.remove(freeCards));
                 freeCards--;

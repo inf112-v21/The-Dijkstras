@@ -38,9 +38,9 @@ public class RoundHandlerTest {
         player2 = new Player(new Location(20, 0, 2));
         player3 = new Player(new Location(48, 0, 2));
 
-        player1.setRobot(new Robot("robot1"));
-        player2.setRobot(new Robot("robot2"));
-        player3.setRobot(new Robot("robot3"));
+        player1.setRobot(new Robo("robot1"));
+        player2.setRobot(new Robo("robot2"));
+        player3.setRobot(new Robo("robot3"));
 
         players = new HashSet<>();
         players.add(player1);

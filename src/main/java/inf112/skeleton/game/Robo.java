@@ -7,20 +7,20 @@ import inf112.skeleton.grid.Directions;
  * Robot Class
  * - Has 9 health. Loss life if 0
  */
-public class Robot implements IRobot {
+public class Robo implements IRobot {
     private int health;
     private int life;
     private Directions direction;
     private String name;
 
-    public Robot() {
+    public Robo() {
         this.health = 9;
         this.life = 3;
         this.direction = Directions.NORTH;
         this.name = "Default name";
     }
 
-    public Robot(String name) {
+    public Robo(String name) {
         this.health = 9;
         this.life = 3;
         this.direction = Directions.NORTH;
