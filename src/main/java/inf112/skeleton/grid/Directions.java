@@ -1,8 +1,4 @@
 package inf112.skeleton.grid;
-/**
- * Please save my file
- */
-
 
 import java.util.Arrays;
 import java.util.List;

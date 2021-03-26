@@ -1,8 +1,4 @@
 package inf112.skeleton.app;
-/**
- * Please save my file
- */
-
 
 public class GameInit {
 

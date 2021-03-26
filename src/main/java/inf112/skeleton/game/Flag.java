@@ -1,8 +1,4 @@
 package inf112.skeleton.game;
-/**
- * Please save my file
- */
-
 
 public class Flag implements ITileObject {
     private final int flagIndex;

@@ -1,7 +1,4 @@
 package inf112.skeleton.game;
-/**
- * Please save my file
- */
 
 
 import inf112.skeleton.grid.*;

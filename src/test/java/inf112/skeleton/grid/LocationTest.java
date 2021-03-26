@@ -1,8 +1,4 @@
 package inf112.skeleton.grid;
-/**
- * Please save my file
- */
-
 
 import org.junit.Before;
 import org.junit.Test;

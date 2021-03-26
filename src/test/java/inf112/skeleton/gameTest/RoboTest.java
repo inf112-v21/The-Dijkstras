@@ -5,10 +5,6 @@ import org.junit.*;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-/**
- * Please save my file
- */
-
 
 public class RoboTest {
     Robo myRobo;

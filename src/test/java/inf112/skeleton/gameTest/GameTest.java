@@ -7,11 +7,6 @@ import java.util.ArrayList;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-/**
- * Please save my file
- */
-
-
 
 public class GameTest {
     private Game game;
