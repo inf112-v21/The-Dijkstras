@@ -15,7 +15,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * TODO: Run Screens Simultanous
  */
 public class AppManualTest {
-
+    /**
+     * Does not work as intended
+     *
     @Test
     public void screenPopUp(){
         String question = "Does Screen appear?";
@@ -44,4 +46,5 @@ public class AppManualTest {
             return askQuestion(question);
         }
     }
+    */
 }
