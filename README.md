@@ -7,9 +7,12 @@ When you run main:
 
 
 ## Running it
-*To run:* 
-Navigate to src/main/java/inf112/skeleton/app/main.java and run the Main file to start the game.
-It will then pop up a screen that shows the board.
+*To run:*
+- Download the project from https://github.com/inf112-v21/The-Dijkstras using the green button and press download ZIP.
+- Open the project in IntelliJ or a different IDE
+- Navigate to `src/main/java/inf112/skeleton/app/main.java`
+- Run the Main file to start the game.
+- It will then pop up a screen that shows the board.
 
 ## Deliverables
 
