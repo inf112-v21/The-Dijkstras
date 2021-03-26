@@ -1,4 +1,8 @@
 package inf112.skeleton.game;
+/**
+ * Please save my file
+ */
+
 
 public class Card {
     public int priorityNr;
