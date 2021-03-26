@@ -1,7 +1,4 @@
 package inf112.skeleton.game;
-import inf112.skeleton.Game.Card;
-import inf112.skeleton.Game.CardType;
-import inf112.skeleton.Game.Deck;
 import org.junit.Test;
 import org.junit.*;
 

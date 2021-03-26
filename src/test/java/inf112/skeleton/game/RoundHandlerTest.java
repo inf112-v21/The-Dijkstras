@@ -1,8 +1,5 @@
 package inf112.skeleton.game;
 
-import inf112.skeleton.Game.Player;
-import inf112.skeleton.Game.Robot;
-import inf112.skeleton.Game.RoundHandler;
 import inf112.skeleton.grid.Location;
 import org.junit.Before;
 import org.junit.Test;

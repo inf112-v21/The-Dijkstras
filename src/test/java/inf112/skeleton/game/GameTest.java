@@ -1,5 +1,4 @@
 package inf112.skeleton.game;
-import inf112.skeleton.Game.Game;
 import inf112.skeleton.grid.GameBoard;
 import org.junit.Before;
 import org.junit.Test;

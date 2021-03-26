@@ -1,4 +1,4 @@
-package inf112.skeleton.Game;
+package inf112.skeleton.game;
 
 import java.util.Collections;
 import java.util.HashSet;
