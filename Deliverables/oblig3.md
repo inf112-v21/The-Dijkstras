@@ -52,12 +52,37 @@ men vi burde nok blir strenger i hvordan vi jobber med brukerhistoriene og backl
 
 ## Deloppgave 2: Krav
 
+Her er våre nåværende MVP krav:
+1. Vise et spillebrett
+2. Vise brikke på spillebrett
+3. Flytte brikke (vha taster e.l. for testing)
+4. Robot besøker flagg
+5. Robot vinner ved å besøke flagg
+6. Spille fra flere maskiner (vise brikker for alle spillere, flytte brikker for alle spillere) - Ikke en del av oblig3
+7. Dele ut kort
+8. Velge 5 kort
+9. Bevege robot ut fra valgte kort.
+10. Brettet har hindringer.
+11. Robot flytter på andre roboter.
+12. Utfører runde etter spilleregler. 
 
--Er dere kommet forbi MVP? 
+#### Arbeidskravene i Sprint 3
+Her har MVP krav 12 vært et stort fokus for denne innleveringen, noe som vi har fått til i back-end delen.\
+Krav 9 har vi fått til i back-end. \
+Ved krav 10 har vi introdusert vegger (i back-end), men mangler fortsatt hull og lasere. \
+Krav 11 har vi kommet i gang med i back-end, men kravet er ikke godt nok testet som å anses ferdig.
 
--Forklar hvordan dere prioriterer ny funksjonalitet.
+Mye av disse kravene har vi fått til kun i back-end; så snart visualisering av spillbrett er oppnåd vil disse kravene
+mer eller mindre automatisk være oppfyllt for front-end i tillegg til back-end.
 
-Hittil har mye av fokuset gått til å få ting til å kjøre riktig i back-end siden (spill-logikk utføres)
+
+#### Fokus på MVP 12
+Hittil har mye av fokuset gått til å få ting til å kjøre riktig i back-end siden (spill-logikk utføres).
+Spesielt dette med krav 12; utføre runder. 
+Dette mener vi har vært et en veldig sentral del av spillet som burde være på plass før vi beveger oss videre i prosjektet. 
+Siden det har vært så stor fokus på dette "back-end" har vi slitt noe med utvikling av LIBGDX GUI siden (front-end), 
+hittil har det vært kun en person ansvarlig for utvikling av dette (Alexander), 
+så dette kommer vi til å sette mer ressurser på framover.
 
 
 #### Brukerhistorie MVP-krav 12
@@ -68,9 +93,12 @@ her har vi brukt møtereferatene og project-boardet for å dokumentere.
 Koden vi har utviklet har gode tester, noe som viser i det minste at vi har kontroll over akseptansekriteriene. 
 Arbeidsoppgavene er også dokumentert i møtereferatene og project-boardet. 
 
--Husk å skrive hvilke bugs som finnes i de kravene dere har utført (dersom det finnes bugs).
-Kravlista er lang, men det er ikke nødvendig å levere på alle kravene hvis det ikke er realistisk. Det er
-viktigere at de oppgavene som er utført holder høy kvalitet. Utførte oppgaver skal være ferdige.
+
+Kjente bugs finner du i README.md 
+Det er verdt å peke ut at kravet "roboter flytter" andre roboter er begynt utvikling på, 
+men ikke skrevet tester for, så det kan være bugs til stede ved denne funksjonaliteten. 
+
+---
 
 ## Deloppgave 3: Produktleveranse og kodekvalitet
 #### Main

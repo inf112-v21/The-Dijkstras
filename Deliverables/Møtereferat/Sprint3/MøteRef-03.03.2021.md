@@ -49,4 +49,3 @@ Fysiske eller digitale gruppetimer
 
 ### //TODO Oppdater hvilke krav dere har prioritert, hvor langt dere har kommet og hva dere har gjort siden forrige gang.
 
-
