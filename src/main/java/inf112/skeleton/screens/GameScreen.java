@@ -64,6 +64,7 @@ public class GameScreen extends ScreenAdapter {
            @Override
            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                System.out.println("INFO: Ready button pressed!");
+               //TODO Check cards after making all card choices.
            }
            @Override
            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -94,6 +95,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private Table makeCardTable(Skin skin) {
+        //TODO ADD BACK-END FUNCTION TO ADD CARDS.
         Table cardsTable = new Table();
 
         Label cardsLabel = new Label("Hand: ", skin);
@@ -167,6 +169,7 @@ public class GameScreen extends ScreenAdapter {
         for (int i = 0; i < 5; i++) {
             ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
             style.imageUp = cardTexture.get("NULL");
+            //TODO "NULL" only temporary, update with actual cards
             programmingSlotButtons[i].setStyle(style);
 
         }
@@ -174,6 +177,7 @@ public class GameScreen extends ScreenAdapter {
         for (int i = 0; i < 9; i++) {
             ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
             style.imageUp = cardTexture.get("NULL");
+            //TODO "NULL" only temporary, update with actual cards
             handSlotButtons[i].setStyle(style);
         }
     }
