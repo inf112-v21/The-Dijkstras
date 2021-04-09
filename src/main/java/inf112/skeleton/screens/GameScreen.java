@@ -25,6 +25,7 @@ public class GameScreen extends ScreenAdapter {
     private ImageButton[] programmingSlotButtons;
     private ImageButton[] handSlotButtons;
     private TextButton readyButton;
+    private TextButton powerButton;
     public GameScreen(GameInit gameInit, Board board, InputMultiplexer inputMultiplexer) {
         this.gameInit = gameInit;
         viewport = new FitViewport(1000, 1000);
@@ -71,7 +72,22 @@ public class GameScreen extends ScreenAdapter {
                return true;
            }
         });
+
+        powerButton = new TextButton("Power Down?", skin);
+        powerButton.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("INFO: Power button pressed!");
+                //TODO Power down logic.
+            }
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
+
         frameTable.add(readyButton);
+        frameTable.add(powerButton);
 
         stage.addActor(gameActor);
         stage.addActor(programingCardsTable);
