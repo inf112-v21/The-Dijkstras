@@ -4,6 +4,7 @@ package inf112.skeleton.game;
 import inf112.skeleton.grid.Directions;
 import inf112.skeleton.grid.GameBoard;
 import inf112.skeleton.grid.Location;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -56,16 +57,16 @@ public class Player implements ITileObject {
     public int getLife() {
         return myRobo.getLife();
     }
-    public void addDamage(int d){
-        if (myRobo.getHealth()==0) {
+
+    public void addDamage(int d) {
+        if (myRobo.getHealth() == 0) {
             decreaseLife();
             myRobo.resetHealth();
-        }
-        else myRobo.addDamage(d);
+        } else myRobo.addDamage(d);
     }
 
     public void decreaseLife() {
-       myRobo.decreaseLife();
+        myRobo.decreaseLife();
     }
 
     public int getNumberOfDamages() {
@@ -95,7 +96,7 @@ public class Player implements ITileObject {
         myRobo.resetHealth();
         placeRobotAtSpawn(gameBoard);
         powerDown = true;
-        System.out.println(myRobo +" announced Power Down for next round !");
+        System.out.println(myRobo + " announced Power Down for next round !");
     }
 
     public void cancelPowerDown() {

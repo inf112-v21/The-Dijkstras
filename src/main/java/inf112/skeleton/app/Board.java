@@ -1,7 +1,6 @@
 package inf112.skeleton.app;
 
 
-
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;

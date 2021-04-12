@@ -95,9 +95,10 @@ public class Game {
                 isGameOver();
             }
         }
-            return;
+        return;
 
     }
+
     /**
      * temporary method
      */

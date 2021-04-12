@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Deck of Cards
- *
+ * <p>
  * Consists of:
  * backup: 6 kort (430 - 480)
  * u-turn: 6 kort (10 - 60)
@@ -44,9 +44,9 @@ public class Deck {
     }
 
     public void addRestCards(List<Card> cards) {
-        for (Card c: cards){
-            if(cardDeck.size()<84)
-            cardDeck.add(c);
+        for (Card c : cards) {
+            if (cardDeck.size() < 84)
+                cardDeck.add(c);
         }
     }
 }

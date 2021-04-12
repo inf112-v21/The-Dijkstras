@@ -6,7 +6,6 @@ import java.util.List;
 
 /**
  * Source is inf101 spring 20 semester oblig 2 solution
- *
  */
 
 public class Grid<T> implements IGrid<T> {
@@ -16,14 +15,14 @@ public class Grid<T> implements IGrid<T> {
     private int layer;
 
     public Grid(int rows, int cols, T initElement, int layer) {
-        if(cols <= 0 || rows <= 0)
+        if (cols <= 0 || rows <= 0)
             throw new IllegalArgumentException("number of rows and columns must be positive");
 
         this.rows = rows;
         this.cols = cols;
         this.layer = layer;
         cells = new ArrayList<>(rows * cols);
-        for(int i = 0; i<rows*cols; i++) {
+        for (int i = 0; i < rows * cols; i++) {
             cells.add(initElement);
         }
     }
@@ -42,7 +41,9 @@ public class Grid<T> implements IGrid<T> {
     }
 
     @Override
-    public int numLayers() { return layer; }
+    public int numLayers() {
+        return layer;
+    }
 
     @Override
     public void set(Location loc, T elem) {
@@ -53,22 +54,24 @@ public class Grid<T> implements IGrid<T> {
 
     /**
      * Computes the right index in the list from a location in the inf112.skeleton.grid
+     *
      * @param loc - the location in the inf112.skeleton.grid
      * @return the index in the list cells
      */
     private int indexOf(Location loc) {
-        return loc.getCol() + loc.getRow()*cols;
+        return loc.getCol() + loc.getRow() * cols;
     }
 
     /**
      * Computes the location corresponding to an index in the list
+     *
      * @param index
      * @return
      */
     private Location locationFromIndex(int index) {
-        if(index<0 || index > cells.size())
+        if (index < 0 || index > cells.size())
             throw new IndexOutOfBoundsException("index is not a valid index of the board");
-        return new Location(index%cols,index/cols, layer);
+        return new Location(index % cols, index / cols, layer);
     }
 
     @Override
@@ -86,24 +89,26 @@ public class Grid<T> implements IGrid<T> {
     }
 
     protected void copy(IGrid<T> newGrid) {
-        for(Location loc : locations())
-            newGrid.set(loc,  get(loc));
+        for (Location loc : locations())
+            newGrid.set(loc, get(loc));
     }
 
     /**
      * Checks that a given xy coordinate is within the bounds of the Grid
+     *
      * @param x
      * @param y
      * @return
      */
     public boolean validCoordinate(int x, int y) {
-        if(x < 0 || x >= cols || y < 0 || y >= rows)
+        if (x < 0 || x >= cols || y < 0 || y >= rows)
             return false;
         return true;
     }
 
     /**
      * Checks if a given location is within the limits of the inf112.skeleton.grid
+     *
      * @param loc
      * @return
      */
@@ -116,7 +121,7 @@ public class Grid<T> implements IGrid<T> {
      * If not an exception is thrown
      */
     public void check(Location loc) {
-        if(!validLocation(loc))
+        if (!validLocation(loc))
             throw new IndexOutOfBoundsException();
     }
 
@@ -128,7 +133,7 @@ public class Grid<T> implements IGrid<T> {
     @Override
     public Location locationOf(Object target) {
         int index = this.cells.indexOf(target);
-        if(index<0)
+        if (index < 0)
             return null;
         else
             return locationFromIndex(index);
@@ -145,17 +150,18 @@ public class Grid<T> implements IGrid<T> {
     }
 
     @Override
-    public String  toString(){
-        return "layer= "+layer+"\n"+cells.toString();
+    public String toString() {
+        return "layer= " + layer + "\n" + cells.toString();
     }
+
     @Override
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
         if (obj.getClass() != this.getClass()) {
             return false;
         }
 
-        Grid<T> grid= (Grid<T>) obj;
-        return this.cells.equals(grid.cells)&& this.layer==grid.layer;
+        Grid<T> grid = (Grid<T>) obj;
+        return this.cells.equals(grid.cells) && this.layer == grid.layer;
 
     }
 }

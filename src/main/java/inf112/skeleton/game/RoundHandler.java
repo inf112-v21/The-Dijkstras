@@ -35,8 +35,8 @@ public class RoundHandler {
             int numOfCards = DetermineTheNumberOfCards(player);
 
             while (numOfCards > 0) {
-if (deck.cardDeck.size()==0)
-    throw new IllegalStateException(" Deck should have cards for every new round");
+                if (deck.cardDeck.size() == 0)
+                    throw new IllegalStateException(" Deck should have cards for every new round");
                 hand.add(deck.cardDeck.remove(0));
                 numOfCards--;
             }
@@ -53,8 +53,7 @@ if (deck.cardDeck.size()==0)
         //TODO find a way to get input card from the player
         Random r = new Random();
         int bound = player.getHand().size();
-        List<Card> toChoos= new ArrayList<>();
-        toChoos.addAll(player.getHand());
+        List<Card> toChoos = new ArrayList<>(player.getHand());
         return toChoos.remove(r.nextInt(bound));// this line should change and replace with a input card
     }
 
@@ -67,7 +66,7 @@ if (deck.cardDeck.size()==0)
             throw new NoSuchElementException("The player has no cards in their hand");
         }
 
-
+        //TODO ta imot 5 (eller mindre) valgte kort fra GUI
         while (player.allowedToChooseCards()) {
             Card card = getInputCardFromPlayer(player);
             addChosenCard(player, card);
@@ -80,6 +79,7 @@ if (deck.cardDeck.size()==0)
     }
 
     private void addChosenCard(Player player, Card card) {
+        //TODO ta imot 5 (eller mindre) valgte kort fra GUI
         if (!player.allowedToChooseCards()) {
             return;
         }
@@ -105,10 +105,10 @@ if (deck.cardDeck.size()==0)
      * Perform  actions in 5 phases according to programing cards
      */
     public void performMovements(HashSet<Player> players) {
-        HashSet<Player> activePlayer= new HashSet<>();
-        for(Player p: players){
-           if( p.getLife()>0 && p.getChosenCards().size()==5)
-               activePlayer.add(p);
+        HashSet<Player> activePlayer = new HashSet<>();
+        for (Player p : players) {
+            if (p.getLife() > 0 && p.getChosenCards().size() == 5)
+                activePlayer.add(p);
         }
         int phase = 1;
         while (phase <= 5) {
@@ -144,13 +144,13 @@ if (deck.cardDeck.size()==0)
 
     private void flagCheck(List<Flag> flags, HashSet<Player> players) {
         for (Player player : players) {
-            debugPrint("Checking if "+player.getRobot()+" has touched any flag!");
+            debugPrint("Checking if " + player.getRobot() + " has touched any flag!");
             for (Flag flag : flags) {
                 if (gameBoard.sameXYLocation(player.getRobot(), flag)) {
-                    debugPrint("Yes!! "+player.getRobot()+" har visited flag "+flag);
+                    debugPrint("Yes!! " + player.getRobot() + " har visited flag " + flag);
                     player.checkFlagIndex(flag);
                 }
-                debugPrint("No, "+player.getRobot()+" has not reached any flag yet!");
+                debugPrint("No, " + player.getRobot() + " has not reached any flag yet!");
             }
         }
 
@@ -168,18 +168,18 @@ if (deck.cardDeck.size()==0)
 
     private void updateRobotsSpawnPoint(HashSet<Player> players) {
         for (Player p : players) {
-           if( p.isPowerDown()) {
-               p.cancelPowerDown();
-               debugPrint(p.getRobot()+" Canceled Power Down! ");
-           }
+            if (p.isPowerDown()) {
+                p.cancelPowerDown();
+                debugPrint(p.getRobot() + " Canceled Power Down! ");
+            }
         }
     }
 
     private void cleanOrLockeCards(HashSet<Player> players) {
         for (Player p : players) {
             p.updateCurrentCards();
-            debugPrint(p.getRobot()+" har  "+p.getNumberOfDamages()+" damages And "+p.getLife()+" life");
-            debugPrint(p.getRobot()+ " has\n "+p.getChosenCards()+"\n to the next round");
+            debugPrint(p.getRobot() + " har  " + p.getNumberOfDamages() + " damages And " + p.getLife() + " life");
+            debugPrint(p.getRobot() + " has\n " + p.getChosenCards() + "\n to the next round");
         }
     }
 

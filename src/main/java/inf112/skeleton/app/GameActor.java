@@ -17,8 +17,8 @@ public class GameActor extends Actor {
         TiledMap map = gameInit.getMapBuilder().getMap();
         mapWidth = gameInit.getMapBuilder().mapWidth;
         mapHeight = gameInit.getMapBuilder().mapHeight;
-        setWidth(1/300f* mapWidth * unitScale);
-        setHeight(1/300f* mapHeight * unitScale);
+        setWidth(1 / 300f * mapWidth * unitScale);
+        setHeight(1 / 300f * mapHeight * unitScale);
         myRenderer = new OrthogonalTiledMapRenderer(map, unitScale);
 
     }

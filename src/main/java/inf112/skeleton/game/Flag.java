@@ -15,9 +15,10 @@ public class Flag implements ITileObject {
     public int getIndex() {
         return this.flagIndex;
     }
+
     @Override
-    public String toString(){
-        return "flag index "+flagIndex;
+    public String toString() {
+        return "flag index " + flagIndex;
     }
 
 }

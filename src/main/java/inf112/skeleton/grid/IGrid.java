@@ -1,10 +1,8 @@
 package inf112.skeleton.grid;
 
 
-
 /**
  * Source is inf101 spring 20 semester oblig 2 solution
- *
  */
 
 public interface IGrid<T> extends Iterable<T> {
@@ -22,10 +20,9 @@ public interface IGrid<T> extends Iterable<T> {
     int numLayers();
 
     /**
-     *
      * Set the contents of the cell in the given Location.
      *
-     * @param loc - The location we want to change.
+     * @param loc     - The location we want to change.
      * @param element - The contents the cell is to have.
      */
     void set(Location loc, T element);
@@ -48,6 +45,7 @@ public interface IGrid<T> extends Iterable<T> {
 
     /**
      * Searches the inf112.skeleton.grid for an element
+     *
      * @param target - element to find
      * @return the location at which that element is stored, if no such element is found null is returned.
      */
@@ -55,12 +53,14 @@ public interface IGrid<T> extends Iterable<T> {
 
     /**
      * Returns an Iterable over all valid locations in this inf112.skeleton.grid
+     *
      * @return
      */
     public Iterable<Location> locations();
 
     /**
      * Searches the inf112.skeleton.grid for an element
+     *
      * @param obj - the element to search for
      * @return true if the element was found, false otherwise
      */

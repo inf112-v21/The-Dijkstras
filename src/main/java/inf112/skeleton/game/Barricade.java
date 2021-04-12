@@ -4,7 +4,7 @@ import inf112.skeleton.grid.*;
 
 import java.util.ArrayList;
 
-public class Barricade implements ITileObject{
+public class Barricade implements ITileObject {
     private final int layer = 3;
     private Location loc;
     private ArrayList<Directions> facing;
@@ -30,14 +30,16 @@ public class Barricade implements ITileObject{
     public void addBarricade(Directions dir) {
         if (facing.contains(dir)) {
             return;
-        }else {
+        } else {
             facing.add(dir);
         }
     }
 
     public boolean isFacing(Directions dir) {
-        for(Directions face : facing) {
-            if (face == dir) { return true; }
+        for (Directions face : facing) {
+            if (face == dir) {
+                return true;
+            }
         }
         return false;
     }

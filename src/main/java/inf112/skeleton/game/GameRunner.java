@@ -1,4 +1,5 @@
 package inf112.skeleton.game;
+
 import inf112.skeleton.game.*;
 import inf112.skeleton.grid.GameBoard;
 import inf112.skeleton.grid.Location;
@@ -12,13 +13,11 @@ public class GameRunner {
     static inf112.skeleton.game.Player player1;
     static Player player2;
     static Player player3;
-    static  HashSet<Player> players;
-    static  List<Flag> flags;
+    static HashSet<Player> players;
+    static List<Flag> flags;
     static GameBoard gb;
     static int rows, cols;
     static Game game;
-
-
 
 
     public static void setUp() {
@@ -39,9 +38,9 @@ public class GameRunner {
         flags = new ArrayList<>();
         flags.add(flag1);
         flags.add(flag2);
-        game= new Game(true,gb,flags, players);
+        game = new Game(true, gb, flags, players);
 
-        game.randomSetUp(players,flags,gb);
+        game.randomSetUp(players, flags, gb);
 
 
 //        player1.setRobot(new Robot("robot1"));
@@ -59,7 +58,7 @@ public class GameRunner {
 
     public static void main(String[] args) {
         setUp();
-        Game game = new Game(true,gb,flags,players);
+        Game game = new Game(true, gb, flags, players);
         game.startGame();
 
     }

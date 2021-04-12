@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * Source is inf101 spring 20 semester oblig 2 solution
- *
  */
 
 public enum Directions {
@@ -33,7 +32,7 @@ public enum Directions {
 
     /**
      * @return The change to your X-coordinate if you were to move one step in this
-     *         direction
+     * direction
      */
     public int getDx() {
         return dx;
@@ -41,7 +40,7 @@ public enum Directions {
 
     /**
      * @return The change to your Y-coordinate if you were to move one step in this
-     *         direction
+     * direction
      */
     public int getDy() {
         return dy;
@@ -62,7 +61,7 @@ public enum Directions {
      */
     public Directions rotate(int amountToRotate) {
         int newDirection = (dir + amountToRotate) % 4;
-        switch(newDirection) {
+        switch (newDirection) {
             case 1:
                 return EAST;
             case 2:

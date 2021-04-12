@@ -4,11 +4,12 @@ public class GameInit {
 
     private final MapBuilder mapBuilder;
 
-    public GameInit (String map_filename, int playerLimit) {
+    public GameInit(String map_filename, int playerLimit) {
         mapBuilder = new MapBuilder(map_filename);
 
 
     }
+
     public MapBuilder getMapBuilder() {
         return this.mapBuilder;
     }
