@@ -50,8 +50,8 @@ public class Board extends InputAdapter {
     private final GameScreen gameScreen;
 
 
-    public Board(RoboRally game, String map_filename) {
-        this.playerLimit = 1;
+    public Board(RoboRally game, String map_filename,int playerLimit) {
+        this.playerLimit = playerLimit;
 
         mapName = map_filename;
         this.gameInit = new GameInit(map_filename, playerLimit);

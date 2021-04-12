@@ -1,8 +1,5 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -11,19 +8,19 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import inf112.skeleton.game.Player;
 import inf112.skeleton.grid.Location;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class MapBuilder {
     private final TiledMap map;
     public TiledMapTileLayer boardLayer, playerLayer, holeLayer, flagLayer, laserLayer, movementLayer, barriersLayer;
     private int numOfFlags;
-    private int playerLimit = 8;
+    private int playerLimit;
     private final Array<Vector2> spawns = new Array<Vector2>(playerLimit);
     private Vector2 playerPos;
     public int xPos = 0, yPos = 0;
@@ -36,7 +33,8 @@ public class MapBuilder {
     public int mapWidth;
     public int mapHeight;
 
-    public MapBuilder(String map_filename) {
+    public MapBuilder(String map_filename, int playerLimit) {
+        this.playerLimit= playerLimit;
         map = new TmxMapLoader().load(map_filename);
         lasers = new LinkedList<>();
 
@@ -76,19 +74,29 @@ public class MapBuilder {
             spawns.add(new Vector2(0, 0));
             System.out.println("Couldn't find a spawnpoint, setting spawnposition @ xy(0,0)");
         }
-        Vector2 spawnPoint = spawns.get(0);             //Getting first Vector2 in list
+        playersInit();
 
-        xPos = (int) spawnPoint.x;                       //Applying Vector2 as player-spawn position.
-        yPos = (int) spawnPoint.y;
 
-        TextureRegion[][] playerTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
-        playerCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][0]));
-        playerDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][1]));
-        playerWonCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][2]));
+    }
 
-        playerPos = new Vector2(xPos, yPos);
-        playerLayer.setCell(xPos, yPos, playerCell);
+    public HashSet<Player> playersInit() {
+        HashSet<Player> players = new HashSet<>();
+        for (int i = 1; i < playerLimit; i++) {
+            xPos = (int) spawns.get(i).x;
+            yPos = (int) spawns.get(i).y;
 
+            playerLayer.setCell(xPos, yPos, playerCell);
+            Player p = new Player(new Location(xPos, yPos));
+            players.add(p);
+            System.out.println(players.size());
+            //TODO Make PlayerTextureList for 4, player_(num).png files.
+            TextureRegion[][] playerTextures = TextureRegion.split(new Texture("assets/player.png"), 300, 300);
+            playerCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][0]));
+            playerDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][1]));
+            playerWonCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][2]));
+
+        }
+        return players;
     }
 
     public TiledMap getMap() {

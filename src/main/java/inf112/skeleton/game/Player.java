@@ -1,6 +1,7 @@
 package inf112.skeleton.game;
 
 
+import inf112.skeleton.app.MapBuilder;
 import inf112.skeleton.grid.Directions;
 import inf112.skeleton.grid.GameBoard;
 import inf112.skeleton.grid.Location;
@@ -115,6 +116,7 @@ public class Player implements ITileObject {
     }
 
     public List<Card> getHand() {
+        //TODO throw exeption if hand is empty
         return hand;
     }
 

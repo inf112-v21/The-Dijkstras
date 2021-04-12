@@ -11,8 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import inf112.skeleton.app.*;
+import inf112.skeleton.game.Player;
+import inf112.skeleton.game.RoundHandler;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class GameScreen extends ScreenAdapter {
     private final GameInit gameInit;
@@ -26,6 +29,7 @@ public class GameScreen extends ScreenAdapter {
     private ImageButton[] handSlotButtons;
     private TextButton readyButton;
     private TextButton powerButton;
+    private HashSet<Player> players;
     public GameScreen(GameInit gameInit, Board board, InputMultiplexer inputMultiplexer) {
         this.gameInit = gameInit;
         viewport = new FitViewport(1000, 1000);
@@ -43,6 +47,8 @@ public class GameScreen extends ScreenAdapter {
         textureLoader(cardsTexAtlas);
 
         gameActor = new GameActor(gameInit, unitScale*0.75f);
+
+
 
         Table programingCardsTable = makeProgrammingCardsTable(skin);
         programingCardsTable.setFillParent(true);
@@ -185,6 +191,7 @@ public class GameScreen extends ScreenAdapter {
         for (int i = 0; i < 5; i++) {
             ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
             style.imageUp = cardTexture.get("NULL");
+
             //TODO "NULL" only temporary, update with actual cards
             programmingSlotButtons[i].setStyle(style);
 
@@ -192,7 +199,10 @@ public class GameScreen extends ScreenAdapter {
 
         for (int i = 0; i < 9; i++) {
             ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
+
+
             style.imageUp = cardTexture.get("NULL");
+
             //TODO "NULL" only temporary, update with actual cards
             handSlotButtons[i].setStyle(style);
         }

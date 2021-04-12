@@ -30,11 +30,16 @@ public class TitleScreen extends ScreenAdapter {
         String[] mapChoiceList = {"exampleMap.tmx", "map001.tmx"};
         mapChoiceBox.setItems(mapChoiceList);
 
-        Button singlePlayerButton = new TextButton("Singleplayer", skin);
-        singlePlayerButton.addListener(new InputListener() {
+        SelectBox<String> playerCountChoice = new SelectBox<String>(skin);
+        String[] playerCountList = {"1", "2", "3", "4"};
+        playerCountChoice.setItems(playerCountList);
+
+        Button multiPlayerButton = new TextButton("Multiplayer", skin);
+        multiPlayerButton.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                new Board(game, mapChoiceBox.getSelected());
+                Integer playerCount = Integer.valueOf(playerCountChoice.getSelected());
+                new Board(game, mapChoiceBox.getSelected(), playerCount);
             }
 
             @Override
@@ -42,6 +47,23 @@ public class TitleScreen extends ScreenAdapter {
                 return true;
             }
         });
+
+
+        Button singlePlayerButton = new TextButton("Singleplayer", skin);
+        singlePlayerButton.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                Integer playerCount = 1;
+                new Board(game, mapChoiceBox.getSelected(), playerCount);
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
+
+
 
         Button exitButton = new TextButton("Exit Game", skin);
         exitButton.addListener(new InputListener() {
@@ -60,8 +82,12 @@ public class TitleScreen extends ScreenAdapter {
         table.row().padBottom(30);
 
         table.add(singlePlayerButton).prefHeight(50).prefWidth(200).colspan(2);
-
+        table.row().padBottom(30);
+        table.add(multiPlayerButton).prefHeight(50).prefWidth(200).colspan(2);
         table.add(mapChoiceBox).colspan(2);
+        table.row().padBottom(30);
+
+        table.add(playerCountChoice).colspan(4);
         table.row().padBottom(30);
 
         table.add(exitButton).prefHeight(50).prefWidth(200).colspan(2);
@@ -73,7 +99,7 @@ public class TitleScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(112/255f, 128/255F, 144/255F, 0);
+        Gdx.gl.glClearColor(112 / 255f, 128 / 255F, 144 / 255F, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();

@@ -5,7 +5,7 @@ public class GameInit {
     private final MapBuilder mapBuilder;
 
     public GameInit(String map_filename, int playerLimit) {
-        mapBuilder = new MapBuilder(map_filename);
+        mapBuilder = new MapBuilder(map_filename, playerLimit);
 
 
     }
