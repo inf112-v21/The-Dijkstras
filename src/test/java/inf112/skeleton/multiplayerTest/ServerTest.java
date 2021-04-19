@@ -13,10 +13,11 @@ public class ServerTest {
 
 
     @Before
-    public void setup() {
+    public void setup() throws InterruptedException {
         server = new Server(5001);
         server.start();
 
+        Thread.sleep(100); // Waiting for server thread to setup
     }
 
     @Test
@@ -28,10 +29,12 @@ public class ServerTest {
 
         assertEquals("bye", terminate);
 
+        client.stopConnection();
+
     }
 
     @Test
-    public void ServerRespondsToMultipleMessages() {
+    public void ServerRespondsToMultipleMessages() throws InterruptedException {
         Client client = new Client();
         client.startConnection("127.0.0.1", 5001);
 
@@ -41,8 +44,11 @@ public class ServerTest {
         String response2 = client.sendMessage("World");
         assertEquals("World", response2);
 
+
         String response3 = client.sendMessage(".");
         assertEquals("bye", response3);
+
+        client.stopConnection();
 
     }
 
@@ -50,16 +56,22 @@ public class ServerTest {
     public void ServerRespondsToMultipleClients() {
 
         Client client1 = new Client();
-        client1.startConnection("127.0.0.1", 5001);
-        String response1 = client1.sendMessage(".");
-
-
         Client client2 = new Client();
+        client1.startConnection("127.0.0.1", 5001);
         client2.startConnection("127.0.0.1", 5001);
-        String response2 = client2.sendMessage(".");
 
-        assertEquals("bye", response1);
-        assertEquals("bye", response2);
+        String response1 = client1.sendMessage("Hello");
+        String response2 = client2.sendMessage("World");
+        String response3 = client2.sendMessage(".");
+        String response4 = client1.sendMessage(".");
+
+        assertEquals("Hello", response1);
+        assertEquals("World", response2);
+        assertEquals("bye", response3);
+        assertEquals("bye", response4);
+
+        client1.stopConnection();
+        client2.stopConnection();
     }
 
     @After
