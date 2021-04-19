@@ -31,7 +31,7 @@ public class Client{
             out.println(msg);
             System.out.println("Client says: " + msg);
             String resp = in.readLine();
-            System.out.println("Server says: " + msg);
+            System.out.println("Server says: " + resp);
             return resp;}
 
         catch (IOException e) {
