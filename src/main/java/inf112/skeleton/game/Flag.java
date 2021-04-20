@@ -19,6 +19,7 @@ public class Flag implements ITileObject {
         return (player.getNextFlagIndex() > flagIndex);
     }
 
+
     public int getIndex() {
         return this.flagIndex;
     }

@@ -45,7 +45,10 @@ public class Barricade implements ITileObject {
         }
     }
 
-    public boolean isFacing(Directions dir) {
+    /**
+     * Checks if Barricade is blocking direction dir
+     */
+    public boolean isBlocking(Directions dir) {
         for (Directions face : facing) {
             if (face == dir) {
                 return true;
