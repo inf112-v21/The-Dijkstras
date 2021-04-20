@@ -53,8 +53,8 @@ public class RoundHandler {
         //TODO find a way to get input card from the player
         Random r = new Random();
         int bound = player.getHand().size();
-        List<Card> toChoos = new ArrayList<>(player.getHand());
-        return toChoos.remove(r.nextInt(bound));// this line should change and replace with a input card
+        List<Card> toChoose = new ArrayList<>(player.getHand());
+        return toChoose.remove(r.nextInt(bound));// this line should change and replace with a input card
     }
 
     /**

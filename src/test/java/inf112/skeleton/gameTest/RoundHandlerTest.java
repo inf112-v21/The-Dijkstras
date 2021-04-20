@@ -102,7 +102,7 @@ public class RoundHandlerTest {
     // }
 
     /**
-     * Checks if players chooses the correct amount of cards based on amount of lifes left.
+     * Checks if players chooses the correct amount of cards based on amount of lives left.
      */
     @Test
     public void correctAmountOfCardsChosen() {
