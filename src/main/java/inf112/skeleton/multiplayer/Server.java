@@ -7,6 +7,7 @@ import java.net.SocketException;
 public class Server extends Thread{
     private ServerSocket serverSocket;
     private int port;
+    private int clientsConnected;
 
     public Server(int port){
         this.port = port;
@@ -16,12 +17,10 @@ public class Server extends Thread{
         try {
             serverSocket = new ServerSocket(port);
 
-            int threadsRunning = 0;
             while (true){
                 try{
-                threadsRunning++;
-                new Host(serverSocket).start();
-                threadsRunning--;
+                new Host(serverSocket, this).start();
+                clientsConnected++;
                 } catch (SocketException s){
                     System.out.println("Server Closed");
                     break;
@@ -34,11 +33,17 @@ public class Server extends Thread{
         }
     }
 
+
+
     public void serverStop(){
         try {
             serverSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getNumberOfClients(){
+        return this.clientsConnected;
     }
 }

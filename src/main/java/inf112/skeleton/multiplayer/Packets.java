@@ -52,7 +52,7 @@ public class Packets {
      * but only if all players have registered their cards or powered down (I think?)
      *
      */
-    public JSONObject roundActionsJson(HashMap<Integer, Boolean> intentToPowerDown,
+    public JSONObject allPlayersActionsJson(HashMap<Integer, Boolean> intentToPowerDown,
                                        HashMap<Integer, ArrayList<Card>> playerCards) throws JSONException {
         JSONObject roundAction = new JSONObject();
         roundAction.put("type", "handRequest");

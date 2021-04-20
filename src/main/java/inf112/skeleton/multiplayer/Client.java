@@ -8,6 +8,7 @@ import java.net.*;
 import org.json.*;
 
 // TODO: Implement Client methods
+// TODO: Client Request
 
 public class Client{
     private Socket clientSocket;
