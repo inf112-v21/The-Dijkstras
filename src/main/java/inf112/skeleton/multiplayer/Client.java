@@ -8,8 +8,7 @@ import java.net.*;
 import org.json.*;
 
 // TODO: Implement Client methods
-// TODO: Use Reciever.java to listen to host
-// TODO: Use Sender.java to send data to host
+
 public class Client{
     private Socket clientSocket;
     private PrintWriter out;
@@ -44,7 +43,7 @@ public class Client{
 //    public void sendJSONobject(JSONObject packet) {
 //    }
 
-    public void stopConnection() throws IOException {
+    public void stopConnection(){
         try{
             in.close();
             out.close();
