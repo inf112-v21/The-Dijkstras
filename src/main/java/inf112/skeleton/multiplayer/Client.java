@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.*;
+
+import com.jcraft.jogg.Packet;
 import org.json.*;
 
 // TODO: Implement Client methods
@@ -41,8 +43,21 @@ public class Client{
         return null;
     }
 
-//    public void sendJSONobject(JSONObject packet) {
-//    }
+    public JSONObject requestJsonFile(JSONObject myRequest){
+        try{
+            String msg = myRequest.toString();
+            out.println(msg);
+            System.out.println("Client says: " + msg);
+            String resp = in.readLine();
+            System.out.println("Server says: " + resp);
+
+            return new JSONObject(resp);
+
+        }catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public void stopConnection(){
         try{
