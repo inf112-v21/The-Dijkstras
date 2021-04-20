@@ -13,9 +13,11 @@ public class Host extends Thread{
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
+    private Server serverParent;
 
-    public Host(ServerSocket socket) throws IOException {
+    public Host(ServerSocket socket, Server myParent) throws IOException {
         clientSocket = socket.accept();
+        serverParent = myParent;
     }
 
     public void run() {
@@ -30,6 +32,14 @@ public class Host extends Thread{
             while (true) {
                 if ((inputLine = in.readLine()) == null) break;
 
+                if("waitfortwo".equals(inputLine)){
+                    while(serverParent.getNumberOfClients() != 2){
+                        System.out.println("Host Waiting..." + serverParent.getNumberOfClients());
+                        Thread.sleep(100);
+                    }
+                    out.println("Two hosts connected");
+                    break;
+                }
                 if (".".equals(inputLine)) {
                     out.println("bye");
                     break;
@@ -38,7 +48,7 @@ public class Host extends Thread{
             }
             close();
         }
-        catch (IOException e) {
+        catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 

@@ -74,8 +74,40 @@ public class ServerTest {
         client2.stopConnection();
     }
 
+
+    @Test
+    public void ServerRecievesJsonHelloWorld() {
+
+        Client client1 = new Client();
+        client1.startConnection("127.0.0.1", 5001);
+
+
+        String response1 = client1.sendMessage("Hello");
+
+        assertEquals("Hello", response1);
+    }
+
+    @Test
+    public void ServerWaitsForTwoClients() throws InterruptedException {
+
+        Client client1 = new Client();
+        Client client2 = new Client();
+        client1.startConnection("127.0.0.1", 5001);
+        client2.startConnection("127.0.0.1", 5001);
+
+        String response1 = client1.sendMessage("waitfortwo");
+
+        Thread.sleep(1000);
+        String response2 = client2.sendMessage("Hello");
+
+        assertEquals("Hello", response2);
+        assertEquals("Two hosts connected", response1);
+
+    }
+
+
     @After
-    public void tearDown() {
+    public void tearDown(){
         server.serverStop();
     }
 }
