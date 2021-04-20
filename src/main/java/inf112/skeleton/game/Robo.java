@@ -5,10 +5,15 @@ import inf112.skeleton.grid.Directions;
 
 
 /**
- * Robot Class
- * - Has 9 health. Loss life if 0
+ * Robot is a TileObject moved player on the board
  */
 public class Robo implements IRobot {
+    /**
+     * Has 9 health. Loss life if 0
+     * Has 3 lives
+     * Has direction which can change
+     * Has a name
+     */
     private int health;
     private int life;
     private Directions direction;

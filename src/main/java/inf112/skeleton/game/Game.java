@@ -7,6 +7,9 @@ import java.util.*;
 
 //import static sun.swing.MenuItemLayoutHelper.max;
 
+/**
+ * Starts the backend side of the game
+ */
 public class Game {
     private boolean gameActive;
     public RoundHandler rh;
@@ -25,7 +28,7 @@ public class Game {
     }
 
     /**
-     * All the player in players set should be initialized
+     * TODO: All the player in players set should be initialized
      */
 
     public void randomSetUp(List<Player> players, List<Flag> flags, GameBoard gb) {

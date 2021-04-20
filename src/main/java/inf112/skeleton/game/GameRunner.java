@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * A gamesimulation from the backend side
+ */
 public class GameRunner {
     static inf112.skeleton.game.RoundHandler rh;
     static inf112.skeleton.game.Player player1;

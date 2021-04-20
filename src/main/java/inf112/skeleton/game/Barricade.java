@@ -4,7 +4,14 @@ import inf112.skeleton.grid.*;
 
 import java.util.ArrayList;
 
+/**
+ * Barricade is a wall blocking path in specified direction
+ */
 public class Barricade implements ITileObject {
+    /**
+     * Location loc is coordiante
+     * ArrayList Direction is the directions it is blocking
+     */
     private final int layer = 3;
     private Location loc;
     private ArrayList<Directions> facing;
@@ -27,6 +34,9 @@ public class Barricade implements ITileObject {
         return facing;
     }
 
+    /**
+     *  Adds direction to block
+     */
     public void addBarricade(Directions dir) {
         if (facing.contains(dir)) {
             return;

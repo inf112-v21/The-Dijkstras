@@ -11,9 +11,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-public class Player implements ITileObject {
-
-
+/**
+ * Player is the usercontrol of the game
+ */
+public class Player {
+    /**
+     * Player has a robot
+     * Player can power down
+     * Player has cards
+     * Player can choose cards
+     */
     private Location robotSpawnPoint;
     private Robo myRobo;
     private int nextFlagIndex = 1;
@@ -27,10 +34,10 @@ public class Player implements ITileObject {
         this.myRobo = new Robo();
     }
 
-    // Get && set robot
     public void setRobot(Robo myRobo) {
         this.myRobo = myRobo;
     }
+
 
     public Robo getRobot() {
         return myRobo;
@@ -87,7 +94,6 @@ public class Player implements ITileObject {
             this.nextFlagIndex++;
         }
     }
-
 
     public boolean isPowerDown() {
         return powerDown;
@@ -195,7 +201,9 @@ public class Player implements ITileObject {
 
     }
 
-
+    /**
+     * Adds cards according to rules.(dmg taken etc.)
+     */
     public void updateCurrentCards() {
         restCards.clear();
         if (myRobo.getHealth() >= 5) {

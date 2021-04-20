@@ -225,7 +225,7 @@ public class GameBoard {
         List<ITileObject> XYObjects = getXYObjects(loc2);
         for (Object obj : XYObjects) {
             if (obj instanceof Barricade) {
-                if (((Barricade) obj).isFacing(dir.rotate(2))) {
+                if (((Barricade) obj).isBlocking(dir.rotate(2))) {
                     return false;
                 }
             }

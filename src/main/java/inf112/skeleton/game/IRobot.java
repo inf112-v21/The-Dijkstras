@@ -9,6 +9,7 @@ import inf112.skeleton.grid.Directions;
 
 public interface IRobot extends ITileObject {
 
+
     int getHealth();
 
     void addDamage(int damage);

@@ -172,8 +172,8 @@ public class GameBoardTest {
 
         Barricade a = (Barricade) gb.get(loc1);
         Barricade b = (Barricade) gb.get(loc2);
-        assertThat(a.isFacing(Directions.EAST), is (true));
-        assertThat(b.isFacing(Directions.WEST), is (true));
+        assertThat(a.isBlocking(Directions.EAST), is (true));
+        assertThat(b.isBlocking(Directions.WEST), is (true));
         assertThat(gb.wallCheck(loc1, Directions.EAST), is (false));
     }
 }

@@ -1,7 +1,7 @@
 package inf112.skeleton.game;
 
 /**
- * CardType describes Card
+ * CardType spesifi describes Card
  * <p>
  * * Consists of:
  * * backup: 6 kort (430 - 480)
