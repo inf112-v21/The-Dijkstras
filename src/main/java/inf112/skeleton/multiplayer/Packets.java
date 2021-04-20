@@ -14,13 +14,15 @@ public class Packets {
      * Sent by host to all the players
      * Which map it is
      * What playerNumber the client receiving is
+     * How many players there are in total this game
      *
      */
-    public JSONObject initializeGameJSon(int mapSelection, int playerNumber) throws JSONException {
+    public JSONObject initializeGameJSon(int mapSelection, int playerNumber, int playerAmount) throws JSONException {
         JSONObject initializeGame = new JSONObject();
         initializeGame.put("type", "initializeGame");
         initializeGame.put("mapSelection", mapSelection);
         initializeGame.put("playerNumber", playerNumber);
+        initializeGame.put("playerAmount", playerAmount);
         return initializeGame;
     }
 

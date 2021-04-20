@@ -1,12 +1,16 @@
 package inf112.skeleton.multiplayerTest;
 
 import inf112.skeleton.multiplayer.Client;
+import inf112.skeleton.multiplayer.Packets;
 import inf112.skeleton.multiplayer.Server;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class ServerTest {
     Server server;
@@ -76,15 +80,18 @@ public class ServerTest {
 
 
     @Test
-    public void ServerRecievesJsonHelloWorld() {
+    public void ServerRecievesJsonHelloWorld() throws JSONException {
 
         Client client1 = new Client();
         client1.startConnection("127.0.0.1", 5001);
 
+        JSONObject playerPacket = new Packets().handRequestJSON(1);
 
-        String response1 = client1.sendMessage("Hello");
+        String response = client1.sendMessage(playerPacket.toString());
 
-        assertEquals("Hello", response1);
+        JSONObject jsonResponse = new JSONObject(response);
+
+        assertEquals(playerPacket.toString(), jsonResponse.toString());
     }
 
     @Test
