@@ -89,8 +89,8 @@ Her er våre nåværende MVP krav:
 - [ ] 12.Utfører runde etter spilleregler.
 
 
-#### Arbeidskrav fokus i Sprint 4`
-Vi jobber mest med arbeidskrav 12 og 11, men måtte sjekke at de tidligere arbeidskravene var oppfylt underveis
+#### Krav fokus i Sprint 4`
+Vi jobber mest med krav 12 og 11, men måtte sjekke at de tidligere kravene var oppfylt underveis.
 
 #### Ufullstendig Krav
 Vi har vurdert at der vi er nå har vi ikke klart å nå krav 5, 7, 11 og 12. 
