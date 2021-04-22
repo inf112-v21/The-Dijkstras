@@ -56,20 +56,6 @@ public class RoundHandler {
     }
 
     /**
-     * This method receives an input card from a player through GUI
-     */
-    //  public Card getInputCardFromPlayer (Player player){
-
-    //TODO find a way to get input card from the player
-
-//        Random r = new Random();
-//        int bound = player.getHand().size();
-//        List<Card> toChoos = new ArrayList<>(player.getHand());
-//        return toChoos.remove(r.nextInt(bound));// this line should change and replace with a input card
-    // return
-    //    }
-
-    /**
      * Manages the players selection of cards
      */
     public void chooseCardsManager(Player player) { //Må kalles før spiller velger noen kort for den runden
@@ -79,30 +65,24 @@ public class RoundHandler {
         }
 
         //TODO ta imot 5 (eller mindre) valgte kort fra GUI
-        while (player.allowedToChooseCards()&& receivedCards.get(player).size()!=0) {
-            if (receivedCards.isEmpty()) {
-               // addChosenCard(player, chooseRandomCard(player));
-                debugPrint("player should select a card");
-                break;
-            } else {
+        if (!receivedCards.isEmpty()) {
+            while (player.allowedToChooseCards() && receivedCards.get(player).size() != 0) {
                 Card card = receivedCards.get(player).remove(0);
                 addChosenCard(player, card);
             }
         }
-        // This condition is always false until the
-        // allowedToChooseCards() method takes time into account
-        while (player.getChosenCards().size() < 5) {
-            chooseRandomCard(player);
+
+        while (player.allowedToChooseCards()) {
+            addChosenCard(player, chooseRandomCard(player));
         }
     }
 
     private void addChosenCard(Player player, Card card) {
-        //TODO ta imot 5 (eller mindre) valgte kort fra GUI
+
         if (!player.allowedToChooseCards()) {
             return;
         }
-
-        int place = player.getChosenCards().size() + 1;
+        int place = player.getChosenCards().size();
         player.addChosenCard(card, place);
 
 
@@ -129,8 +109,8 @@ public class RoundHandler {
             if (p.getLife() > 0 && p.getChosenCards().size() == 5)
                 activePlayer.add(p);
         }
-        int phase = 1;
-        while (phase <= 5) {
+        int phase = 0;
+        while (phase < 5) {
             performOneCardMovement(phase, activePlayer);
 
             phase++;
@@ -138,11 +118,11 @@ public class RoundHandler {
     }
 
     public void performOneCardMovement(int phase, List<Player> players) {
-//debugPrint("Chosen card in round handler "+players.get(0).getChosenCards());
+
         PriorityQueue<Player> prioritetPlayers =
                 new PriorityQueue<>((p1, p2) -> p2.getChosenCards().get(phase).priorityNr - p1.getChosenCards().get(phase).priorityNr);
         prioritetPlayers.addAll(players);
-        debugPrint("in round handler: "+prioritetPlayers);
+        debugPrint("in round handler: " + prioritetPlayers);
         while (!prioritetPlayers.isEmpty()) {
             Player p = prioritetPlayers.poll();
             Card nextCard = p.getChosenCards().get(phase);
@@ -211,10 +191,8 @@ public class RoundHandler {
 
             deck.addRestCards(p.getHand());
             deck.addRestCards(p.getRestCards());
-//            debugPrint("before Cleaning: "+ p.getHand());
+
             p.getHand().clear();
-//
-//            debugPrint("after Cleaning: "+ p.getHand());
         }
 
 

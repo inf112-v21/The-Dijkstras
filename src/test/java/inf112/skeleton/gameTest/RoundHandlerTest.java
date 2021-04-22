@@ -12,8 +12,6 @@ import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashSet;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -156,7 +154,7 @@ public class RoundHandlerTest {
             Location loc = gb.locationOf(p.getRobot());
             Directions dir = p.getRobot().getDirection();
 
-            for (int i = 1; i <= 5; i++) {
+            for (int i = 0; i < 5; i++) {
                 Card card = playerCards.get(i);
                 if (card.type == CardType.ROTRIGHT) dir = dir.rotate(1);
                 if (card.type == CardType.ROTLEFT) dir = dir.rotate(-1);
@@ -207,7 +205,7 @@ public class RoundHandlerTest {
         Card move1 = new Card(CardType.MOVE1, 490);
         player1.makeMove(move1, gb);
 
-        rh.touchCheckpoints(flags,players);
+        rh.touchCheckpoints(flags, players);
 
         assertThat(player1.getNextFlagIndex(), is(2));
 
