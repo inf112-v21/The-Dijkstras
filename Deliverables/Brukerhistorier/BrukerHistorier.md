@@ -57,7 +57,7 @@ Robot kunne gå på et flagg
 Registreres besøk på et flagg.
 
 
-### Robot vinner ved å besøke flagg - Trym
+### Robot vinner ved å besøke flagg
 Som en Robot
 Ønsker jeg å vinne dersom alle flagg er besøkt i kronologisk rekkefølge
 Slik at roboten oppdateres med; “har besøkt flagg x” dersom flagg x-1 er besøkt ELLER x = 0. (antar man starter med første flagg er flagg_0)
@@ -116,56 +116,57 @@ BoxCheck for hvert spillertrekk
 PlayerCollision event.
 
 
-9. Bevege robot ut fra valgte kort
-   Brukerhistorie:
+### Bevege robot ut fra valgte kort
+#### Brukerhistorie:
    Som spiller ønsker jeg at roboten skal bevege seg etter hvilke kort jeg velger for å utføre planen min.
 
-Løsningsbeskrivelse:
+#### Løsningsbeskrivelse:
 Robot må utføre kortets kommando
 
-Akseptansekriterier:
+#### Akseptansekriterier:
 Gitt at en spiller velger et gitt kort så skal roboten utføre valgte kommando.
 Må kunne skille mellom de forskjellige kortene.
 
 
-Arbeidsoppgaver:
+#### Arbeidsoppgaver:
 Deck class med forskjellige kommandoer/kort
 Robot må kunne ta imot valgte kommando fra kort
 Robot må kunne utføre kommando.
 
 
 
-Velge 5 kort brukerhistorie
-Brukerhistorie
+### Velge 5 kort
+#### Brukerhistorie:
 Som spiller ønsker jeg å kunne velge kort hver runde slik at jeg kan kontrollere roboten.
 
-Løsningsbeskrivelse
+#### Løsningsbeskrivelse:
 Kort må være utdelt til spiller og spiller skal kunne velge de gjennom GUI.
 
-Akseptansekriterier:
+#### Akseptansekriterier:
 Gitt at det er en spiller sin tur til å velge kort etter å ha blitt delt ut en mengde kort:
 Spilleren skal kunne velge eksakt 5 kort gjennom GUI
 De 5 kortene lagres i kronologisk rekkefølge
 
-Arbeidsoppgaver:
+#### Arbeidsoppgaver:
 Implementere funksjonalitet til GUI som lar spiller velge kortene
 Lagre brukte kort som variabel i spillerklasse eller robotklasse (?)
 Lage klasser for de forskjellige kort typene
 
 
-Brettet har hull:
+### Brettet har hull:
+#### Brukerhistorie:
 Som Spller må jeg prøve å ikke tape ved å la robot falle ut av banen gjennom et hull.
 
-Løsningsbeskrivelse:
+#### Løsningsbeskrivelse:
 Hull må eksistere på banen og være synlinge slik at spiller kan prøve å unngå de
 Gitt at det eksisterer et brett med roboter som kan bevege seg, må:
 Hull objektet eksistere på brett og være synlig.
 
-Akseptansekriterier:
+#### Akseptansekriterier:
 Robot må kunne unngå hullene.
 Fall inn i hull må registeres som tap av et liv eller game over.
 
-Arbeidsoppgaver:
+#### Arbeidsoppgaver:
 Implementere liv-system og sjekk for fall. Trekke et liv i spillklassen.
 
 

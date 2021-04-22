@@ -79,16 +79,17 @@ Her er våre nåværende MVP krav:
 3. Flytte brikke (vha taster e.l. for testing)
 4. Robot besøker flagg
 5. Robot vinner ved å besøke flagg
-6. Spille fra flere maskiner (vise brikker for alle spillere, flytte brikker for alle spillere) - Ikke en del av oblig3
-7. Dele ut kort
-8. Velge 5 kort
-9. Bevege robot ut fra valgte kort.
+6. Dele ut kort
+7. Robot flytter på robot
+8. Bevege robot ut fra valgte kort.  
+9. Velge 5 kort
 10. Brettet har hindringer.
-11. Robot flytter på andre roboter.
+11. Spille fra flere maskiner (vise brikker for alle spillere, flytte brikker for alle spillere)
 12. Utfører runde etter spilleregler.
 
 
-#### Arbeidskravene i Sprint 3
+#### Arbeidskrav fokus i Sprint 4`
+Vi jobber mest med arbeidskrav 12 og 11, men måtte sjekke at de tidligere arbeidskravene var oppfylt underveis
 
 #### Ufullstendig Arbeidskrav
 
@@ -112,5 +113,3 @@ Under src.test finner du alle våre automatiske tester, alle disse testene skal 
 TODO: MANUELLTEST. takk Alexander
 
 TODO: Skjermdump
-
-
