@@ -4,15 +4,12 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import inf112.skeleton.app.*;
@@ -20,7 +17,6 @@ import inf112.skeleton.game.Card;
 import inf112.skeleton.game.Player;
 import inf112.skeleton.game.Game;
 import inf112.skeleton.grid.Directions;
-import inf112.skeleton.grid.Location;
 
 import java.util.*;
 import java.util.List;
@@ -63,16 +59,23 @@ public class GameScreen extends ScreenAdapter {
     private int roundCount = 0;
     int powerDownRound = -10;
 
+    // Helper function to set a delay where there's one needed.
 
     public static void wait(int ms) {
         try {
             TimeUnit.MILLISECONDS.sleep(ms);
         } catch (InterruptedException e) {
-            // Null
+            System.out.println(e);
         }
     }
 
     public GameScreen(GameInit gameInit, Board board, InputMultiplexer inputMultiplexer) {
+        // Music
+        music = Gdx.audio.newMusic(Gdx.files.internal("assets/audio/gamescreen_music.ogg"));
+        music.setLooping(true);
+        music.setVolume(musicVolume);
+        music.play();
+        // Board, stage, viewport, input etc. initialization.
         this.gameInit = gameInit;
         viewport = new FitViewport(1000, 1000);
         stage = new Stage(viewport);
@@ -80,31 +83,30 @@ public class GameScreen extends ScreenAdapter {
         this.inputMultiplexer = inputMultiplexer;
         inputMultiplexer.addProcessor(stage);
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("assets/audio/gamescreen_music.ogg"));
-        music.setLooping(true);
-        music.setVolume(musicVolume);
-        music.play();
-
-        //TODO refactoring
         backendGame = gameInit.getMapBuilder().game;
         chosenCards = new HashMap<>();
         currentPlayersHand = new HashMap<>();
         players = backendGame.getPlayers();
-
-
     }
 
     @Override
     public void show() {
+        // Constant unitScale for texture sprites 300x300.
         float unitScale = 1 / 300f;
+
+        // Using a skin as template for UI elements.
         Skin skin = new Skin(Gdx.files.internal("assets/menuElements/roboRally.json"));
+        // Using a texture atlas to split and load card textures.
         TextureAtlas cardsTexAtlas = new TextureAtlas(Gdx.files.internal("assets/cards/cards.atlas"));
         textureLoader(cardsTexAtlas);
 
+        // The "game" as an actor.
         gameActor = new GameActor(gameInit, unitScale * 0.75f);
 
+        // SFX for robot moving or performing actions.
         robotMoveSound = Gdx.audio.newSound(Gdx.files.internal("assets/audio/robot_sound.ogg"));
 
+        // Creating distinct tables to organize the layout of UI and game elements.
         Table programingCardsTable = makeProgrammingCardsTable(skin);
         programingCardsTable.setFillParent(true);
         programingCardsTable.setTransform(true);
@@ -126,31 +128,30 @@ public class GameScreen extends ScreenAdapter {
         frameTable.setTransform(true);
         frameTable.right().bottom();
 
+        // Creating clickable buttons below
 
+        // Start Button starts a new round and iterates by button presses.
         startButton = new TextButton("Start Round", skin);
         startButton.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("INFO: Start Round button pressed!");
+                mocPrint("INFO: Start Round button pressed!");
                 startOneRound();
-                //startButton.setDisabled(true);
-                //startButton.setVisible(false);
-
-                System.out.println("roundCount: " + roundCount);
+                mocPrint("roundCount: " + roundCount);
                 roundCount++;
             }
-
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
 
+        // Ready Button initiates the execution of a round.
         readyButton = new TextButton("Ready?", skin);
         readyButton.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("INFO: Ready button pressed!");
+                mocPrint("INFO: Ready button pressed!");
                 List<Card> readyCards = new ArrayList<>();
                 for (int i = 0; i < chosenCards.size(); i++) {
                     readyCards.add(chosenCards.get(i));
@@ -169,30 +170,29 @@ public class GameScreen extends ScreenAdapter {
             }
         });
 
+        // Power Button marks the next round to be a Power Down round.
         powerButton = new TextButton("Power Down?", skin);
         powerButton.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("INFO: Power button pressed!");
-                //TODO Power down logic.
-
-
+                mocPrint("INFO: Power button pressed!");
+                // Stores at which round the powerDown button was pressed for execution at the next round.
                 powerDownRound = roundCount;
             }
-
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
 
-        // DEBUGGING
+        // Debug only input below.
 
+        // Keyboard WASD or Arrow keys movement.
         if (debugMode) {
             stage.addListener(new InputListener() {
                 @Override
                 public boolean keyDown(InputEvent event, int keycode) {
-                    System.out.println("INFO: " + Input.Keys.toString(keycode) + " key pressed");
+                    mocPrint("INFO: " + Input.Keys.toString(keycode) + " key pressed");
                     Gdx.app.log("Image ClickListener", "keyDown. keycode=" + keycode);
                     if (keycode == Input.Keys.UP || keycode == Input.Keys.W) {
                         backendGame.rh.gameBoard.moveRobot(Directions.NORTH, players.get(0).getRobot());
@@ -213,13 +213,14 @@ public class GameScreen extends ScreenAdapter {
             });
         }
 
+        // UI/software buttons for movement.
 
         upArrow = new TextButton("W", skin);
         upArrow.setVisible(debugMode);
         upArrow.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("INFO: Up arrow pressed");
+                mocPrint("INFO: Up arrow pressed");
                 backendGame.rh.gameBoard.moveRobot(Directions.NORTH, players.get(0).getRobot());
                 gameInit.getMapBuilder().updateMap();
                 robotMoveSound.play(sfxVolume);
@@ -250,7 +251,7 @@ public class GameScreen extends ScreenAdapter {
         leftArrow.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("INFO: left arrow pressed");
+                mocPrint("INFO: left arrow pressed");
                 //TODO Up button down logic.
 
                 backendGame.rh.gameBoard.moveRobot(Directions.WEST, players.get(0).getRobot());
@@ -268,7 +269,7 @@ public class GameScreen extends ScreenAdapter {
         rightArrow.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("INFO: right arrow pressed");
+                mocPrint("INFO: right arrow pressed");
                 //TODO Up button down logic.
 
                 backendGame.rh.gameBoard.moveRobot(Directions.EAST, players.get(0).getRobot());
@@ -281,6 +282,8 @@ public class GameScreen extends ScreenAdapter {
                 return true;
             }
         });
+
+        // Adding elements to their tables and actors to stage.
 
         frameTable.add(startButton);
         frameTable.add(readyButton);
@@ -302,10 +305,11 @@ public class GameScreen extends ScreenAdapter {
 
         stage.addActor(frameTable);
 
-        stage.setDebugAll(debugMode); // Debug stage layout boundaries.
+        // Debug stage layout boundaries. Useful when testing different output sizes and resolutions.
+        stage.setDebugAll(debugMode);
     }
 
-
+    // Texture loader for loading the cards by texture atlas.
     private void textureLoader(TextureAtlas cardsTexAtlas) {
         cardTexture = new HashMap<>();
         cardTexture.put("MOVE1", new TextureRegionDrawable(cardsTexAtlas.findRegion("card_move1")));
@@ -318,11 +322,10 @@ public class GameScreen extends ScreenAdapter {
         cardTexture.put("NULL", new TextureRegionDrawable(cardsTexAtlas.findRegion("card_null")));
 
     }
-
+    // Creates hand slots table.
     private Table makeCardTable(Skin skin) {
-        //TODO ADD BACK-END FUNCTION TO ADD CARDS.
-        Table cardsTable = new Table();
 
+        Table cardsTable = new Table();
         Label cardsLabel = new Label("Hand: ", skin);
 
         cardsTable.add(cardsLabel);
@@ -342,6 +345,7 @@ public class GameScreen extends ScreenAdapter {
         return cardsTable;
     }
 
+    // Creates programming slots table.
     private Table makeProgrammingCardsTable(Skin skin) {
         Table programmingCardsTable = new Table();
         Label programmingLabel = new Label("Programming Slots: ", skin);
@@ -361,7 +365,7 @@ public class GameScreen extends ScreenAdapter {
         return programmingCardsTable;
     }
 
-
+    // Below calls either placing or undoing of placing of a card that is clicked.
     private void cardInteractions() {
 
         for (int i = 0; i < handSlotButtons.length; i++) {
@@ -371,7 +375,6 @@ public class GameScreen extends ScreenAdapter {
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     placeCardInProgrammingSlot(j);
                 }
-
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     return true;
@@ -380,8 +383,24 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-    private void placeCardInProgrammingSlot(int j) {
+    private void cardInteractions1() {
+        for (int i = 0; i < programmingSlotButtons.length; i++) {
+            int j = i;
+            programmingSlotButtons[i].addListener(new InputListener() {
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    returnCardToHand(j);
+                }
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+            });
+        }
+    }
 
+    // Places chosen cards.
+    private void placeCardInProgrammingSlot(int j) {
 
         if (chosenCards.size() >= 5) return;
         for (int i = 0; i < 5; i++) {
@@ -393,31 +412,11 @@ public class GameScreen extends ScreenAdapter {
                 break;
             }
         }
-
-
         handSlotButtons[j].setStyle(setNullStyle());
-
     }
 
-    private void cardInteractions1() {
-        for (int i = 0; i < programmingSlotButtons.length; i++) {
-            int j = i;
-            programmingSlotButtons[i].addListener(new InputListener() {
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    returnCardToHand(j);
-                }
-
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    return true;
-                }
-            });
-        }
-    }
-
+    // Returns chosen cards back to hand slots.
     private void returnCardToHand(int j) {
-
 
         for (int i = 0; i < 9; i++) {
             if (currentPlayersHand.get(i) == null) {
@@ -431,21 +430,20 @@ public class GameScreen extends ScreenAdapter {
 
     }
 
+    // A null or "empty" card.
     private Button.ButtonStyle setNullStyle() {
         ImageButton.ImageButtonStyle styleNull = new ImageButton.ImageButtonStyle();
         styleNull.imageUp = cardTexture.get("NULL");
         return styleNull;
     }
 
-
+    // Calls both update functions.
     private void updateCards() {
-            
 
         updateProgrammingSlot(players.get(0));
-
         updatePlayersHand(players.get(0));
     }
-
+    // Updates programming slot cards.
     private void updateProgrammingSlot(Player currentPlayer) {
 
         chosenCards = currentPlayer.getChosenCards();
@@ -456,9 +454,8 @@ public class GameScreen extends ScreenAdapter {
             programmingSlotButtons[4 - i].setStyle(style);
 
         }
-
     }
-
+    // Updates hand slot cards.
     private void updatePlayersHand(Player currentPlayer) {
 
         currentPlayersHand = new HashMap<>();
@@ -479,7 +476,7 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-
+    // Renders game at 30 frames per second.
     @Override
     public void render(float delta) {
 
@@ -490,16 +487,11 @@ public class GameScreen extends ScreenAdapter {
         stage.draw();
 
         if (phasesReady) {
-
             performMovements();
-
         }
-
         if (phase == 6) {
             phasesReady = false;
         }
-
-
     }
 
     @Override
@@ -512,6 +504,7 @@ public class GameScreen extends ScreenAdapter {
         viewport.update(width, height, true);
     }
 
+    // Handles starting a round and power down.
     public void startOneRound() {
         if (roundCount == powerDownRound) {
             players.get(0).announcePowerDown(backendGame.rh.gameBoard);
@@ -519,15 +512,14 @@ public class GameScreen extends ScreenAdapter {
         }
         dealCards();
         updateCards();
-        // performMovementsAndCleanUP();
-
     }
 
+    // Deals out cards to the players.
     public void dealCards() {
         backendGame.rh.dealProgramCards(players);
     }
 
-
+    // Manages chosen cards for each player.
     private void chooseCardsManager() {
 
         for (Player player : players) {
@@ -536,15 +528,11 @@ public class GameScreen extends ScreenAdapter {
                 mocPrint(player.getRobot() + " has chosen: " + player.getChosenCards());
             }
         }
-
     }
-
 
     /**
      * Perform  actions in 5 phases according to programing cards
      */
-
-
     public void performMovements() {
 
         wait(750);
@@ -555,11 +543,9 @@ public class GameScreen extends ScreenAdapter {
             if (p.getLife() > 0 && p.getChosenCards().size() == 5)
                 activePlayer.add(p);
 
-
         }
         backendGame.rh.performOneCardMovement(phase-1, activePlayer);
         programmingSlotButtons[phase - 1].setStyle(setNullStyle());
-        //chosenCards.remove(phase - 1);
         gameInit.getMapBuilder().updateMap();
         if (phase == 5) {
             cleanUp();
@@ -568,17 +554,13 @@ public class GameScreen extends ScreenAdapter {
             isGameOver();
         }
         phase++;
-
-
     }
 
     public void cleanUp() {
         backendGame.rh.touchCheckpoints(backendGame.getFlags(), players);
         backendGame.rh.cleanUP(players);
-        // updateRobotsSpawnPoint(players);
         for (Player p : players)
             updatePlayersHand(p);
-
     }
 
     private void collectCards() {
@@ -591,7 +573,6 @@ public class GameScreen extends ScreenAdapter {
     public void isGameOver() {
         for (Player p : players) {
             if (p.getNextFlagIndex() > backendGame.getFlags().size()) {
-                //gameActive = false;
                 mocPrint("Game over, winner is: " + p.getRobot());
             }
         }
@@ -606,7 +587,6 @@ public class GameScreen extends ScreenAdapter {
                     deadPlayers.add(player);
                     players.remove(player);
                     if (players.isEmpty()) {
-                        // gameActive = false;
                     }
                 }
                 player.getRobot().resetHealth();
@@ -620,12 +600,9 @@ public class GameScreen extends ScreenAdapter {
      * If debugmode is true:
      * Allows Printing in methods
      */
-
-
     protected void mocPrint(String debugString) {
         if (mocMode) {
             System.out.println(debugString);
         }
     }
-
 }

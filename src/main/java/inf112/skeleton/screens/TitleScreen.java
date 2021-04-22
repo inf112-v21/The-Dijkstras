@@ -18,20 +18,26 @@ public class TitleScreen extends ScreenAdapter {
     private Music music;
 
     public TitleScreen(RoboRally game) {
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
-
+        // Music
         music = Gdx.audio.newMusic(Gdx.files.internal("assets/audio/titlescreen_music.ogg"));
         music.setLooping(true);
         music.setVolume(0.3f);
         music.play();
+        // Creating stage and table to be filled with UI elements.
         Table table = new Table();
         table.setFillParent(true);
+        stage = new Stage(new ScreenViewport());
+        // Enables stage input.
+        Gdx.input.setInputProcessor(stage);
 
+        // Loading Textures
         Texture roboRallyLogoTexture = new Texture(Gdx.files.internal("menuElements/roboRallyLogo.png"));
         Image roboRallyLogo = new Image(roboRallyLogoTexture);
 
+        // Using a skin as template for UI elements.
         Skin skin = new Skin(Gdx.files.internal("menuElements/roboRally.json"));
+
+        // List boxes.
         SelectBox<String> mapChoiceBox = new SelectBox<String>(skin);
         String[] mapChoiceList = {"map001.tmx", "exampleMap.tmx"};
         mapChoiceBox.setItems(mapChoiceList);
@@ -40,6 +46,11 @@ public class TitleScreen extends ScreenAdapter {
         String[] playerCountList = {"1", "2", "3", "4"};
         playerCountChoice.setItems(playerCountList);
 
+        // Creating clickable buttons below.
+
+        /* Multiplayer button disposes of everything that's not needed and creates a game with a playerCount value.
+         * Makes new Board which then initiates the game and lastly sets screen to GameScreen.
+         */
         Button multiPlayerButton = new TextButton("Multiplayer", skin);
         multiPlayerButton.addListener(new InputListener() {
             @Override
@@ -55,6 +66,7 @@ public class TitleScreen extends ScreenAdapter {
             }
         });
 
+        //Singleplayer button, same as multiplayer, but the playerCount value passed is == 1 for one player.
 
         Button singlePlayerButton = new TextButton("Singleplayer", skin);
         singlePlayerButton.addListener(new InputListener() {
@@ -71,6 +83,7 @@ public class TitleScreen extends ScreenAdapter {
             }
         });
 
+        // Exit button, exits the application a "correct way".
 
         Button exitButton = new TextButton("Exit Game", skin);
         exitButton.addListener(new InputListener() {
@@ -85,6 +98,9 @@ public class TitleScreen extends ScreenAdapter {
                 return true;
             }
         });
+
+        // Adding elements to the table and the table then to stage as actor.
+
         table.add(roboRallyLogo).top().colspan(4).padBottom(100).padTop(50);
         table.row().padBottom(30);
 
@@ -102,6 +118,7 @@ public class TitleScreen extends ScreenAdapter {
         stage.addActor(table);
     }
 
+    // Renders game at 30 frames per second.
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(112 / 255f, 128 / 255F, 144 / 255F, 0);
@@ -109,6 +126,8 @@ public class TitleScreen extends ScreenAdapter {
         stage.act();
         stage.draw();
     }
+
+    // Disposes when called on, for example to turn off the music when switching to GameScreen.
     @Override
     public void dispose() {
         super.dispose();
