@@ -3,29 +3,46 @@
 ----
 
 #### Gruppen om prosjektet
-Hele gruppen synes at prosjektet har vært lærerikt.
+Gruppen synes at prosjektet har vært lærerikt. Vi fikk en treig start, men ettersom ting ble oversiktlig og 
+vi ble bedre kjent, jobbet vi godt sammen. 
+
+En av fordelene vi har hatt med prosjektet har vært å kunne få se andres prosjekter, prate med andre grupper om hvordan de jobber,
+og ha nær kontakt med gruppeledere som har gjort dette før. Det har vært greit da det prosjektet helhetlig har 
+hatt ganske frie tøyler. 
 
 #### Team Roller
 I retrospektivet snakket vi om at de rollene som passet godt
 ble veldig fremtredende, og de rollene som ikke passet ble passive. Roller som teamleder og gitansvarlig har vært
-veldig tydelige, men produksjonsansvarlig, testansvarlig er roller som har hatt få konkrete ansvar.
+veldig tydelige, men produksjonsansvarlig, testansvarlig,  er roller som har hatt få konkrete ansvar.
 
+Etterhvert i prosjektet ble det styrkene og svakhetene våre mer tydelige, og vi ble flinkere å delegere
+oppgaver som passet hverandr, slik at vi alle kunne bidra på vår måte.
 
 #### Gode & Dårlige Valg:
-Et av valgene var å starte utvikling med fokus på back-end utvikling, som vi håpte vi kunne koble opp til en gui enkelt og greit
-Vi la ikke så godt rette til denne overgangen når vi utviklen back-end, som førte til en del problemer i utviklingen da det kome tid til å koble de sammen
+Et av valgene var å starte utvikling med fokus på back-end utvikling, som vi håpte vi kunne koble opp til en gui.
+Vi la ikke så godt rette til denne overgangen når vi utviklen back-end, som førte til en del problemer i sammenkoblingen.
 Her burde vi sikkert satt av tid på starten av prosjektet for å lete etter/diskutere en løsning som hadde vært mer integrert med libgdx gui
-Eksempelet over er det vi som et team har strevet mest med i prosjektet. 
-Ellers har vi gjort mange gode valg, bruk av gitflow metodikk har fungert bra, 
+Problemet fikk store konsekvenser for teamet vårt gjennom prosjektet, noe som ga grunn til ettertanke.
 
-En stund var GUI-ansvarlig jobbende alene på LibGDX. I etterkant
+En passivt valg var GUI-ansvarlig jobbende alene på LibGDX over en lengre periode. I etterkant
 ser vi dette som litt uheldig, da han trives med å jobbe i lag med andre. I tillegg er LibGDX litt komplekst, og det kan
-være greit å ha en sparringspartner.
+være greit å ha en sparringspartner. Med passivt valg mener jeg at vi ikke gjor noe 
+aktivt for å løse situsjonen.
+
+Et av de gode valgene vi tok var bruk av gitflow metodikk. Det skapte god flyt i arbeidet. Det krevde av oss litt planlegging 
+før man branchet, som gjor at vi fikk mindre problemer igjen da vi skulle samle prosjektet. Sammen GitKraken var det et verktøy 
+som lot oss jobbe parallelt på en tryggere måte.
+
+Et annet bra valg var bruk av parprogrammering, som har vært den dominerende arbeidsformen
+i gruppen. Vi dokumenterte en del i starten, for å få innsikt i hvordan gruppen parprogrammerte, for å lære av hverandre.
+Syklusen mellom aktivitet, dokumentasjon, og refleksjon ble en kontinuerlig læringsoverføring for oss som gruppe.
 
 
 #### Gruppedynamikk og kommunikasjon, start vs. nå:
 I starten var vi usikre på mye; hvordan vi skal jobbe og hvem som jobber med hva. 
 Etter hvert har vi blitt bedre på å bli bedre kjent med styrkene og svakhetene til hverandre, noe som har gjort gruppearbeidet mer effektivt.
+Etter Sprint 2 satt vi opp Kanban board, som hjalp oss å sette opp en plan for 
+arbeidet opp mot arbeidskravene. 
 
 Vi har brukt Parprogrammeringer aktivt gjennom hele prosjektet, men hvordan og hvorfor vi bruker dem har endret seg.
 I starten var det utrolig nyttig i en digital hverdag å få noen en til en, for å bli kjent både personlig og faglig. Da tenkte
@@ -35,68 +52,64 @@ flinke på forskjellige ting. Mot slutten av prosjektet var parprogrammeringer b
 Vi så det at planlagte arbeidsøkter i par
 var en av de mest produktive arbeidsmetodene vi hadde. Så ble det sosiale, og kunnskapsoverføringen bare et pluss.
 
-Måten vi fordeler oss på oppgavene
-
 Kodemøtene i sprint fire har hjulpet oss å få mer oversikt.
-Vi starter møtet med at alle går igjennom produksjonsprogresjonen over forrige uke, der vi ser på 
-utfordringer og løsningner hos de forskjellige.
+Vi starter møtet med at alle går igjennom produksjonsprogresjonen over forrige uke, der vi ser på hverandres
+utfordringer og prøver å finne løsningner.
 
-
-Starten av sprintene har endret seg. Den første sprinten var vi veldig usikre hva vi gikk inn i og det var vanskelig å 
+Måten vi starter sprintene har også endret seg. Den første sprinten var vi veldig usikre hva vi gikk inn i og det var vanskelig å 
 å planlegge godt. Som reaksjon på lite struktur i Sprint brukte vi en del tid på å lage planer,
 bare for å finne ut senere at det å utføre planen var mer krevende enn forventet.  I sprint 3 ble ble det lettere å se for seg
 ukene mot neste oblig og hva man får tid til. Vi var også flinkere å sette små mål for parprorgrammeringer, og realistiske
 mål for perioden.
 
+### Forbedringer for teamet
 
-### Tanker fra Retrosepktiv
+Hvis vi skulle blitt bedre som team burde vi har fokusert mer på å bli enda mer strukturert i arbeidet vårt.
+Det vil si at vi blir flinkere å planlegge i og følge opp Kanbanbrettet, er mer nøye med bruk av SCRUM ikke bare for 
+å ha progresjon i arbeidet, men for progresjon i teamet som utviklere og samarbeidspartnere.
 
-Retrospektiv (skal inneholde beskrivelse av hva som var planlagt å bruke av metodikk, hva de
+Om vi startet på ny er gruppen enig om at struktur og arbeidsmetodikk er hovedfokus fra start av.
+Få på Scrum/Kanban med gitflow, med fast møtestrukter og klare mål for ukene
 
-Project board er oppdatert
-
-Kommunikasjon (spesifisere kunnskapsoverføring og hvordan kunnskapsoverføring gjøres)
-
-Hvordan fungerer rollene i teamet?
-Trenger dere å oppdatere hvem som er teamlead eller
-kundekontakt?
-Er det noen erfaringer enten team-messig eller mtp prosjektmetodikk som er verdt å nevne?
-Synes
-teamet at de valgene dere har tatt er gode?
-Hvis ikke, hva kan dere gjøre annerledes for å forbedre
-måten teamet fungerer på?
-Gjør et retrospektiv hvor dere vurderer prosjektet har gått.
-Hva har dere gjort bra, hva hadde dere gjort
-annerledes hvis dere begynte på nytt?
-
-Hvordan fungerer gruppedynamikken og kommunikasjonen nå i forhold til i starten?
 
 ## Deloppgave 2: Krav
 
 Her er våre nåværende MVP krav:
-1. Vise et spillebrett
-2. Vise brikke på spillebrett
-3. Flytte brikke (vha taster e.l. for testing)
-4. Robot besøker flagg
-5. Robot vinner ved å besøke flagg
-6. Dele ut kort
-7. Robot flytter på robot
-8. Bevege robot ut fra valgte kort.  
-9. Velge 5 kort
-10. Brettet har hindringer.
-11. Spille fra flere maskiner (vise brikker for alle spillere, flytte brikker for alle spillere)
-12. Utfører runde etter spilleregler.
+- [x] 1.Vise et spillebrett
+- [x] 2.Vise brikke på spillebrett
+- [x] 3.Flytte brikke (vha taster e.l. for testing)
+- [x] 4.Robot besøker flagg
+- [ ] 5.Robot vinner ved å besøke flagg
+- [x] 6.Dele ut kort
+- [ ] 7.Robot flytter på robot
+- [x] 8.Bevege robot ut fra valgte kort.  
+- [x] 9.Velge 5 kort
+- [x] 10.Brettet har hindringer.
+- [ ] 11.Spille fra flere maskiner (vise brikker for alle spillere, flytte brikker for alle spillere)
+- [ ] 12.Utfører runde etter spilleregler.
 
 
-#### Arbeidskrav fokus i Sprint 4`
-Vi jobber mest med arbeidskrav 12 og 11, men måtte sjekke at de tidligere arbeidskravene var oppfylt underveis
+#### Krav fokus i Sprint 4`
+Vi jobber mest med krav 12 og 11, men måtte sjekke at de tidligere kravene var oppfylt underveis.
 
-#### Ufullstendig Arbeidskrav
+#### Ufullstendig Krav
+Vi har vurdert at der vi er nå har vi ikke klart å nå krav 5, 7, 11 og 12. 
+5 og 7 er krav som er ufullstendige som resultat av forsinkelse rundt GUI. Det vil si at både 5 og 7 passerer i backend, men
+er enda ikke implementert med GUI.
+Multiplayer(krav 11) ble laget da vi ønsket å få oversikt hva som trengtes for å implementere 
+
+
+#### Arbeidskrav 12
+Krav 12 ble laget for å sette fokus på forbindelsen mellom GUI og backend.
+Forrige sprint jobbet vi med å kunne kjøre en full runde med 5 faser i backend.
+Denne sprinten koblet vi backendlogikken opp mot 
+
+#### Arbeidskrav 11
+Multiplayer(krav 11) ble laget da vi ønsket å få oversikt hva som trengtes for å implementere
+
 
 #### Brukerhistorier sprint 4
-I sprint 4 laget vi brukerhistorier for multiplayer, da det var et av kravene
-vi jobbet mest med.\
-TODO: legg til Brukerhistoriene
+Brukerhistorie 11 og 12 er lagt ved i Brukerhistorie mappe
 
 ## Deloppgave 3: Produktleveranse og kodekvalitet
 
