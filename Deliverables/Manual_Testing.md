@@ -36,7 +36,7 @@ Pressing the Exit Button should exit the game and its processes. Investigate run
 
 ### Game Screen (Singleplayer / Multiplayer):
 
-Compare to reference the [image.](../assets/images/game_screen.png)
+Compare to the reference [image.](../assets/images/game_screen.png)
 The general layout should look the same as in the image. All elements should be visible as shown.
 Otherwise, with debug mode, see if any layout boundaries are overlapping in a way that prevents an element from being shown,
 and also control the robot with WASD, arrow keys or interface buttons.
