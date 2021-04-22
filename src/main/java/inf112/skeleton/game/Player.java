@@ -96,6 +96,7 @@ public class Player implements ITileObject {
     public void announcePowerDown(GameBoard gameBoard) {
         myRobo.resetHealth();
         placeRobotAtSpawn(gameBoard);
+        //TODO reset direction to NORTH after placing back in spawn.
         powerDown = true;
         System.out.println(myRobo + " announced Power Down for next round !");
     }
@@ -116,7 +117,8 @@ public class Player implements ITileObject {
     }
 
     public List<Card> getHand() {
-        //TODO throw exeption if hand is empty
+
+        //if(hand.isEmpty()) throw new IllegalCallerException("Player has no card in his hand ");
         return hand;
     }
 
@@ -201,8 +203,9 @@ public class Player implements ITileObject {
             chosenCards.clear();
         } else {
 
-            int freeCards = myRobo.getHealth();
-            while (freeCards > 0) {
+            int freeCards = myRobo.getHealth() - 1;
+            while (freeCards >= 0) {
+
                 restCards.add(chosenCards.remove(freeCards));
                 freeCards--;
 

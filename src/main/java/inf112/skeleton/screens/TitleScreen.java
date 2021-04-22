@@ -1,6 +1,7 @@
 package inf112.skeleton.screens;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -14,11 +15,16 @@ import inf112.skeleton.app.Board;
 
 public class TitleScreen extends ScreenAdapter {
     private final Stage stage;
+    private Music music;
 
     public TitleScreen(RoboRally game) {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
+        music = Gdx.audio.newMusic(Gdx.files.internal("assets/audio/titlescreen_music.ogg"));
+        music.setLooping(true);
+        music.setVolume(0.3f);
+        music.play();
         Table table = new Table();
         table.setFillParent(true);
 
@@ -27,7 +33,7 @@ public class TitleScreen extends ScreenAdapter {
 
         Skin skin = new Skin(Gdx.files.internal("menuElements/roboRally.json"));
         SelectBox<String> mapChoiceBox = new SelectBox<String>(skin);
-        String[] mapChoiceList = {"exampleMap.tmx", "map001.tmx"};
+        String[] mapChoiceList = {"map001.tmx", "exampleMap.tmx"};
         mapChoiceBox.setItems(mapChoiceList);
 
         SelectBox<String> playerCountChoice = new SelectBox<String>(skin);
@@ -38,6 +44,7 @@ public class TitleScreen extends ScreenAdapter {
         multiPlayerButton.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                dispose();
                 Integer playerCount = Integer.valueOf(playerCountChoice.getSelected());
                 new Board(game, mapChoiceBox.getSelected(), playerCount);
             }
@@ -53,6 +60,7 @@ public class TitleScreen extends ScreenAdapter {
         singlePlayerButton.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                dispose();
                 Integer playerCount = 1;
                 new Board(game, mapChoiceBox.getSelected(), playerCount);
             }
@@ -62,7 +70,6 @@ public class TitleScreen extends ScreenAdapter {
                 return true;
             }
         });
-
 
 
         Button exitButton = new TextButton("Exit Game", skin);
@@ -82,12 +89,10 @@ public class TitleScreen extends ScreenAdapter {
         table.row().padBottom(30);
 
         table.add(singlePlayerButton).prefHeight(50).prefWidth(200).colspan(2);
-        table.row().padBottom(30);
-        table.add(multiPlayerButton).prefHeight(50).prefWidth(200).colspan(2);
         table.add(mapChoiceBox).colspan(2);
         table.row().padBottom(30);
-
-        table.add(playerCountChoice).colspan(4);
+        table.add(multiPlayerButton).prefHeight(50).prefWidth(200).colspan(2);
+        table.add(playerCountChoice).colspan(1);
         table.row().padBottom(30);
 
         table.add(exitButton).prefHeight(50).prefWidth(200).colspan(2);
@@ -103,5 +108,10 @@ public class TitleScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();
+    }
+    @Override
+    public void dispose() {
+        super.dispose();
+        music.dispose();
     }
 }

@@ -13,7 +13,7 @@ public class GameRunner {
     static inf112.skeleton.game.Player player1;
     static Player player2;
     static Player player3;
-    static HashSet<Player> players;
+    static List<Player> players;
     static List<Flag> flags;
     static GameBoard gb;
     static int rows, cols;
@@ -29,7 +29,7 @@ public class GameRunner {
         player2 = new Player(new Location(20, 0, 2));
         player3 = new Player(new Location(48, 0, 2));
 
-        players = new HashSet<>();
+        players = new ArrayList<>();
         players.add(player1);
         players.add(player2);
         players.add(player3);
@@ -59,7 +59,7 @@ public class GameRunner {
     public static void main(String[] args) {
         setUp();
         Game game = new Game(true, gb, flags, players);
-        game.startGame();
+        game.startGame(true);
 
     }
 }

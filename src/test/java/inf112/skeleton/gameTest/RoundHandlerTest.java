@@ -23,7 +23,7 @@ public class RoundHandlerTest {
     Player player1;
     Player player2;
     Player player3;
-    HashSet<Player> players;
+    List<Player> players;
     List<Flag> flags;
     GameBoard gb;
     int rows, cols;
@@ -42,7 +42,7 @@ public class RoundHandlerTest {
         player2.setRobot(new Robo("robot2"));
         player3.setRobot(new Robo("robot3"));
 
-        players = new HashSet<>();
+        players = new ArrayList<>();
         players.add(player1);
         players.add(player2);
         players.add(player3);

@@ -9,14 +9,14 @@ import java.util.*;
 
 public class Game {
     private boolean gameActive;
-    private RoundHandler rh;
+    public RoundHandler rh;
     protected final List<Flag> flags;
-    protected final HashSet<Player> players;
+    protected final List<Player> players;
     protected final HashSet<Player> deadPlayers;
     private boolean mocMode = true;
 
 
-    public Game(boolean gameActive, GameBoard gameBoard, List<Flag> flags, HashSet<Player> players) {
+    public Game(boolean gameActive, GameBoard gameBoard, List<Flag> flags, List<Player> players) {
         this.flags = flags;
         this.gameActive = gameActive;
         this.players = players;
@@ -28,7 +28,7 @@ public class Game {
      * All the player in players set should be initialized
      */
 
-    public void randomSetUp(HashSet<Player> players, List<Flag> flags, GameBoard gb) {
+    public void randomSetUp(List<Player> players, List<Flag> flags, GameBoard gb) {
         if (flags.isEmpty() || players.isEmpty()) {
             throw new NullPointerException("Need players and flags to setup");
         }
@@ -59,15 +59,18 @@ public class Game {
     //Q: hva er det minimum man trenger for å kjøre et spill (mvp)
     //A: GameBoard, Robot, Player, Flag,
 
-    public void startGame() {
+    public void startGame(boolean gameActive) {
 
-        while (gameActive) {
+       //while (gameActive) {
             mocPrint("Would you like start a new Round? y/n");
             Scanner answer = new Scanner(System.in);
             if (!answer.hasNext() || !answer.next().toLowerCase().startsWith("y")) {
                 mocPrint("End the game !\n God Bay!");
                 gameActive = false;
+                return;
             } else {
+                for(Player player: players)
+                    mocPrint(player.getRobot() + " has : " + player.getHand());
                 mocPrint("Dealing the programing cards:");
                 rh.dealProgramCards(players);
 
@@ -94,7 +97,7 @@ public class Game {
                 isRobotDead();
                 isGameOver();
             }
-        }
+       // }
         return;
 
     }
@@ -144,5 +147,12 @@ public class Game {
         if (mocMode) {
             System.out.println(debugString);
         }
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+    public List<Flag> getFlags() {
+        return flags;
     }
 }
