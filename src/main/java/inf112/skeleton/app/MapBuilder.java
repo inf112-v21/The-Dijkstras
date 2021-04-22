@@ -1,16 +1,11 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import inf112.skeleton.game.Flag;
 import inf112.skeleton.game.Game;
@@ -22,8 +17,7 @@ import inf112.skeleton.grid.Location;
 
 import java.util.*;
 
-
-public class MapBuilder implements ApplicationListener, InputProcessor {
+public class MapBuilder {
     private final TiledMap map;
     public TiledMapTileLayer boardLayer, playerLayer, holeLayer, flagLayer, laserLayer, movementLayer, barriersLayer;
     private int numOfFlags;
@@ -32,7 +26,6 @@ public class MapBuilder implements ApplicationListener, InputProcessor {
     private final HashMap<Integer, Location> flagsLocations = new HashMap<>();
     private final HashMap<Integer, Integer> flagIndex = new HashMap<>();
     public Location playerPos;
-    public int xPos = 0, yPos = 0;
     private List<Location> lasers;
 
     public TiledMapTileLayer.Cell playerCell;
@@ -46,7 +39,6 @@ public class MapBuilder implements ApplicationListener, InputProcessor {
     private final List<Flag> flags;
     private final GameBoard gameBoard;
     public final Game game;
-
 
     public MapBuilder(String map_filename, int playerLimit) {
         this.playerLimit = playerLimit;
@@ -69,15 +61,15 @@ public class MapBuilder implements ApplicationListener, InputProcessor {
         gameBoard = new GameBoard(mapHeight, mapWidth, 7);
         game = new Game(false, gameBoard, flags, players);
 
-        // translate  tile Id to flag index
+        // Translates tile Id to flag index.
         flagIndex.put(55, 1);
         flagIndex.put(63, 2);
         flagIndex.put(71, 3);
-        //TODO add fourth flag, to hashmap. cell.getTile().getId() to find texture value.
 
         for (int i = 0; i < mapWidth; i++) {
             for (int j = 0; j < mapHeight; j++) {
-                TiledMapTileLayer.Cell cell1 = flagLayer.getCell(i, j);          //Parsing flagLayer for flags.
+                //Parsing flagLayer for flags.
+                TiledMapTileLayer.Cell cell1 = flagLayer.getCell(i, j);
                 try {
                     if (cell1.getTile() != null) {
                         numOfFlags += 1;
@@ -87,7 +79,8 @@ public class MapBuilder implements ApplicationListener, InputProcessor {
                 } catch (Exception e) {
                     //Ignoring exceptions
                 }
-                TiledMapTileLayer.Cell cell2 = playerLayer.getCell(i, j);        //Parsing playerLayer for spawn-point coordinates.
+                //Parsing playerLayer for spawn-point coordinates.
+                TiledMapTileLayer.Cell cell2 = playerLayer.getCell(i, j);
                 try {
                     if (cell2.getTile() != null) {
 
@@ -108,28 +101,24 @@ public class MapBuilder implements ApplicationListener, InputProcessor {
 
     public void playersInit() {
         //TODO Make PlayerTextureList for 4, player_(num).png files.
-
-         TextureRegion[][] playerTextures = TextureRegion.split(new Texture("assets/player/player_0.png"), 300, 300); // Original logic
+        TextureRegion[][] playerTextures = TextureRegion.split(new Texture("assets/player/player_0.png"), 300, 300);
         playerCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][0]));
         playerDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][1]));
         playerWonCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][2]));
 
         for (int i = 0; i < playerLimit; i++) {
-            playerPos=spawns.get(i);
+            playerPos = spawns.get(i);
             playerLayer.setCell(playerPos.getCol(), playerPos.getRow(), playerCell);
 
             Player p = new Player(playerPos);
             p.setRobot(new Robo("robo_" + i));
             p.placeRobotAtSpawn(gameBoard);
             players.add(p);
-
-
         }
-
-
     }
-    public void updateMap(){
-        for (Player player: players) {
+
+    public void updateMap() {
+        for (Player player : players) {
             Directions dir = player.getRobot().getDirection();
             Location newPos = gameBoard.locationOf(player.getRobot());
             playerLayer.setCell(playerPos.getCol(), playerPos.getRow(), null);
@@ -139,16 +128,14 @@ public class MapBuilder implements ApplicationListener, InputProcessor {
 
         }
         // change the player icon when player visit a flag or  when player fall in a hole
-        xPos=playerPos.getCol();
-        yPos= playerPos.getRow();
-          if (holeLayer.getCell(xPos,yPos)!= null){
-                playerLayer.setCell(xPos,yPos,playerDiedCell);
-            }
-            else if (flagLayer.getCell(xPos,yPos)!= null){
-                playerLayer.setCell(xPos,yPos,playerWonCell);
-            }
-            else
-                playerLayer.setCell(xPos,yPos,playerCell);
+        int xPos = playerPos.getCol();
+        int yPos = playerPos.getRow();
+        if (holeLayer.getCell(xPos, yPos) != null) {
+            playerLayer.setCell(xPos, yPos, playerDiedCell);
+        } else if (flagLayer.getCell(xPos, yPos) != null) {
+            playerLayer.setCell(xPos, yPos, playerWonCell);
+        } else
+            playerLayer.setCell(xPos, yPos, playerCell);
 
     }
 
@@ -162,98 +149,12 @@ public class MapBuilder implements ApplicationListener, InputProcessor {
 
     }
 
-    public GameBoard getGameBoard(){
+
+    public GameBoard getGameBoard() {
         return gameBoard;
     }
 
     public TiledMap getMap() {
         return this.map;
-    }
-
-    @Override
-    public boolean keyDown (int keycode) {
-
-        if (keycode== Input.Keys.LEFT && xPos>0) {
-           playerLayer.setCell(xPos,yPos,null);
-            xPos-=1;
-            System.out.println(xPos);
-        }else if ( keycode == Input.Keys.RIGHT && xPos<4) {
-            playerLayer.setCell(xPos,yPos,null);
-            xPos +=1;
-            System.out.println(xPos);
-        }else if (keycode== Input.Keys.DOWN && yPos >0) {
-            playerLayer.setCell(xPos,yPos,null);
-            yPos-=1;
-            System.out.println(yPos);
-        }else if (keycode== Input.Keys.UP && yPos<4) {
-            playerLayer.setCell(xPos,yPos,null);
-            yPos +=1;
-            System.out.println(yPos);
-        }
-        return true;
-    }
-    @Override
-    public boolean keyUp (int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        return false;
-    }
-
-    @Override
-    public void create() {
-
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void render() {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void dispose() {
-
     }
 }
