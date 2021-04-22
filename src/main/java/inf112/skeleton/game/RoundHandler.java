@@ -43,9 +43,7 @@ public class RoundHandler {
                 hand.add(deck.cardDeck.remove(0));
                 numOfCards--;
             }
-
             player.setHand(hand);
-            debugPrint("after dealing Cards: " + player.getHand());
 
         }
     }
@@ -64,7 +62,6 @@ public class RoundHandler {
             throw new NoSuchElementException("The player has no cards in their hand");
         }
 
-        //TODO ta imot 5 (eller mindre) valgte kort fra GUI
         if (!receivedCards.isEmpty()) {
             while (player.allowedToChooseCards() && receivedCards.get(player).size() != 0) {
                 Card card = receivedCards.get(player).remove(0);
@@ -90,13 +87,14 @@ public class RoundHandler {
 
     /**
      * This method should be called when a player has no more time
-     * to choose programming cards
+     * to choose programming cards, or if player has chosen less than allowed number of cards
      */
     public Card chooseRandomCard(Player player) {
+        //TODO show the random chosen cards in the game screen
         Random r = new Random();
         int bound = player.getHand().size();
-        List<Card> toChoos = new ArrayList<>(player.getHand());
-        return toChoos.remove(r.nextInt(bound));
+        List<Card> toChoose = new ArrayList<>(player.getHand());
+        return toChoose.remove(r.nextInt(bound));
 
     }
 
@@ -112,7 +110,6 @@ public class RoundHandler {
         int phase = 0;
         while (phase < 5) {
             performOneCardMovement(phase, activePlayer);
-
             phase++;
         }
     }
@@ -121,8 +118,9 @@ public class RoundHandler {
 
         PriorityQueue<Player> prioritetPlayers =
                 new PriorityQueue<>((p1, p2) -> p2.getChosenCards().get(phase).priorityNr - p1.getChosenCards().get(phase).priorityNr);
+
         prioritetPlayers.addAll(players);
-        debugPrint("in round handler: " + prioritetPlayers);
+
         while (!prioritetPlayers.isEmpty()) {
             Player p = prioritetPlayers.poll();
             Card nextCard = p.getChosenCards().get(phase);
@@ -143,15 +141,23 @@ public class RoundHandler {
 
     }
 
+    /**
+     * Check if any player has visited an actual next flag
+     */
     private void flagCheck(List<Flag> flags, List<Player> players) {
         for (Player player : players) {
             debugPrint("Checking if " + player.getRobot() + " has touched any flag!");
             for (Flag flag : flags) {
+
                 if (gameBoard.sameXYLocation(player.getRobot(), flag)) {
-                    debugPrint("Yes!! " + player.getRobot() + " har visited flag " + flag);
                     player.checkFlagIndex(flag);
+                    if (flag.playerHasVisited(player)) {
+                        player.newCheckPoint(gameBoard.locationOf(flag));
+                        debugPrint("Yes!! " + player.getRobot() + " har visited flag " + flag);
+                    } else {
+                        debugPrint("No, " + player.getRobot() + " has not reached any flag yet!");
+                    }
                 }
-                debugPrint("No, " + player.getRobot() + " has not reached any flag yet!");
             }
         }
 

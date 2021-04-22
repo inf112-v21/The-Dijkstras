@@ -4,15 +4,12 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import inf112.skeleton.app.*;
@@ -20,7 +17,6 @@ import inf112.skeleton.game.Card;
 import inf112.skeleton.game.Player;
 import inf112.skeleton.game.Game;
 import inf112.skeleton.grid.Directions;
-import inf112.skeleton.grid.Location;
 
 import java.util.*;
 import java.util.List;
@@ -49,7 +45,7 @@ public class GameScreen extends ScreenAdapter {
 
     private boolean phasesReady = false;
     private boolean mocMode = true;
-    private boolean debugMode = false;   // Change value to "true" to launch with debug mode.
+    private boolean debugMode = true;   // Change value to "true" to launch with debug mode.
     private TextButton upArrow;
     private TextButton downArrow;
     private TextButton leftArrow;
@@ -85,7 +81,7 @@ public class GameScreen extends ScreenAdapter {
         music.setVolume(musicVolume);
         music.play();
 
-        //TODO refactoring
+
         backendGame = gameInit.getMapBuilder().game;
         chosenCards = new HashMap<>();
         currentPlayersHand = new HashMap<>();
@@ -133,10 +129,7 @@ public class GameScreen extends ScreenAdapter {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("INFO: Start Round button pressed!");
                 startOneRound();
-                //startButton.setDisabled(true);
-                //startButton.setVisible(false);
 
-                System.out.println("roundCount: " + roundCount);
                 roundCount++;
             }
 
@@ -173,9 +166,7 @@ public class GameScreen extends ScreenAdapter {
         powerButton.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("INFO: Power button pressed!");
-                //TODO Power down logic.
-
+                System.out.println("INFO: Power down button pressed!");
 
                 powerDownRound = roundCount;
             }
@@ -337,7 +328,7 @@ public class GameScreen extends ScreenAdapter {
             cardsTable.add(handSlot);
             handSlotButtons[i] = handSlot;
         }
-        cardInteractions();
+        handCardsInteractions();
 
         return cardsTable;
     }
@@ -357,12 +348,12 @@ public class GameScreen extends ScreenAdapter {
             programmingCardsTable.add(programmingSlot).prefHeight(10).prefWidth(60);
             programmingSlotButtons[i] = programmingSlot;
         }
-        cardInteractions1();
+        chosenCardInteractions();
         return programmingCardsTable;
     }
 
 
-    private void cardInteractions() {
+    private void handCardsInteractions() {
 
         for (int i = 0; i < handSlotButtons.length; i++) {
             int j = i;
@@ -399,7 +390,7 @@ public class GameScreen extends ScreenAdapter {
 
     }
 
-    private void cardInteractions1() {
+    private void chosenCardInteractions() {
         for (int i = 0; i < programmingSlotButtons.length; i++) {
             int j = i;
             programmingSlotButtons[i].addListener(new InputListener() {
@@ -472,7 +463,7 @@ public class GameScreen extends ScreenAdapter {
             ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle();
             style.imageUp = cardTexture.get(currentPlayersHand.get(i).toString());
             handSlotButtons[i].setStyle(style);
-            //TODO save the card priority number
+
         }
         for (int i = handSize; i < 9; i++) {
             handSlotButtons[i].setStyle(setNullStyle());
@@ -519,7 +510,7 @@ public class GameScreen extends ScreenAdapter {
         }
         dealCards();
         updateCards();
-        // performMovementsAndCleanUP();
+
 
     }
 
@@ -551,7 +542,6 @@ public class GameScreen extends ScreenAdapter {
         robotMoveSound.play(sfxVolume);
         List<Player> activePlayer = new ArrayList<>();
         for (Player p : players) {
-            mocPrint("Player chosen card " + p.getChosenCards());
             if (p.getLife() > 0 && p.getChosenCards().size() == 5)
                 activePlayer.add(p);
 
@@ -559,7 +549,7 @@ public class GameScreen extends ScreenAdapter {
         }
         backendGame.rh.performOneCardMovement(phase-1, activePlayer);
         programmingSlotButtons[phase - 1].setStyle(setNullStyle());
-        //chosenCards.remove(phase - 1);
+
         gameInit.getMapBuilder().updateMap();
         if (phase == 5) {
             cleanUp();

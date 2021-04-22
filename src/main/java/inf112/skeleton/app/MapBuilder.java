@@ -104,17 +104,12 @@ public class MapBuilder implements ApplicationListener, InputProcessor {
         }
         playersInit();
         flagsInit();
-        // spawns[0]
-        // spawns[3]
     }
 
     public void playersInit() {
         //TODO Make PlayerTextureList for 4, player_(num).png files.
 
-        //Integer playerNumID = 0; // Temporary testing
-        //String filenameIndex = String.format("player_{0}", playerNumID);
-        //TextureRegion[][] playerTextures = TextureRegion.split(new Texture(filenameIndex), 300, 300);  // Testing dynamic version
-        TextureRegion[][] playerTextures = TextureRegion.split(new Texture("assets/player/player_0.png"), 300, 300); // Original logic
+         TextureRegion[][] playerTextures = TextureRegion.split(new Texture("assets/player/player_0.png"), 300, 300); // Original logic
         playerCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][0]));
         playerDiedCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][1]));
         playerWonCell = new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(playerTextures[0][2]));
@@ -127,7 +122,7 @@ public class MapBuilder implements ApplicationListener, InputProcessor {
             p.setRobot(new Robo("robo_" + i));
             p.placeRobotAtSpawn(gameBoard);
             players.add(p);
-            //System.out.println(playerPos.toString());
+
 
         }
 
@@ -135,27 +130,26 @@ public class MapBuilder implements ApplicationListener, InputProcessor {
     }
     public void updateMap(){
         for (Player player: players) {
-            Directions dir=  player.getRobot().getDirection();
-            Location newPos =gameBoard.locationOf(player.getRobot());
+            Directions dir = player.getRobot().getDirection();
+            Location newPos = gameBoard.locationOf(player.getRobot());
             playerLayer.setCell(playerPos.getCol(), playerPos.getRow(), null);
 
-            System.out.println("the old robot pos: x= "+playerPos.getCol()+" y="+playerPos.getRow());
-            System.out.println("the new robot pos: x= "+newPos.getCol()+" y="+newPos.getRow());
-            System.out.println("player rotation "+playerCell.getRotation());
-            playerLayer.setCell(newPos.getCol(),newPos.getRow(), playerCell.setRotation(dir.getDir()));
-            System.out.println("player rotation after  "+playerCell.getRotation());
-            playerPos= newPos;
+            playerLayer.setCell(newPos.getCol(), newPos.getRow(), playerCell.setRotation(dir.getDir()));
+            playerPos = newPos;
 
-
-/*          if (holeLayer.getCell(xPos,yPos)!= null){
+        }
+        // change the player icon when player visit a flag or  when player fall in a hole
+        xPos=playerPos.getCol();
+        yPos= playerPos.getRow();
+          if (holeLayer.getCell(xPos,yPos)!= null){
                 playerLayer.setCell(xPos,yPos,playerDiedCell);
             }
             else if (flagLayer.getCell(xPos,yPos)!= null){
                 playerLayer.setCell(xPos,yPos,playerWonCell);
             }
             else
-                playerLayer.setCell(xPos,yPos,playerCell);*/
-        }
+                playerLayer.setCell(xPos,yPos,playerCell);
+
     }
 
     public void flagsInit() {
@@ -168,12 +162,6 @@ public class MapBuilder implements ApplicationListener, InputProcessor {
 
     }
 
-    public List<Player> getPlayers() {
-        return players;
-    }
-    public List<Flag> getFlags() {
-        return flags;
-    }
     public GameBoard getGameBoard(){
         return gameBoard;
     }
