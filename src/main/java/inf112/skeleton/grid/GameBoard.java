@@ -216,8 +216,6 @@ public class GameBoard {
     /**
      * Checks if there is a wall using a location and direction
      *
-     * @param loc
-     * @param dir
      * @return true if wall is in way
      */
     public boolean wallCheck(Location loc, Directions dir) {
@@ -236,8 +234,6 @@ public class GameBoard {
     /**
      * Used by wall to either place a Barricade or update an existing Barricade
      *
-     * @param loc
-     * @param dir
      */
     private void placeBarricade(Location loc, Directions dir) {
         if (get(loc) instanceof Barricade) {
@@ -253,8 +249,6 @@ public class GameBoard {
      * Places a wall between two locations
      * A "wall" is composed of two Barricade objects, with each Barricade having at least one direction
      *
-     * @param loc
-     * @param dir
      */
     public void wall(Location loc, Directions dir) {
         placeBarricade(loc, dir);
