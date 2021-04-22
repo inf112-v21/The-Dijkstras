@@ -89,8 +89,8 @@ Her er våre nåværende MVP krav:
 - [ ] 12.Utfører runde etter spilleregler.
 
 
-#### Krav fokus i Sprint 4`
-Vi jobber mest med krav 12 og 11, men måtte sjekke at de tidligere kravene var oppfylt underveis.
+#### Fokus i Sprint 4
+Vi jobbet mest med krav 12 og 11, men måtte sjekke at de tidligere kravene var oppfylt underveis.
 
 #### Ufullstendig Krav
 Vi har vurdert at der vi er nå har vi ikke klart å nå krav 5, 7, 11 og 12. 
@@ -98,31 +98,38 @@ Vi har vurdert at der vi er nå har vi ikke klart å nå krav 5, 7, 11 og 12.
 er enda ikke implementert med GUI.
 Multiplayer(krav 11) ble laget da vi ønsket å få oversikt hva som trengtes for å implementere 
 
-
 #### Arbeidskrav 12
 Krav 12 ble laget for å sette fokus på forbindelsen mellom GUI og backend.
 Forrige sprint jobbet vi med å kunne kjøre en full runde med 5 faser i backend.
-Denne sprinten koblet vi backendlogikken opp mot 
+Denne sprinten koblet vi backendlogikken opp mot GUI, og har implementert mye GUI funksjonalitet. 
+Vi er enda ikke helt ferdige, men har jobbet mot et punkt der vi kan implementere nye utfordringer.
 
 #### Arbeidskrav 11
-Multiplayer(krav 11) ble laget da vi ønsket å få oversikt hva som trengtes for å implementere
-
+Multiplayer(krav 11) ble et fokus da vi ønsket å få oversikt hva som trengtes for å implementere multiplayer.
+Vi har ordnet en server-tråd som kan ta imort flere clienter og har mulighet for å sende og motta Json filer.
+Videre arbeid vil vær å lage en spilllogikk der client er en del av spillet og spør servertråd om nødvendig data.
 
 #### Brukerhistorier sprint 4
-Brukerhistorie 11 og 12 er lagt ved i Brukerhistorie mappe
+Brukerhistorie 11 og 12 er lagt ved i `Deliverables/Brukerhistorier`
 
 ## Deloppgave 3: Produktleveranse og kodekvalitet
 
+#### ReadMe
+
+
 #### Main
-Main ligger i:
+Her finner du Main\
 `src/main/java/inf112/skeleton/app/main.java`
 
 Om Intellij har problemer med å bygge prosjektet kan du prøve å markere assets som resources root,
 src.main.java som Sources root og src.test.java som Test Sources root
 
 #### Tester
-Under src.test finner du alle våre automatiske tester, alle disse testene skal passere ved denne innleveringen.
+`src/test/java/inf112/skeleton` \
+finner du alle våre automatiske tester, alle disse testene skal passere ved denne innleveringen.
 
-TODO: MANUELLTEST. takk Alexander
+Manuell test for spillet ligger i `/Deliverables` Mer info finner du der!
+
+
 
 TODO: Skjermdump
