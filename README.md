@@ -12,7 +12,6 @@ A work-in-progress MVP implementation of RoboRally.
 
 ## Running it
 *To run:*
-- Download the project from https://github.com/inf112-v21/The-Dijkstras using the green button and press download ZIP. 
 - Clone the repo: `git clone https://github.com/inf112-v21/The-Dijkstras` 
   or download the latest <a href=https://github.com/inf112-v21/The-Dijkstras/tags>release.</a>
 - In your IDE of choice, preferably IntelliJ IDEA, run Main.java `src/main/java/inf112/skeleton/app/main.java`
