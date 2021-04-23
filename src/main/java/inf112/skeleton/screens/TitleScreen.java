@@ -39,7 +39,7 @@ public class TitleScreen extends ScreenAdapter {
 
         // List boxes.
         SelectBox<String> mapChoiceBox = new SelectBox<String>(skin);
-        String[] mapChoiceList = {"map001.tmx", "exampleMap.tmx"};
+        String[] mapChoiceList = {"map001.tmx", "map002.tmx"};
         mapChoiceBox.setItems(mapChoiceList);
 
         SelectBox<String> playerCountChoice = new SelectBox<String>(skin);
