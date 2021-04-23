@@ -22,16 +22,8 @@ public class Barricade implements ITileObject {
         this.facing.add(dir);
     }
 
-    public int getLayer() {
-        return layer;
-    }
-
     public Location getLocation() {
         return loc;
-    }
-
-    public ArrayList<Directions> getFacing() {
-        return facing;
     }
 
     /**
