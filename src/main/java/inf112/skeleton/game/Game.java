@@ -28,7 +28,7 @@ public class Game {
     }
 
     /**
-     * TODO: All the player in players set should be initialized
+     * A random setup used for testing game logic
      */
 
     public void randomSetUp(List<Player> players, List<Flag> flags, GameBoard gb) {
