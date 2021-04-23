@@ -35,8 +35,9 @@ A work-in-progress MVP implementation of RoboRally.
 - Klassediagram
 - ObligDoc1
 - ObligDoc2
+- ObligDoc3
+- ObligDoc4
 - Manual_Testing.md
-
 
 ## Known bugs
 

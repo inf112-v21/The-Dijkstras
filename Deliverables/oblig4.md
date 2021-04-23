@@ -114,9 +114,6 @@ Brukerhistorie 11 og 12 er lagt ved i `Deliverables/Brukerhistorier`
 
 ## Deloppgave 3: Produktleveranse og kodekvalitet
 
-#### ReadMe
-
-
 #### Main
 Her finner du Main\
 `src/main/java/inf112/skeleton/app/main.java`
@@ -130,6 +127,3 @@ finner du alle våre automatiske tester, alle disse testene skal passere ved den
 
 Manuell test for spillet ligger i `/Deliverables` Mer info finner du der!
 
-
-
-TODO: Skjermdump
