@@ -10,7 +10,7 @@ In GameScreen.java line 48, change debugMode value to "true".
 
 
 ```java
-private boolean debugMode = true;
+//private boolean debugMode = true;
 ```
 
 
@@ -58,10 +58,10 @@ press the **Ready Button** to initiate the round.
 ![](../assets/images/ready_button.png "Ready button")
 
 The robot will then perform the card moves one by one. If the robot steps in a hole it should indicate death by an 
-explosion texture, and for flags it should change to a celebratory texture.
+explosion texture (this functionality logic is not implemented yet, i.e. robot texture is changed but robot does not misse a life), and for flags it should change to a celebratory texture.
 
 If your robot takes damage it should get less cards at the start of a round, if for example damage dealt is 4 the player
-receives only 5 out of 9 cards. When more damage is dealt, programming slots will be filled with random cards so that
+receives only 5 out of 9 cards. When more damage is dealt, number of programming slots will be locked and cards in these slots stay for the next round so that
 the player always has enough cards to play 5 cards.
 
 ![](../assets/images/robot_death.gif "Robot death") ![](../assets/images/robot_flag.gif "Robot death")
