@@ -42,7 +42,7 @@ public class GameScreen extends ScreenAdapter {
     private TextButton readyButton;
     private TextButton powerButton;
     private List<Player> players;
-
+    private boolean startNotReady=true;
     private boolean phasesReady = false;
     private boolean mocMode = true;
     private boolean debugMode = false;   // Change value to "true" to launch with debug mode.
@@ -138,6 +138,7 @@ public class GameScreen extends ScreenAdapter {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 mocPrint("INFO: Start Round button pressed!");
+
                 startOneRound();
                 roundCount++;
             }
@@ -176,7 +177,7 @@ public class GameScreen extends ScreenAdapter {
         powerButton.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                mocPrint("INFO: Power button pressed!");
+                mocPrint("INFO: Power down button pressed!");
                 // Stores at which round the powerDown button was pressed for execution at the next round.
                 powerDownRound = roundCount;
             }
@@ -548,6 +549,7 @@ public class GameScreen extends ScreenAdapter {
         }
         backendGame.rh.performOneCardMovement(phase-1, activePlayer);
         programmingSlotButtons[phase - 1].setStyle(setNullStyle());
+
         gameInit.getMapBuilder().updateMap();
         if (phase == 5) {
             cleanUp();

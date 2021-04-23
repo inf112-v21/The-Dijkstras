@@ -6,7 +6,7 @@
 <p>The latest <a href=https://github.com/inf112-v21/The-Dijkstras/tags>release.</a></p>
 
 ### Debug mode enabled:
-In GameScreen.java, change debugMode value to "true".
+In GameScreen.java line 48, change debugMode value to "true".
 
 
 ```java

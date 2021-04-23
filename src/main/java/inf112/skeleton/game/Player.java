@@ -102,6 +102,7 @@ public class Player {
     public void announcePowerDown(GameBoard gameBoard) {
         myRobo.resetHealth();
         placeRobotAtSpawn(gameBoard);
+        chosenCards.clear();
         //TODO reset direction to NORTH after placing back in spawn.
         powerDown = true;
         System.out.println(myRobo + " announced Power Down for next round !");
@@ -109,7 +110,6 @@ public class Player {
 
     public void cancelPowerDown() {
         restCards.addAll(chosenCards.values());
-        chosenCards.clear();
         powerDown = false;
     }
 
