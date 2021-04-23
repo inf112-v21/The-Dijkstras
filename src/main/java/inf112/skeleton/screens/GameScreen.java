@@ -141,6 +141,7 @@ public class GameScreen extends ScreenAdapter {
 
                 startOneRound();
                 roundCount++;
+                startNotReady=false;
             }
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -163,14 +164,14 @@ public class GameScreen extends ScreenAdapter {
                 phasesReady = true;
                 phase = 1;
                 chooseCardsManager();
-
+                startNotReady=true;
             }
-
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
         });
+
 
         // Power Button marks the next round to be a Power Down round.
         powerButton = new TextButton("Power Down?", skin);
@@ -489,6 +490,10 @@ public class GameScreen extends ScreenAdapter {
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+
+        // Toggles button visibility
+        startButton.setVisible(startNotReady);
+        readyButton.setVisible(!startNotReady);
 
         if (phasesReady) {
             performMovements();
